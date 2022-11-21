@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Support.UnitOfWork\Support.UnitOfWork.csproj" />
     <ProjectReference Include="..\Testing.Common\Testing.Common.csproj" />
   </ItemGroup>
 
