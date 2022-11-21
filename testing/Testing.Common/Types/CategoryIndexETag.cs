@@ -2,7 +2,7 @@
 
 namespace Testing.Common.Types;
 
-internal class CategoryIndexETag : IETagDto<CategoryIndex<LookupDatabaseModel>>
+public class CategoryIndexETag : IETagDto<CategoryIndex<LookupDatabaseModel>>
 {
     public CategoryIndexETag(string etag,
         CategoryIndex<LookupDatabaseModel> payload)

@@ -2,7 +2,7 @@
 
 namespace Testing.Common.Types;
 
-internal class AggregateETag : IETagDto<AggregateDatabaseModel>
+public class AggregateETag : IETagDto<AggregateDatabaseModel>
 {
     public AggregateETag(string etag, AggregateDatabaseModel payload)
     {

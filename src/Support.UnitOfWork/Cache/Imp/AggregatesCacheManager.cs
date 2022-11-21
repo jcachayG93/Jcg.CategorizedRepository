@@ -13,21 +13,44 @@ namespace Support.UnitOfWork.Cache.Imp
                 TLookupDatabaseModel> dbClient,
             Cache<TAggregateDatabaseModel> aggregatesCache)
         {
+            _dbClient = dbClient;
+            _aggregatesCache = aggregatesCache;
         }
 
-        public Task<TAggregateDatabaseModel?> GetAsync(string key)
+        public async Task<TAggregateDatabaseModel?> GetAsync(string key)
         {
-            throw new NotImplementedException();
+            await ReadAndAddToCacheIfNeededAsync(key);
+
+            return _aggregatesCache.Get(key);
         }
 
-        public Task UpsertAsync(string key, TAggregateDatabaseModel aggregate)
+        public async Task UpsertAsync(string key,
+            TAggregateDatabaseModel aggregate)
         {
-            throw new NotImplementedException();
+            await ReadAndAddToCacheIfNeededAsync(key);
+
+            _aggregatesCache.Upsert(key, aggregate);
         }
 
-        public IEnumerable<UpsertedItem<TAggregateDatabaseModel>> UpsertedItems
+        public IEnumerable<UpsertedItem<TAggregateDatabaseModel>>
+            UpsertedItems => _aggregatesCache.UpsertedItems;
+
+        private async Task ReadAndAddToCacheIfNeededAsync(string key)
         {
-            get;
+            if (!_aggregatesCache.HasKey(key))
+            {
+                var data =
+                    await _dbClient.GetAggregateAsync(key,
+                        CancellationToken.None);
+
+                _aggregatesCache.Add(key, data);
+            }
         }
+
+        private readonly Cache<TAggregateDatabaseModel> _aggregatesCache;
+
+        private readonly
+            ITransactionalDatabaseClient<TAggregateDatabaseModel,
+                TLookupDatabaseModel> _dbClient;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Support.UnitOfWork.Api;
+using Support.UnitOfWork.InternalExceptions;
 
 namespace Support.UnitOfWork.Cache.Imp
 {
@@ -11,14 +12,29 @@ namespace Support.UnitOfWork.Cache.Imp
         ///     be the the value originally passed to the Add method
         /// </summary>
         public virtual IEnumerable<UpsertedItem<TData>>
-            UpsertedItems { get; }
+            UpsertedItems
+        {
+            get
+            {
+                var items = _data.Where(i =>
+                        i.Value.WasUpserted)
+                    .Select(i =>
+                        // I can use the ! because to mark an item as Upserted it must receive a non null payload. See CacheItem definition bellow.
+                        new UpsertedItem<TData>(i.Key, i.Value.ETag,
+                            i.Value.PayLoad!))
+                    .ToList();
+
+                return items;
+            }
+        }
+
 
         /// <summary>
         ///     Checks if an Add operation has been done for the specified key
         /// </summary>
         public virtual bool HasKey(string key)
         {
-            throw new NotImplementedException();
+            return _data.ContainsKey(key);
         }
 
         /// <summary>
@@ -27,17 +43,32 @@ namespace Support.UnitOfWork.Cache.Imp
         /// </summary>
         public virtual TData? Get(string key)
         {
-            throw new NotImplementedException();
+            if (!HasKey(key))
+            {
+                throw new CacheException("No data for key");
+            }
+
+            return _data[key].PayLoad;
         }
 
         /// <summary>
         ///     Adds the payload for the specified key to the cache. The data could be
         ///     null but the HasKey method will return true anyway.
+        ///     Throws an exception if key is already in the cache
         /// </summary>
         public virtual void Add(string key,
-            IETagDto<TData> data)
+            IETagDto<TData>? data)
         {
-            throw new NotImplementedException();
+            if (HasKey(key))
+            {
+                throw new CacheException("Data for key already exists");
+            }
+
+            var eTag = data?.Etag ?? "";
+
+            var payload = data?.Payload ?? null;
+
+            _data.Add(key, new(eTag, payload));
         }
 
         /// <summary>
@@ -46,7 +77,38 @@ namespace Support.UnitOfWork.Cache.Imp
         /// </summary>
         public virtual void Upsert(string key, TData payload)
         {
-            throw new NotImplementedException();
+            if (!HasKey(key))
+            {
+                Add(key, null);
+            }
+
+            var item = _data[key];
+
+            item.Upsert(payload);
+        }
+
+        private readonly Dictionary<string, CacheItem> _data = new();
+
+        private class CacheItem
+        {
+            public CacheItem(string eTag, TData? payLoad)
+            {
+                ETag = eTag;
+                PayLoad = payLoad;
+                WasUpserted = false;
+            }
+
+            public string ETag { get; }
+
+            public TData? PayLoad { get; private set; }
+
+            public bool WasUpserted { get; private set; }
+
+            public void Upsert(TData updatedPayload)
+            {
+                PayLoad = updatedPayload;
+                WasUpserted = true;
+            }
         }
     }
 }

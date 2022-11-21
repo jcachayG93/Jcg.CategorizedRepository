@@ -17,8 +17,6 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
             SetupGetAggregate(GetAggregateReturns);
 
             SetupGetCategoryIndex(GetCategoryIndexReturns);
-
-            throw new NotImplementedException();
         }
 
         public IETagDto<AggregateDatabaseModel> GetAggregateReturns { get; }
@@ -49,6 +47,11 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
         {
             _moq.Verify(s =>
                 s.GetAggregateAsync(key, AnyCt()));
+        }
+
+        public void VerifyNoOtherCalls()
+        {
+            _moq.VerifyNoOtherCalls();
         }
 
         public void VerifyUpsertAggregate(string key, string eTag,

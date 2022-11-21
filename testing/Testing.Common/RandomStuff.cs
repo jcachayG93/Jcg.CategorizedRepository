@@ -22,6 +22,11 @@ namespace Testing.Common
             return new CategoryIndexETag(RandomString(), new());
         }
 
+        public static AggregateDatabaseModel RandomAggregateDatabaseModel()
+        {
+            return new();
+        }
+
         public static CancellationToken AnyCt()
         {
             return It.IsAny<CancellationToken>();
