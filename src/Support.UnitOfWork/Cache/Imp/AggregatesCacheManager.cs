@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Support.UnitOfWork.Api;
+﻿using Support.UnitOfWork.Api;
 
 namespace Support.UnitOfWork.Cache.Imp
 {
-    internal class AggregatesCacheManager<TAggregateDatabaseModel, TLookupDatabaseModel>
-    : IAggregatesCacheManager<TAggregateDatabaseModel>
+    internal class AggregatesCacheManager<TAggregateDatabaseModel,
+            TLookupDatabaseModel>
+        : IAggregatesCacheManager<TAggregateDatabaseModel>
         where TAggregateDatabaseModel : class
-    where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class
     {
         public AggregatesCacheManager(
-            ITransactionalDatabaseClient<TAggregateDatabaseModel, TLookupDatabaseModel> dbClient)
+            ITransactionalDatabaseClient<TAggregateDatabaseModel,
+                TLookupDatabaseModel> dbClient,
+            Cache<TAggregateDatabaseModel> aggregatesCache)
         {
-            
         }
+
         public Task<TAggregateDatabaseModel?> GetAsync(string key)
         {
             throw new NotImplementedException();
@@ -27,6 +25,9 @@ namespace Support.UnitOfWork.Cache.Imp
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UpsertedItem<TAggregateDatabaseModel>> UpsertedItems { get; }
+        public IEnumerable<UpsertedItem<TAggregateDatabaseModel>> UpsertedItems
+        {
+            get;
+        }
     }
 }
