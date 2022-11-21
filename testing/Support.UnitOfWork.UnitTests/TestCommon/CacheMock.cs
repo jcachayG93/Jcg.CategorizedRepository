@@ -45,6 +45,26 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
                 .Returns(value);
         }
 
+        public void SetupUpsertedItemReturnEmpty()
+        {
+            SetupUpsertedItems();
+        }
+
+        public void SetupUpsertedItemReturnsOne(out UpsertedItem<TData> item)
+        {
+            item = new UpsertedItem<TData>(RandomString(), RandomString(),
+                new());
+
+            SetupUpsertedItems(item);
+        }
+
+        private void SetupUpsertedItems(
+            params UpsertedItem<TData>[] upsertedItems)
+        {
+            _moq.Setup(s =>
+                s.UpsertedItems).Returns(upsertedItems);
+        }
+
         private void SetupGet(TData? returns)
         {
             _moq.Setup(s =>

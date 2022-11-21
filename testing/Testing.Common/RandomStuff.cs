@@ -27,6 +27,12 @@ namespace Testing.Common
             return new();
         }
 
+        public static CategoryIndex<LookupDatabaseModel> RandomCategoryIndex()
+        {
+            return new();
+        }
+
+
         public static CancellationToken AnyCt()
         {
             return It.IsAny<CancellationToken>();

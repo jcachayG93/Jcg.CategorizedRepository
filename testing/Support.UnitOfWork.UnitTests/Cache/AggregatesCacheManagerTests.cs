@@ -23,6 +23,11 @@ namespace Support.UnitOfWork.UnitTests.Cache
         private AggregatesCacheManager<AggregateDatabaseModel,
             LookupDatabaseModel> Sut { get; }
 
+        private AggregateDatabaseModel RandomPayload()
+        {
+            return new();
+        }
+
 
         [Fact]
         public async Task
@@ -98,7 +103,7 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
 
         [Fact]
-        public async Task Upsert_DataInCache_DoesNotReadDatabase()
+        public async Task Upsert_KeyInCache_DoesNotReadDatabase()
         {
             // ************ ARRANGE ************
 
@@ -116,7 +121,7 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
 
         [Fact]
-        public async Task Upsert_DelegatesToCacheUpsert_PassingCachedData()
+        public async Task Upsert_DelegatesToCacheUpsert_PassingData()
         {
             // ************ ARRANGE ************
 
@@ -124,14 +129,16 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
             var key = RandomString();
 
+            var data = RandomPayload();
+
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(key, Cache.GetReturns);
+            await Sut.UpsertAsync(key, data);
 
             // ************ ASSERT *************
 
-            Cache.VerifyUpsert(key, Cache.GetReturns);
+            Cache.VerifyUpsert(key, data);
         }
 
         [Fact]

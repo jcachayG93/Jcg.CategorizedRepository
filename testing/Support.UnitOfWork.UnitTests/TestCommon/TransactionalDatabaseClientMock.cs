@@ -43,6 +43,11 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
                 .Returns(returns);
         }
 
+        public void SetupGetCategoryIndexReturnsNull()
+        {
+            SetupGetCategoryIndex(null);
+        }
+
         public void VerifyGetAggregate(string key)
         {
             _moq.Verify(s =>
