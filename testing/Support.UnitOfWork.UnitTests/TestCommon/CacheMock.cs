@@ -5,11 +5,11 @@ using Support.UnitOfWork.Cache.Imp;
 
 namespace Support.UnitOfWork.UnitTests.TestCommon
 {
-    internal class AggregatesCacheMock<TData>
+    internal class CacheMock<TData>
         where TData : class, new()
 
     {
-        public AggregatesCacheMock()
+        public CacheMock()
         {
             GetReturns = new();
 
@@ -24,6 +24,8 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
 
             _moq.Setup(s =>
                 s.UpsertedItems).Returns(UpsertedItemsReturns);
+
+            SetupHasKey(true);
         }
 
         public Cache<TData> Object => _moq.Object;
