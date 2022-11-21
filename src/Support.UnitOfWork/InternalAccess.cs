@@ -1,0 +1,8 @@
+﻿
+
+
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("Support.UnitOfWork.UnitTests")]
+[assembly: InternalsVisibleTo("Common")]
