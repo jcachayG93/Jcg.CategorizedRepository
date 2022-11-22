@@ -3,7 +3,7 @@ using Support.UnitOfWork.Api.Exceptions;
 
 namespace Support.UnitOfWork;
 
-internal interface IUnitOfWorkImp<TAggregateDatabaseModel,
+internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel> where TAggregateDatabaseModel : class
     where TLookupDatabaseModel : class
 {

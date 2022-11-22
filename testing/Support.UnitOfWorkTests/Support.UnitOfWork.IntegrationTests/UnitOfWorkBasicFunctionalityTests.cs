@@ -12,7 +12,7 @@ namespace Support.UnitOfWork.IntegrationTests
             Sut = CreateSut();
         }
 
-        private IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut
+        private IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel> Sut
         {
             get;
         }

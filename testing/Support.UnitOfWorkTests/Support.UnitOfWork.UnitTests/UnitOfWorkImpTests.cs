@@ -41,7 +41,7 @@ namespace Support.UnitOfWork.UnitTests
             get;
         }
 
-        private UnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut
+        private UnitOfWork<AggregateDatabaseModel, LookupDatabaseModel> Sut
         {
             get;
         }
