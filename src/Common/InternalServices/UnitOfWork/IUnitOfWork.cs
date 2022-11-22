@@ -17,31 +17,38 @@ namespace Common.InternalServices.UnitOfWork
         where TLookupDatabaseModel : class
     {
         /// <summary>
-        ///     Gets the category index
+        ///     Gets the non deleted items category index
         /// </summary>
         /// <param name="categoryKey">The category key</param>
-        /// <returns>The category index, null if it not initialized</returns>
+        /// <returns>The category index</returns>
         /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
-        Task<CategoryIndex<TLookupDatabaseModel>> GetCategoryIndex(
-            string categoryKey,
+        Task<CategoryIndex<TLookupDatabaseModel>>
+            GetNonDeletedItemsCategoryIndex(
+                CancellationToken cancellationToken);
+
+        /// <summary>
+        ///     Gets the deleted items category index
+        /// </summary>
+        /// <param name="categoryKey">The category key</param>
+        /// <returns>The category index</returns>
+        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
+        Task<CategoryIndex<TLookupDatabaseModel>>
+            GetDeletedItemsCategoryIndex(
+                CancellationToken cancellationToken);
+
+        /// <summary>
+        ///     Upsert the deleted items category index
+        /// </summary>
+        Task UpsertDeletedItemsCategoryIndex(
+            CategoryIndex<TLookupDatabaseModel> deletedItemsCategoryIndex,
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Upsert the category index
+        ///     Upsert the non-deleted items category index
         /// </summary>
-        Task UpsertCategoryIndex(string categoryKey,
-            CategoryIndex<TLookupDatabaseModel> categoryIndex,
+        Task UpsertNonDeletedItemsCategoryIndex(
+            CategoryIndex<TLookupDatabaseModel> nonDeletedItemsCategoryIndex,
             CancellationToken cancellationToken);
-
-        /// <summary>
-        ///     Commits all the changes. This operation can be called only once for the lifetime of this UnitOfWork
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="CommitMayBeCalledOnlyOnceException">
-        ///     When called more than once. Once changes are committed, you must use a different instance for the
-        ///     unit of work
-        /// </exception>
-        Task CommitChangesAsync(CancellationToken cancellationToken);
 
         /// <summary>
         ///     Gets the aggregate for the matching key.
@@ -58,7 +65,18 @@ namespace Common.InternalServices.UnitOfWork
         /// <param name="aggregate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UpsertAggregateAsync(string key, TAggregateDatabaseModel aggregate,
+        Task UpsertAggregateAsync(string key,
+            TAggregateDatabaseModel aggregate,
+            CancellationToken cancellationToken);
+
+        /// <summary>
+        ///     Commits all the changes. This operation can be called only once for the lifetime of this UnitOfWork
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
+        ///     Thrown when called more than once. This unit of work can be committed up to one time only.
+        /// </exception>
+        Task CommitChangesAsync(
             CancellationToken cancellationToken);
     }
 }
