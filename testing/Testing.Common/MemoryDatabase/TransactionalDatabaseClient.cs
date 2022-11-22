@@ -3,10 +3,16 @@ using Testing.Common.Types;
 
 namespace Testing.Common.Doubles
 {
-    public class TransactionalDatabaseClient
+    internal class TransactionalDatabaseClient
         : ITransactionalDatabaseClient<AggregateDatabaseModel,
             LookupDatabaseModel>
     {
+        private readonly InMemoryDataSource _ds;
+
+        public TransactionalDatabaseClient(InMemoryDataSource ds)
+        {
+            _ds = ds;
+        }
         /// <inheritdoc />
         public Task<IETagDto<AggregateDatabaseModel>?> GetAggregateAsync(
             string key, CancellationToken cancellationToken)
@@ -48,7 +54,13 @@ namespace Testing.Common.Doubles
         /// <inheritdoc />
         public Task CommitTransactionAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                lock (_lockObject)
+                {
+                    _ds.Upsert(_aggregates, _categoryIndexes);
+                }
+            });
         }
 
         private static readonly object _lockObject = new();
