@@ -25,11 +25,34 @@ public class InMemoryDataSource
     public void Upsert(Dictionary<string, AggregateETag> aggregates,
         Dictionary<string, CategoryIndexETag> categoryIndexes)
     {
+        AssignETagIfBlank(aggregates, categoryIndexes);
+
+
         AssertETagsMatch(aggregates, categoryIndexes);
 
         SaveAggregates(aggregates);
 
         SaveCategoryIndexes(categoryIndexes);
+    }
+
+    private void AssignETagIfBlank(Dictionary<string, AggregateETag> aggregates,
+        Dictionary<string, CategoryIndexETag> categoryIndexes)
+    {
+        foreach (var aggregate in aggregates)
+        {
+            if (string.IsNullOrWhiteSpace(aggregate.Value.Etag))
+            {
+                aggregates[aggregate.Key] = aggregate.Value.CloneWithNewETag();
+            }
+        }
+
+        foreach (var index in categoryIndexes)
+        {
+            if (string.IsNullOrWhiteSpace(index.Value.Etag))
+            {
+                categoryIndexes[index.Key] = index.Value.CloneWithNewETag();
+            }
+        }
     }
 
     private void SaveCategoryIndexes(
@@ -90,6 +113,9 @@ public class InMemoryDataSource
         {
             if (_categoryIndexes.ContainsKey(index.Key))
             {
+                var item = _categoryIndexes[index.Key];
+
+
                 if (_categoryIndexes[index.Key].Etag != index.Value.Etag)
                 {
                     throw new DatabaseException(

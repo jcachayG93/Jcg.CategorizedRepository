@@ -1,123 +1,124 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Support.UnitOfWork.Api.Exceptions;
 using Testing.Common.Assertions;
+using Testing.Common.Doubles;
 
 namespace Support.UnitOfWork.IntegrationTests
 {
     public class UnitOfWorkIsolationTests : TestBase
     {
+        private async Task AssertThrows<TException>(Func<Task> f)
+            where TException : Exception
+        {
+            await f.Should().ThrowAsync<TException>();
+        }
+
+        private async Task AssertDoesntThrows(Func<Task> f)
+
+        {
+            await f.Should().NotThrowAsync();
+        }
+
+
         /*
-         * Changes exist in the Unit of work but not in the database until committed
+         * Changes exist in the Unit of work but not in the database until committed.
+         * The following tests will create two UnitOfWork instances (sut1, sut2), make changes in one. assert that data exist in the other one only after data is committed
          */
 
-        [Fact]
-        public async Task DeletedCategoryIndex_NoCommit_KeepsChangesLocal()
-        {
-            // ************ ARRANGE ************
-
-            var categoryIndex = RandomCategoryIndex();
-
-            // ************ ACT ****************
-
-            await Sut.UpsertDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
-
-            var result = await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
-
-            // ************ ASSERT *************
-
-            result.Should().NotBeNull();
-            
-            DataSource.GetCategoryIndex(DeletedCategoryIndexKey).Should().BeNull();
-        }
-
-        [Fact]
-        public async Task DeleteCategoryIndex_Commit_ApplyChangesInDatabase()
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task DeletedCategoryIndex_NoCommit_KeepsChangesLocal(
+            bool callCommit, bool dataShouldExistInSut2)
         {
             // ************ ARRANGE ************
 
             var categoryIndex = CreateCategoryIndex(3);
 
-            // ************ ACT ****************
+            var sut1 = CreateSut();
 
-            await Sut.UpsertDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
-
-            await Sut.CommitChangesAsync(CancellationToken.None);
-
-            // ************ ASSERT *************
-
-            var resultFromDatabase = DataSource.GetCategoryIndex(DeletedCategoryIndexKey);
-
-            resultFromDatabase.Payload.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,(x,y)=>x.SomeValue == y.SomeValue);
-        }
-
-        [Fact]
-        public async Task NonDeletedCategoryIndex_NoCommit_KeepsChangesLocal()
-        {
-            // ************ ARRANGE ************
-
-            var categoryIndex = RandomCategoryIndex();
+            var sut2 = CreateSut();
 
             // ************ ACT ****************
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
+            await sut1.UpsertDeletedItemsCategoryIndex(categoryIndex,
+                CancellationToken.None);
 
-            var result = await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+            if (callCommit)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
 
             // ************ ASSERT *************
 
-            result.Should().NotBeNull();
+            if (dataShouldExistInSut2)
+            {
+                var result =
+                    await sut2.GetDeletedItemsCategoryIndex(CancellationToken
+                        .None);
 
-            DataSource.GetCategoryIndex(NonDeletedCategoryIndexKey).Should().BeNull();
+                result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,
+                    (x, y) => x.SomeValue == y.SomeValue);
+            }
+            else
+            {
+                await AssertThrows<CategoryIndexIsUninitializedException>(
+                    () => sut2.GetDeletedItemsCategoryIndex(
+                        CancellationToken
+                            .None));
+            }
         }
 
-        [Fact]
-        public async Task NonDeleteCategoryIndex_Commit_ApplyChangesInDatabase()
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task NonDeletedCategoryIndex_NoCommit_KeepsChangesLocal(
+            bool callCommit, bool dataShouldExistInSut2)
         {
             // ************ ARRANGE ************
 
             var categoryIndex = CreateCategoryIndex(3);
 
-            // ************ ACT ****************
+            var sut1 = CreateSut();
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
-
-            await Sut.CommitChangesAsync(CancellationToken.None);
-
-            // ************ ASSERT *************
-
-            var resultFromDatabase = DataSource.GetCategoryIndex(NonDeletedCategoryIndexKey);
-
-            resultFromDatabase.Payload.Lookups.ShouldBeEquivalent(categoryIndex.Lookups, (x, y) => x.SomeValue == y.SomeValue);
-        }
-
-        [Fact]
-        public async Task UpsertAggregate_NoCommit_KeepsChangesLocal()
-        {
-            // ************ ARRANGE ************
-
-            var aggregate = RandomAggregateDatabaseModel();
-
-            var key = RandomString();
+            var sut2 = CreateSut();
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, aggregate, CancellationToken.None);
+            await sut1.UpsertNonDeletedItemsCategoryIndex(categoryIndex,
+                CancellationToken.None);
 
-            var result = await Sut.GetAggregateAsync(key, CancellationToken.None);
+            if (callCommit)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
 
             // ************ ASSERT *************
 
-            result.Should().NotBeNull();
+            if (dataShouldExistInSut2)
+            {
+                var result =
+                    await sut2.GetNonDeletedItemsCategoryIndex(CancellationToken
+                        .None);
 
-            DataSource.GetAggregate(key).Should().BeNull();
+                result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,
+                    (x, y) => x.SomeValue == y.SomeValue);
+            }
+            else
+            {
+                await AssertThrows<CategoryIndexIsUninitializedException>(
+                    () => sut2.GetNonDeletedItemsCategoryIndex(
+                        CancellationToken
+                            .None));
+            }
         }
 
-        [Fact]
-        public async Task UpsertAggregate_Commit_ApplyChangesToDatabase()
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task UpsertAggregate_NoCommit_KeepsChangesLocal(
+            bool callCommit, bool dataShouldExistInSut2)
         {
             // ************ ARRANGE ************
 
@@ -125,19 +126,168 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var key = RandomString();
 
+            var sut1 = CreateSut();
+
+            var sut2 = CreateSut();
+
+
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, aggregate, CancellationToken.None);
+            await sut1.UpsertAggregateAsync(key, aggregate,
+                CancellationToken.None);
 
-            await Sut.CommitChangesAsync(CancellationToken.None);
+            if (callCommit)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
 
             // ************ ASSERT *************
 
-            var result = DataSource.GetAggregate(key);
+            if (dataShouldExistInSut2)
+            {
+                var result =
+                    await sut2.GetAggregateAsync(key, CancellationToken.None);
 
-            var aggregateFromDatabase = DataSource.GetAggregate(key);
+                result!.SomeValue.Should().Be(value);
+            }
+            else
+            {
+                (await sut2.GetAggregateAsync(key, CancellationToken.None))
+                    .Should().BeNull();
+            }
+        }
 
-            aggregateFromDatabase.Payload.SomeValue.Should().Be(value);
+        /*
+         * Optimistic concurrency. The following test check that whichever commits first wins.
+         * Create two suts, upsert the data for the same key on both. Then commit as the parameters of the test, assert.
+         * The UnitOfWork (SUT) does not make the concurrency check, all it does is pass the received ETag to the database, the database
+         * is responsible for making this check. For this particular database (InMemoryDataSource.cs) that logic is implemented.
+         * With this test, I am asserting that the UnitOfWork is in fact sending the correct ETags
+         */
+
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task DeletedCategoryIndex_OptimisticConcurrencyCheck(
+            bool sut1WasCommittedBeforeSut2, bool sut2ShouldThrow)
+        {
+            // ************ ARRANGE ************
+
+
+            var sut1 = CreateSut();
+
+            var sut2 = CreateSut();
+
+            // ************ ACT ****************
+
+            await sut1.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
+
+            await sut2.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
+
+            if (sut1WasCommittedBeforeSut2)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
+
+
+            // ************ ASSERT *************
+
+            if (sut2ShouldThrow)
+            {
+                await AssertThrows<DatabaseException>(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
+            else
+            {
+                await AssertDoesntThrows(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
+        }
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task NonDeletedCategoryIndex_OptimisticConcurrencyCheck(
+            bool sut1WasCommittedBeforeSut2, bool sut2ShouldThrow)
+        {
+            // ************ ARRANGE ************
+
+
+            var sut1 = CreateSut();
+
+            var sut2 = CreateSut();
+
+            // ************ ACT ****************
+
+            await sut1.UpsertNonDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
+
+            await sut2.UpsertNonDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
+
+            if (sut1WasCommittedBeforeSut2)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
+
+
+            // ************ ASSERT *************
+
+            if (sut2ShouldThrow)
+            {
+                await AssertThrows<DatabaseException>(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
+            else
+            {
+                await AssertDoesntThrows(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
+        }
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task UpsertAggregates_OptimisticConcurrencyCheck(
+            bool sut1WasCommittedBeforeSut2, bool sut2ShouldThrow)
+        {
+            // ************ ARRANGE ************
+
+            var key = RandomString();
+
+            var sut1 = CreateSut();
+
+            var sut2 = CreateSut();
+
+            // ************ ACT ****************
+
+            await sut1.UpsertAggregateAsync(key, RandomAggregateDatabaseModel(),
+                CancellationToken.None);
+
+            await sut2.UpsertAggregateAsync(key, RandomAggregateDatabaseModel(),
+                CancellationToken.None);
+
+            if (sut1WasCommittedBeforeSut2)
+            {
+                await sut1.CommitChangesAsync(CancellationToken.None);
+            }
+
+
+            // ************ ASSERT *************
+
+            if (sut2ShouldThrow)
+            {
+                await AssertThrows<DatabaseException>(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
+            else
+            {
+                await AssertDoesntThrows(() =>
+                    sut2.CommitChangesAsync(CancellationToken.None));
+            }
         }
     }
 }

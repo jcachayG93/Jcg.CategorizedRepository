@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Support.UnitOfWork.Api.Exceptions;
 using Testing.Common.Assertions;
+using Testing.Common.Types;
 
 namespace Support.UnitOfWork.IntegrationTests
 {
     public class UnitOfWorkBasicFunctionalityTests : TestBase
     {
+        public UnitOfWorkBasicFunctionalityTests()
+        {
+            Sut = CreateSut();
+        }
+
+        private IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut
+        {
+            get;
+        }
+
         [Fact]
-        public async Task GetNonDeletedItemsCategoryIndex_NoCategoryIndex_Throws()
+        public async Task
+            GetNonDeletedItemsCategoryIndex_NoCategoryIndex_Throws()
         {
             // ************ ARRANGE ************
 
@@ -20,13 +27,14 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+                await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken
+                    .None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<CategoryIndexIsUninitializedException>();
-
+            await fun.Should()
+                .ThrowAsync<CategoryIndexIsUninitializedException>();
         }
 
         [Fact]
@@ -38,13 +46,14 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
+                await Sut.GetDeletedItemsCategoryIndex(CancellationToken
+                    .None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<CategoryIndexIsUninitializedException>();
-
+            await fun.Should()
+                .ThrowAsync<CategoryIndexIsUninitializedException>();
         }
 
         [Fact]
@@ -56,14 +65,17 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ACT ****************
 
-            await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
 
-            var result = await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
 
             // ************ ASSERT *************
 
-            result.Lookups.ShouldBeEquivalent(index.Lookups,(x,y)=>x.SomeValue == y.SomeValue);
+            result.Lookups.ShouldBeEquivalent(index.Lookups,
+                (x, y) => x.SomeValue == y.SomeValue);
         }
 
         [Fact]
@@ -75,14 +87,18 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ACT ****************
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertNonDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
 
-            var result = await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetNonDeletedItemsCategoryIndex(
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
-            result.Lookups.ShouldBeEquivalent(index.Lookups, (x, y) => x.SomeValue == y.SomeValue);
+            result.Lookups.ShouldBeEquivalent(index.Lookups,
+                (x, y) => x.SomeValue == y.SomeValue);
         }
 
         [Fact]
@@ -90,10 +106,12 @@ namespace Support.UnitOfWork.IntegrationTests
         {
             // ************ ARRANGE ************
 
-           
+
             // ************ ACT ****************
 
-            var result = await Sut.GetAggregateAsync(RandomString(), CancellationToken.None);
+            var result =
+                await Sut.GetAggregateAsync(RandomString(),
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -111,9 +129,11 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, aggregate, CancellationToken.None);
+            await Sut.UpsertAggregateAsync(key, aggregate,
+                CancellationToken.None);
 
-            var result = await Sut.GetAggregateAsync(key, CancellationToken.None);
+            var result =
+                await Sut.GetAggregateAsync(key, CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -125,7 +145,8 @@ namespace Support.UnitOfWork.IntegrationTests
         {
             // ************ ARRANGE ************
 
-            await Sut.UpsertAggregateAsync(RandomString(), RandomAggregateDatabaseModel(), CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomString(),
+                RandomAggregateDatabaseModel(), CancellationToken.None);
 
             // ************ ACT ****************
 
@@ -138,7 +159,8 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -148,18 +170,21 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var index = RandomCategoryIndex();
 
-            await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+                await Sut.UpsertDeletedItemsCategoryIndex(index,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -169,18 +194,21 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var index = RandomCategoryIndex();
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertNonDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+                await Sut.UpsertNonDeletedItemsCategoryIndex(index,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -190,22 +218,24 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
-
 
 
             // ************ ACT ****************
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+                await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -215,17 +245,20 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var categoryIndex = CreateCategoryIndex(1);
 
-            await Sut.UpsertDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
+            await Sut.UpsertDeletedItemsCategoryIndex(categoryIndex,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
 
             // ************ ASSERT *************
 
-            result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,(x,y)=>x.SomeValue == y.SomeValue);
+            result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,
+                (x, y) => x.SomeValue == y.SomeValue);
         }
 
         [Fact]
@@ -235,17 +268,21 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var categoryIndex = CreateCategoryIndex(1);
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(categoryIndex, CancellationToken.None);
+            await Sut.UpsertNonDeletedItemsCategoryIndex(categoryIndex,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetNonDeletedItemsCategoryIndex(
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
-            result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups, (x, y) => x.SomeValue == y.SomeValue);
+            result.Lookups.ShouldBeEquivalent(categoryIndex.Lookups,
+                (x, y) => x.SomeValue == y.SomeValue);
         }
 
         [Fact]
@@ -257,13 +294,15 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var key = RandomString();
 
-            await Sut.UpsertAggregateAsync(key, aggregate, CancellationToken.None);
+            await Sut.UpsertAggregateAsync(key, aggregate,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetAggregateAsync(key, CancellationToken.None);
+            var result =
+                await Sut.GetAggregateAsync(key, CancellationToken.None);
 
             // ************ ASSERT *************
 

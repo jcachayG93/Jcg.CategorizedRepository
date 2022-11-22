@@ -9,26 +9,36 @@ namespace Support.UnitOfWork.IntegrationTests
         {
             DataSource = new();
 
-            var databaseClient = new TransactionalDatabaseClient(DataSource);
+            DatabaseClient = new TransactionalDatabaseClient(DataSource);
 
             DeletedCategoryIndexKey = RandomString();
 
             NonDeletedCategoryIndexKey = RandomString();
 
-            Sut = (new UnitOfWorkFactory()).Create(
-                NonDeletedCategoryIndexKey, 
-                DeletedCategoryIndexKey, 
-                databaseClient);
+            UnitOfWorkFactory = new UnitOfWorkFactory();
         }
 
         public string DeletedCategoryIndexKey { get; }
 
         public string NonDeletedCategoryIndexKey { get; }
 
+        private TransactionalDatabaseClient DatabaseClient { get; }
+
+        private UnitOfWorkFactory UnitOfWorkFactory { get; }
+
         protected InMemoryDataSource DataSource { get; }
 
-   
 
-        internal IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut { get; }
+        /// <summary>
+        ///     Creates a unit of work instance. Each one created with this method shacer the same underlying database client,
+        ///     database and category keys
+        /// </summary>
+        /// <returns></returns>
+        internal IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel>
+            CreateSut()
+        {
+            return UnitOfWorkFactory.Create(NonDeletedCategoryIndexKey,
+                DeletedCategoryIndexKey, DatabaseClient);
+        }
     }
 }
