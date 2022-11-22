@@ -1,4 +1,5 @@
 ﻿using Support.UnitOfWork.Api;
+using Support.UnitOfWork.Api.Exceptions;
 
 namespace Support.UnitOfWork;
 
@@ -10,7 +11,7 @@ internal interface IUnitOfWorkImp<TAggregateDatabaseModel,
     ///     Gets the non deleted items category index
     /// </summary>
     /// <param name="categoryKey">The category key</param>
-    /// <returns>The category index, null if it not initialized</returns>
+    /// <returns>The category index</returns>
     /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
     Task<CategoryIndex<TLookupDatabaseModel>>
         GetNonDeletedItemsCategoryIndex(
@@ -20,7 +21,7 @@ internal interface IUnitOfWorkImp<TAggregateDatabaseModel,
     ///     Gets the deleted items category index
     /// </summary>
     /// <param name="categoryKey">The category key</param>
-    /// <returns>The category index, null if it not initialized</returns>
+    /// <returns>The category index</returns>
     /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
     Task<CategoryIndex<TLookupDatabaseModel>>
         GetDeletedItemsCategoryIndex(

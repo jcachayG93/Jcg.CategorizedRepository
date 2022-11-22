@@ -1,4 +1,5 @@
 ﻿using Testing.Common.Doubles;
+using Testing.Common.Types;
 
 namespace Support.UnitOfWork.IntegrationTests
 {
@@ -7,10 +8,15 @@ namespace Support.UnitOfWork.IntegrationTests
         public TestBase()
         {
             DatabaseClient = new(new());
+
+            Sut = (new UnitOfWorkFactory()).Create(
+                "non-deleted-index", 
+                "deleted-index", 
+                DatabaseClient);
         }
 
         protected TransactionalDatabaseClient DatabaseClient { get; }
 
-        internal UnitOfWorkFactory UnitOfWorkFactory { get; }
+        internal IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut { get; }
     }
 }
