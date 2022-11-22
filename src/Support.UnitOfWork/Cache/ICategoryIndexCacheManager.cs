@@ -5,7 +5,7 @@ using Support.UnitOfWork.Api.Exceptions;
 namespace Support.UnitOfWork.Cache;
 
 internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
-    where TLookupDatabaseModel : class, IRepositoryLookup
+    where TLookupDatabaseModel : class, IRepositoryKey
 {
     /// <summary>
     ///     If the category index was upserted, this will contain the latest version. Null if it was not upserted.

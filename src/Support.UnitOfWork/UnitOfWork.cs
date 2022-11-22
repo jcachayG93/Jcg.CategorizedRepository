@@ -9,7 +9,7 @@ namespace Support.UnitOfWork
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class, IRepositoryLookup
+        where TLookupDatabaseModel : class, IRepositoryKey
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

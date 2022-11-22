@@ -10,7 +10,7 @@ namespace Support.UnitOfWork.Api
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class, IRepositoryLookup
+        where TLookupDatabaseModel : class, IRepositoryKey
     {
         /// <summary>
         ///     Gets the aggregate

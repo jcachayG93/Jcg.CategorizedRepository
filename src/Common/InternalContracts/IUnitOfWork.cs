@@ -6,7 +6,7 @@ namespace Support.UnitOfWork;
 
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel> where TAggregateDatabaseModel : class
-    where TLookupDatabaseModel : class, IRepositoryLookup
+    where TLookupDatabaseModel : class, IRepositoryKey
 {
     /// <summary>
     ///     Gets the non deleted items category index

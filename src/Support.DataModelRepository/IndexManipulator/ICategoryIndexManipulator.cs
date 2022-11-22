@@ -11,7 +11,7 @@ namespace Support.DataModelRepository.IndexManipulator
     public interface ICategoryIndexManipulator
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class, IRepositoryLookup
+        where TLookupDatabaseModel : class, IRepositoryKey
     {
         /// <summary>
         ///     If a lookup exist for the key, replaces it, else inserts a new one. The lookup will be mapped from the aggregate
