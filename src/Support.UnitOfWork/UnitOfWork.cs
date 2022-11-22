@@ -5,12 +5,12 @@ using Support.UnitOfWork.Cache;
 namespace Support.UnitOfWork
 {
     internal class
-        UnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel> :
-            IUnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>
+        UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
+            IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
         where TLookupDatabaseModel : class
     {
-        public UnitOfWorkImp(
+        public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
                 TLookupDatabaseModel> dbClient,
             IAggregatesCacheManager<TAggregateDatabaseModel> aggregatesCache,
@@ -147,7 +147,6 @@ namespace Support.UnitOfWork
             }
         }
 
-        
 
         private async Task<bool> UpsertDeletedItemsCategoryIndex()
         {
@@ -158,12 +157,10 @@ namespace Support.UnitOfWork
                 return false;
             }
 
-           await _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
-               item.PayLoad, CancellationToken.None);
+            await _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
+                item.PayLoad, CancellationToken.None);
 
-           return true;
-
-
+            return true;
         }
 
         private async Task<bool> UpsertNonDeletedIndexCategoryIndex()

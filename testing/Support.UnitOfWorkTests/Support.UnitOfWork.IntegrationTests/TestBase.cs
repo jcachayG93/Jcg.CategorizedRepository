@@ -34,7 +34,7 @@ namespace Support.UnitOfWork.IntegrationTests
         ///     database and category keys
         /// </summary>
         /// <returns></returns>
-        internal IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel>
+        internal IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
             CreateSut()
         {
             return UnitOfWorkFactoryImp.Create(NonDeletedCategoryIndexKey,

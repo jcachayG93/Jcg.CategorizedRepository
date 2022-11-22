@@ -6,7 +6,7 @@ namespace Support.UnitOfWork
 {
     internal class UnitOfWorkFactoryImp
     {
-        public IUnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>
+        public IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
             Create<TAggregateDatabaseModel, TLookupDatabaseModel>(
                 string nonDeletedCategoryIndexKey,
                 string deletedCategoryIndexKey,
@@ -28,7 +28,7 @@ namespace Support.UnitOfWork
             var deletedItemsCache =
                 CreateCategoryIndexCache(deletedCategoryIndexKey, dbClient);
 
-            return new UnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>(
+            return new UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>(
                 dbClient,
                 aggregatesCache,
                 deletedItemsCache,
