@@ -1,4 +1,5 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Api.Exceptions;
 
 namespace Support.UnitOfWork.Cache.Imp
@@ -6,7 +7,7 @@ namespace Support.UnitOfWork.Cache.Imp
     internal class CategoryIndexCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : ICategoryIndexCacheManager<TLookupDatabaseModel>
-        where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class, IRepositoryLookup
         where TAggregateDatabaseModel : class
     {
         /// <summary>
@@ -47,7 +48,8 @@ namespace Support.UnitOfWork.Cache.Imp
         {
             if (!_categoryIndexCache.HasKey(_categoryKey))
             {
-                var data = await _databaseClient.GetCategoryIndex(_categoryKey, CancellationToken.None);
+                var data = await _databaseClient.GetCategoryIndex(_categoryKey,
+                    CancellationToken.None);
 
                 if (data != null)
                 {
@@ -56,7 +58,6 @@ namespace Support.UnitOfWork.Cache.Imp
             }
 
             _categoryIndexCache.Upsert(_categoryKey, categoryIndex);
-
         }
 
         private async Task ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync()

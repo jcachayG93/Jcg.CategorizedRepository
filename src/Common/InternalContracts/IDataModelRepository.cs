@@ -1,11 +1,13 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
+using Support.UnitOfWork.Api.Exceptions;
 
 namespace Common.InternalContracts
 {
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class, IRepositoryLookup
     {
         /// <summary>
         ///     Initializes the category indexes for the category

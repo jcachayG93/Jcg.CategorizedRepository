@@ -1,4 +1,5 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Api.Exceptions;
 using Support.UnitOfWork.Cache;
 
@@ -8,7 +9,7 @@ namespace Support.UnitOfWork
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class, IRepositoryLookup
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

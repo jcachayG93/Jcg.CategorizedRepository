@@ -1,4 +1,6 @@
-﻿namespace Support.UnitOfWork.Api
+﻿using Common.Api;
+
+namespace Support.UnitOfWork.Api
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database
@@ -8,7 +10,7 @@
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class, IRepositoryLookup
     {
         /// <summary>
         ///     Gets the aggregate

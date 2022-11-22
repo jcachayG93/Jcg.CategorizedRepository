@@ -1,11 +1,12 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Api.Exceptions;
 
 namespace Support.UnitOfWork;
 
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel> where TAggregateDatabaseModel : class
-    where TLookupDatabaseModel : class
+    where TLookupDatabaseModel : class, IRepositoryLookup
 {
     /// <summary>
     ///     Gets the non deleted items category index

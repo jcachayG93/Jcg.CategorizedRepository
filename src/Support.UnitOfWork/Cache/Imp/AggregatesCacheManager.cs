@@ -1,4 +1,5 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
 
 namespace Support.UnitOfWork.Cache.Imp
 {
@@ -6,7 +7,7 @@ namespace Support.UnitOfWork.Cache.Imp
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class
+        where TLookupDatabaseModel : class, IRepositoryLookup
     {
         public AggregatesCacheManager(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

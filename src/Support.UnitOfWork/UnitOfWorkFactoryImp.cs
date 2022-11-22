@@ -1,4 +1,5 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Cache;
 using Support.UnitOfWork.Cache.Imp;
 
@@ -12,11 +13,10 @@ namespace Support.UnitOfWork
                 string deletedCategoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : class
+            where TLookupDatabaseModel : class, IRepositoryLookup
             where TAggregateDatabaseModel : class
 
         {
-
             var aggregatesCache =
                 new AggregatesCacheManager<TAggregateDatabaseModel,
                     TLookupDatabaseModel>(
@@ -28,22 +28,26 @@ namespace Support.UnitOfWork
             var deletedItemsCache =
                 CreateCategoryIndexCache(deletedCategoryIndexKey, dbClient);
 
-            return new UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>(
-                dbClient,
-                aggregatesCache,
-                deletedItemsCache,
-                nonDeletedItemsCache
-            );
+            return new
+                UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>(
+                    dbClient,
+                    aggregatesCache,
+                    deletedItemsCache,
+                    nonDeletedItemsCache
+                );
         }
 
-        private ICategoryIndexCacheManager<TLookupDatabaseModel> CreateCategoryIndexCache
+        private ICategoryIndexCacheManager<TLookupDatabaseModel>
+            CreateCategoryIndexCache
             <TAggregateDatabaseModel, TLookupDatabaseModel>(
                 string categoryIndexKey,
-                ITransactionalDatabaseClient<TAggregateDatabaseModel, TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : class
+                ITransactionalDatabaseClient<TAggregateDatabaseModel,
+                    TLookupDatabaseModel> dbClient)
+            where TLookupDatabaseModel : class, IRepositoryLookup
             where TAggregateDatabaseModel : class
         {
-          return new CategoryIndexCacheManager<TAggregateDatabaseModel, TLookupDatabaseModel>(
+            return new CategoryIndexCacheManager<TAggregateDatabaseModel,
+                TLookupDatabaseModel>(
                 categoryIndexKey,
                 dbClient,
                 new Cache<CategoryIndex<TLookupDatabaseModel>>());
