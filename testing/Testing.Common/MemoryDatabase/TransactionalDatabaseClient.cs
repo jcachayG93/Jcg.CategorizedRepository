@@ -63,24 +63,112 @@ namespace Testing.Common.Doubles
     {
         public AggregateETag? GetAggregate(string key)
         {
-            throw new NotImplementedException();
+            if (!_aggregates.ContainsKey(key))
+            {
+                return null;
+            }
+
+            return _aggregates[key].Clone();
         }
 
         public CategoryIndexETag? GetCategoryIndex(string key)
         {
-            throw new NotImplementedException();
+            if (!_categoryIndexes.ContainsKey(key))
+            {
+                return null;
+            }
+
+            return _categoryIndexes[key].Clone();
         }
 
         public void Upsert(Dictionary<string, AggregateETag> aggregates,
             Dictionary<string, CategoryIndexETag> categoryIndexes)
         {
-            throw new NotImplementedException();
+            AssertETagsMatch(aggregates, categoryIndexes);
+
+            SaveAggregates(aggregates);
+
+            SaveCategoryIndexes(categoryIndexes);
+        }
+
+        private void SaveCategoryIndexes(
+            Dictionary<string, CategoryIndexETag> categoryIndexes)
+        {
+            var updatedValues = categoryIndexes.ToDictionary(i => i.Key,
+                i => i.Value.CloneWithNewETag());
+
+            foreach (var index in updatedValues)
+            {
+                if (_categoryIndexes.ContainsKey(index.Key))
+                {
+                    _categoryIndexes[index.Key] = index.Value;
+                }
+                else
+                {
+                    _categoryIndexes.Add(index.Key, index.Value);
+                }
+            }
+        }
+
+        private void SaveAggregates(
+            Dictionary<string, AggregateETag> aggregates)
+        {
+            var updatedAggregates = aggregates.ToDictionary(i => i.Key,
+                i => i.Value.CloneWithNewETag());
+
+            foreach (var aggregate in updatedAggregates)
+            {
+                if (_aggregates.ContainsKey(aggregate.Key))
+                {
+                    _aggregates[aggregate.Key] = aggregate.Value;
+                }
+                else
+                {
+                    _aggregates.Add(aggregate.Key, aggregate.Value);
+                }
+            }
+        }
+
+
+        private void AssertETagsMatch(
+            Dictionary<string, AggregateETag> aggregates,
+            Dictionary<string, CategoryIndexETag> categoryIndexes)
+        {
+            foreach (var aggregate in aggregates)
+            {
+                if (_aggregates.ContainsKey(aggregate.Key))
+                {
+                    if (_aggregates[aggregate.Key].Etag != aggregate.Value.Etag)
+                    {
+                        throw new DatabaseException("Aggregate Etag mistmatch");
+                    }
+                }
+            }
+
+            foreach (var index in categoryIndexes)
+            {
+                if (_categoryIndexes.ContainsKey(index.Key))
+                {
+                    if (_categoryIndexes[index.Key].Etag != index.Value.Etag)
+                    {
+                        throw new DatabaseException(
+                            "CategoryIndex Etag Mismatch");
+                    }
+                }
+            }
         }
 
         private readonly Dictionary<string, AggregateETag> _aggregates = new();
 
         private readonly Dictionary<string, CategoryIndexETag>
             _categoryIndexes = new();
+    }
+
+    internal class DatabaseException : Exception
+    {
+        public DatabaseException(string error) : base(error)
+        {
+        }
     }
 
     internal class AggregateETag : IETagDto<AggregateDatabaseModel>
@@ -100,6 +188,11 @@ namespace Testing.Common.Doubles
         public AggregateETag Clone()
         {
             return new(Etag, Payload);
+        }
+
+        public AggregateETag CloneWithNewETag()
+        {
+            return new(RandomString(), Payload);
         }
     }
 
@@ -122,6 +215,11 @@ namespace Testing.Common.Doubles
         public CategoryIndexETag Clone()
         {
             return new(Etag, Payload);
+        }
+
+        public CategoryIndexETag CloneWithNewETag()
+        {
+            return new(RandomString(), Payload);
         }
     }
 }
