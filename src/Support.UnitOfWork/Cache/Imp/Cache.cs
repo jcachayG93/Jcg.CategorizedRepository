@@ -5,6 +5,7 @@ namespace Support.UnitOfWork.Cache.Imp
 {
     internal class Cache<TData>
         where TData : class
+
     {
         /// <summary>
         ///     The items that were passed to the Upsert method. If that was an insert operation,

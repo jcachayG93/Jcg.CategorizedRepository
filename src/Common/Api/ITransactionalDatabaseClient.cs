@@ -9,7 +9,7 @@ namespace Support.UnitOfWork.Api
     /// <typeparam name="TLookupDatabaseModel">The type representing the aggregate lookup to be stored in the database</typeparam>
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class
+        where TAggregateDatabaseModel : class, IRepositoryKey
         where TLookupDatabaseModel : class, IRepositoryKey
     {
         /// <summary>

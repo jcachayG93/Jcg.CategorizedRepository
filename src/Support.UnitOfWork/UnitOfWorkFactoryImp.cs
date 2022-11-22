@@ -14,7 +14,7 @@ namespace Support.UnitOfWork
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
             where TLookupDatabaseModel : class, IRepositoryKey
-            where TAggregateDatabaseModel : class
+            where TAggregateDatabaseModel : class, IRepositoryKey
 
         {
             var aggregatesCache =
@@ -44,7 +44,7 @@ namespace Support.UnitOfWork
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
             where TLookupDatabaseModel : class, IRepositoryKey
-            where TAggregateDatabaseModel : class
+            where TAggregateDatabaseModel : class, IRepositoryKey
         {
             return new CategoryIndexCacheManager<TAggregateDatabaseModel,
                 TLookupDatabaseModel>(

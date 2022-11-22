@@ -8,7 +8,7 @@ namespace Support.UnitOfWork.Cache.Imp
             TLookupDatabaseModel>
         : ICategoryIndexCacheManager<TLookupDatabaseModel>
         where TLookupDatabaseModel : class, IRepositoryKey
-        where TAggregateDatabaseModel : class
+        where TAggregateDatabaseModel : class, IRepositoryKey
     {
         /// <summary>
         ///     Constructor

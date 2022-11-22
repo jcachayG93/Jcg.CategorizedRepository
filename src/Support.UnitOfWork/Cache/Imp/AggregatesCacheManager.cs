@@ -6,7 +6,7 @@ namespace Support.UnitOfWork.Cache.Imp
     internal class AggregatesCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class
+        where TAggregateDatabaseModel : class, IRepositoryKey
         where TLookupDatabaseModel : class, IRepositoryKey
     {
         public AggregatesCacheManager(

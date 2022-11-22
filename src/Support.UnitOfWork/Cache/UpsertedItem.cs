@@ -10,5 +10,4 @@
 ///     one that was retrieved from the database
 /// </param>
 /// <param name="PayLoad">The payload</param>
-internal record UpsertedItem<TData>(string Key, string ETag, TData PayLoad)
-    where TData : class;
+internal record UpsertedItem<TData>(string Key, string ETag, TData PayLoad);
