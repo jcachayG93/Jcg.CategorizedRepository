@@ -35,8 +35,7 @@ namespace Support.UnitOfWork.Cache.Imp
         /// <inheritdoc />
         public async Task<CategoryIndex<TLookupDatabaseModel>> GetAsync()
         {
-            await ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync(
-                _categoryKey);
+            await ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync();
 
 
             return _categoryIndexCache.Get(_categoryKey)!;
@@ -60,13 +59,12 @@ namespace Support.UnitOfWork.Cache.Imp
 
         }
 
-        private async Task ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync(
-            string key)
+        private async Task ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync()
         {
-            if (!_categoryIndexCache.HasKey(key))
+            if (!_categoryIndexCache.HasKey(_categoryKey))
             {
                 var data =
-                    await _databaseClient.GetCategoryIndex(key,
+                    await _databaseClient.GetCategoryIndex(_categoryKey,
                         CancellationToken.None);
 
                 if (data is null)
@@ -74,7 +72,7 @@ namespace Support.UnitOfWork.Cache.Imp
                     throw new CategoryIndexIsUninitializedException();
                 }
 
-                _categoryIndexCache.Add(key, data);
+                _categoryIndexCache.Add(_categoryKey, data);
             }
         }
 

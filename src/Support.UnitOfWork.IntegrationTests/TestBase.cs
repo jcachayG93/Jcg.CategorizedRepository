@@ -7,15 +7,27 @@ namespace Support.UnitOfWork.IntegrationTests
     {
         public TestBase()
         {
-            DatabaseClient = new(new());
+            DataSource = new();
+
+            var databaseClient = new TransactionalDatabaseClient(DataSource);
+
+            DeletedCategoryIndexKey = RandomString();
+
+            NonDeletedCategoryIndexKey = RandomString();
 
             Sut = (new UnitOfWorkFactory()).Create(
-                "non-deleted-index", 
-                "deleted-index", 
-                DatabaseClient);
+                NonDeletedCategoryIndexKey, 
+                DeletedCategoryIndexKey, 
+                databaseClient);
         }
 
-        protected TransactionalDatabaseClient DatabaseClient { get; }
+        public string DeletedCategoryIndexKey { get; }
+
+        public string NonDeletedCategoryIndexKey { get; }
+
+        protected InMemoryDataSource DataSource { get; }
+
+   
 
         internal IUnitOfWorkImp<AggregateDatabaseModel, LookupDatabaseModel> Sut { get; }
     }

@@ -1,4 +1,5 @@
 ﻿using Support.UnitOfWork.Api;
+using Support.UnitOfWork.Api.Exceptions;
 using Support.UnitOfWork.Cache;
 
 namespace Support.UnitOfWork
@@ -23,6 +24,8 @@ namespace Support.UnitOfWork
             _deletedItemsCategoryIndexCache = deletedItemsCategoryIndexCache;
             _nonDeletedItemsCategoryIndexCache =
                 nonDeletedItemsCategoryIndexCache;
+
+            _commitWasCalled = false;
         }
 
         /// <summary>
@@ -58,6 +61,7 @@ namespace Support.UnitOfWork
             CategoryIndex<TLookupDatabaseModel> deletedItemsCategoryIndex,
             CancellationToken cancellationToken)
         {
+            AssertCommitWasNotCalled();
             return _deletedItemsCategoryIndexCache.UpsertAsync(
                 deletedItemsCategoryIndex);
         }
@@ -69,6 +73,7 @@ namespace Support.UnitOfWork
             CategoryIndex<TLookupDatabaseModel> nonDeletedItemsCategoryIndex,
             CancellationToken cancellationToken)
         {
+            AssertCommitWasNotCalled();
             return _nonDeletedItemsCategoryIndexCache.UpsertAsync(
                 nonDeletedItemsCategoryIndex);
         }
@@ -96,6 +101,7 @@ namespace Support.UnitOfWork
             TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
+            AssertCommitWasNotCalled();
             return _aggregatesCache.UpsertAsync(key, aggregate);
         }
 
@@ -110,14 +116,22 @@ namespace Support.UnitOfWork
         public async Task CommitChangesAsync(
             CancellationToken cancellationToken)
         {
+            AssertCommitWasNotCalled();
+
+            _commitWasCalled = true;
+
             var anyChanges = await UpsertAllUpsertedAggregates();
 
-            if (anyChanges)
+            if (await UpsertDeletedItemsCategoryIndex())
             {
-                await UpsertDeletedItemsCategoryIndex();
-
-                await UpsertNonDeletedIndexCategoryIndex();
+                anyChanges = true;
             }
+
+            if (await UpsertNonDeletedIndexCategoryIndex())
+            {
+                anyChanges = true;
+            }
+
 
             if (anyChanges)
             {
@@ -125,30 +139,46 @@ namespace Support.UnitOfWork
             }
         }
 
-        private Task UpsertDeletedItemsCategoryIndex()
+        private void AssertCommitWasNotCalled()
+        {
+            if (_commitWasCalled)
+            {
+                throw new UnitOfWorkWasAlreadyCommittedException();
+            }
+        }
+
+        
+
+        private async Task<bool> UpsertDeletedItemsCategoryIndex()
         {
             var item = _deletedItemsCategoryIndexCache.UpsertedItem;
 
-            if (item != null)
+            if (item is null)
             {
-                return _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
-                    item.PayLoad, CancellationToken.None);
+                return false;
             }
 
-            return Task.CompletedTask;
+           await _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
+               item.PayLoad, CancellationToken.None);
+
+           return true;
+
+
         }
 
-        private Task UpsertNonDeletedIndexCategoryIndex()
+        private async Task<bool> UpsertNonDeletedIndexCategoryIndex()
         {
             var item = _nonDeletedItemsCategoryIndexCache.UpsertedItem;
 
-            if (item != null)
+            if (item is null)
             {
-                return _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
-                    item.PayLoad, CancellationToken.None);
+                return false;
             }
 
-            return Task.CompletedTask;
+            await _dbClient.UpsertCategoryIndex(item.Key, item.ETag,
+                item.PayLoad, CancellationToken.None);
+
+            return true;
         }
 
         private async Task<bool> UpsertAllUpsertedAggregates()
@@ -181,5 +211,7 @@ namespace Support.UnitOfWork
 
         private readonly ICategoryIndexCacheManager<TLookupDatabaseModel>
             _nonDeletedItemsCategoryIndexCache;
+
+        private bool _commitWasCalled;
     }
 }

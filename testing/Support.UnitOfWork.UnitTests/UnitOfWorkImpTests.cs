@@ -1,5 +1,8 @@
 ﻿using FluentAssertions;
+using Support.UnitOfWork.Api.Exceptions;
 using Support.UnitOfWork.UnitTests.TestCommon;
+using System;
+using Testing.Common.Assertions;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.UnitTests
@@ -192,6 +195,152 @@ namespace Support.UnitOfWork.UnitTests
             }
 
             DbClient.VerifyCommitTransaction();
+        }
+
+        [Fact]
+        public async Task Commit_MoreThanOnce_Throws()
+        {
+            // ************ ARRANGE ************
+
+            await Sut.UpsertAggregateAsync(RandomString(), RandomAggregateDatabaseModel(), CancellationToken.None);
+
+            // ************ ACT ****************
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            var fun = new Func<Task>(async () =>
+            {
+                await Sut.CommitChangesAsync(CancellationToken.None);
+            });
+
+            // ************ ASSERT *************
+
+            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+        }
+
+        [Fact]
+        public async Task DeletedCategoryIndex_Upsert_After_Commit_Throws()
+        {
+            // ************ ARRANGE ************
+
+            var index = RandomCategoryIndex();
+
+            await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            var fun = new Func<Task>(async () =>
+            {
+                await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+            });
+
+            // ************ ASSERT *************
+
+            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+        }
+
+        [Fact]
+        public async Task NonDeletedCategoryIndex_Upsert_After_Commit_Throws()
+        {
+            // ************ ARRANGE ************
+
+            var index = RandomCategoryIndex();
+
+            await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            var fun = new Func<Task>(async () =>
+            {
+                await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+            });
+
+            // ************ ASSERT *************
+
+            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+        }
+
+        [Fact]
+        public async Task UpsertAggregate_After_Commit_Throws()
+        {
+            // ************ ARRANGE ************
+
+            var aggregate = RandomAggregateDatabaseModel();
+
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+
+
+            // ************ ACT ****************
+
+            var fun = new Func<Task>(async () =>
+            {
+                await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+            });
+
+            // ************ ASSERT *************
+
+            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+        }
+
+        [Fact]
+        public async Task DeletedCategoryIndex_GetAfterCommit_WorksAsUsual()
+        {
+            // ************ ARRANGE ************
+            
+
+            await Sut.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(), CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            // ************ ACT ****************
+
+            var result = await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().BeSameAs(DeletedItemsCategoryIndexCache.GetReturns);
+        }
+
+        [Fact]
+        public async Task NonDeletedCategoryIndex_GetAfterCommit_WorksAsUsual()
+        {
+            // ************ ARRANGE ************
+
+
+            await Sut.UpsertNonDeletedItemsCategoryIndex(RandomCategoryIndex(), CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            // ************ ACT ****************
+
+            var result = await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().BeSameAs(NonDeletedItemsCategoryIndexCache.GetReturns);
+        }
+
+        [Fact]
+        public async Task GetAggregate_AfterCommit_WorksAsUsual()
+        {
+            // ************ ARRANGE ************
+
+            var aggregate = RandomAggregateDatabaseModel();
+
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            // ************ ACT ****************
+
+            var result = await Sut.GetAggregateAsync(RandomString(), CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().BeSameAs(AggregatesCache.GetReturns);
         }
     }
 }
