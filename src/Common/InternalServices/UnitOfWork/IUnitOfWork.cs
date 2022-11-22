@@ -1,4 +1,5 @@
 ﻿using Support.UnitOfWork.Api;
+using Support.UnitOfWork.Api.Exceptions;
 
 namespace Common.InternalServices.UnitOfWork
 {

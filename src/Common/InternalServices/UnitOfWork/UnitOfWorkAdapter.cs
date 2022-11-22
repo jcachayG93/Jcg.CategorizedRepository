@@ -8,6 +8,7 @@ using Support.UnitOfWork.Api;
 
 namespace Common.InternalServices.UnitOfWork
 {
+    
     internal class UnitOfWorkAdapter<TAggregateDatabaseModel,
         TLookupDatabaseModel>
     : IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
@@ -20,29 +21,42 @@ namespace Common.InternalServices.UnitOfWork
         {
             _adaptee = adaptee;
         }
-        public Task<CategoryIndex<TLookupDatabaseModel>> GetCategoryIndex(string categoryKey, CancellationToken cancellationToken)
+
+        public Task<CategoryIndex<TLookupDatabaseModel>> GetNonDeletedItemsCategoryIndex(
+            CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _adaptee.GetNonDeletedItemsCategoryIndex(cancellationToken);
         }
 
-        public Task UpsertCategoryIndex(string categoryKey, CategoryIndex<TLookupDatabaseModel> categoryIndex, CancellationToken cancellationToken)
+        public Task<CategoryIndex<TLookupDatabaseModel>> GetDeletedItemsCategoryIndex(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _adaptee.GetDeletedItemsCategoryIndex(cancellationToken);
         }
 
-        public Task CommitChangesAsync(CancellationToken cancellationToken)
+        public Task UpsertDeletedItemsCategoryIndex(CategoryIndex<TLookupDatabaseModel> deletedItemsCategoryIndex, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _adaptee.UpsertDeletedItemsCategoryIndex(deletedItemsCategoryIndex, cancellationToken);
+        }
+
+        public Task UpsertNonDeletedItemsCategoryIndex(CategoryIndex<TLookupDatabaseModel> nonDeletedItemsCategoryIndex,
+            CancellationToken cancellationToken)
+        {
+            return _adaptee.UpsertNonDeletedItemsCategoryIndex(nonDeletedItemsCategoryIndex, cancellationToken);
         }
 
         public Task<TAggregateDatabaseModel?> GetAggregateAsync(string key, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _adaptee.GetAggregateAsync(key, cancellationToken);
         }
 
         public Task UpsertAggregateAsync(string key, TAggregateDatabaseModel aggregate, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _adaptee.UpsertAggregateAsync(key, aggregate, cancellationToken);
+        }
+
+        public Task CommitChangesAsync(CancellationToken cancellationToken)
+        {
+            return _adaptee.CommitChangesAsync(cancellationToken);
         }
     }
 }

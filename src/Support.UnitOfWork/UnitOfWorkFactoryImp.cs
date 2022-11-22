@@ -4,7 +4,7 @@ using Support.UnitOfWork.Cache.Imp;
 
 namespace Support.UnitOfWork
 {
-    internal class UnitOfWorkFactory
+    internal class UnitOfWorkFactoryImp
     {
         public IUnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>
             Create<TAggregateDatabaseModel, TLookupDatabaseModel>(
