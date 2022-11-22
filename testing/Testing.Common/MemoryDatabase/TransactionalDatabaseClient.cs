@@ -7,12 +7,11 @@ namespace Testing.Common.Doubles
         : ITransactionalDatabaseClient<AggregateDatabaseModel,
             LookupDatabaseModel>
     {
-        private readonly InMemoryDataSource _ds;
-
         public TransactionalDatabaseClient(InMemoryDataSource ds)
         {
             _ds = ds;
         }
+
         /// <inheritdoc />
         public Task<IETagDto<AggregateDatabaseModel>?> GetAggregateAsync(
             string key, CancellationToken cancellationToken)
@@ -69,6 +68,8 @@ namespace Testing.Common.Doubles
 
         private readonly Dictionary<string, CategoryIndexETag>
             _categoryIndexes = new();
+
+        private readonly InMemoryDataSource _ds;
     }
 
     internal class InMemoryDataSource
