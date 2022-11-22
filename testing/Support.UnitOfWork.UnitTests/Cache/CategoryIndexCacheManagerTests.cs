@@ -96,60 +96,69 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
         [Fact]
         public async Task
-            Upsert_KeyNotInCache_ReadsDataFromDatabase_DatabaseReturnsNull_Throws()
+            Upsert_KeyNotInCache_ReadsDataFromDatabase_DatabaseReturnsNotNull_AddsToCache_UpsertsToCache()
         {
             // ************ ARRANGE ************
 
             Cache.SetupHasKey(false);
 
-            DbClient.SetupGetCategoryIndexReturnsNull();
+            var payload = RandomCategoryIndex();
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
-            {
-                await Sut.UpsertAsync(RandomCategoryIndex());
-            };
-
-            // ************ ASSERT *************
-
-            await fun.Should()
-                .ThrowAsync<CategoryIndexIsUninitializedException>();
-        }
-
-
-        [Fact]
-        public async Task
-            Upsert_KeyNotInCche_ReadsDataFromDatabase_AddsResultToCache()
-        {
-            // ************ ARRANGE ************
-
-            Cache.SetupHasKey(false);
-
-            // ************ ACT ****************
-
-            await Sut.UpsertAsync(RandomCategoryIndex());
+            await Sut.UpsertAsync(payload);
 
             // ************ ASSERT *************
 
             DbClient.VerifyGetCategoryIndex(CategoryKey);
 
             Cache.VerifyAdd(CategoryKey, DbClient.GetCategoryIndexReturns);
+
+            Cache.VerifyUpsert(CategoryKey, payload);
+        }
+
+        [Fact]
+        public async Task
+            Upsert_KeyNotInCache_ReadsDataFromDatabase_DatabaseReturnsNull_UpsertsToCache()
+        {
+            // ************ ARRANGE ************
+
+            Cache.SetupHasKey(false);
+
+            var payload = RandomCategoryIndex();
+
+            DbClient.SetupGetCategoryIndexReturnsNull();
+
+            // ************ ACT ****************
+
+            await Sut.UpsertAsync(payload);
+
+            // ************ ASSERT *************
+
+            DbClient.VerifyGetCategoryIndex(CategoryKey);
+
+
+            Cache.VerifyUpsert(CategoryKey, payload);
         }
 
 
+
         [Fact]
-        public async Task Upsert_KeyInCache_DoesNotReadDatabase()
+        public async Task Upsert_KeyInCache_UpsertsToCache_DoesNotReadDatabase()
         {
             // ************ ARRANGE ************
 
             Cache.SetupHasKey(true);
 
+            var payload = RandomCategoryIndex();
+
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(RandomCategoryIndex());
+            await Sut.UpsertAsync(payload);
 
             // ************ ASSERT *************
+
+            Cache.VerifyUpsert(CategoryKey, payload);
 
             DbClient.VerifyNoOtherCalls();
         }

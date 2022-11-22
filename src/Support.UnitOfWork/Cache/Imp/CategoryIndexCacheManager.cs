@@ -46,11 +46,18 @@ namespace Support.UnitOfWork.Cache.Imp
         public async Task UpsertAsync(
             CategoryIndex<TLookupDatabaseModel> categoryIndex)
         {
-            await ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync(
-                _categoryKey);
+            if (!_categoryIndexCache.HasKey(_categoryKey))
+            {
+                var data = await _databaseClient.GetCategoryIndex(_categoryKey, CancellationToken.None);
 
+                if (data != null)
+                {
+                    _categoryIndexCache.Add(_categoryKey, data);
+                }
+            }
 
             _categoryIndexCache.Upsert(_categoryKey, categoryIndex);
+
         }
 
         private async Task ReadAndAddToCacheIfNeededAssertCacheNotEmptyAsync(
