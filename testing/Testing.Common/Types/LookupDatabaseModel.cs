@@ -2,4 +2,5 @@
 
 public class LookupDatabaseModel
 {
+    public string SomeValue { get; set; } = "";
 }
