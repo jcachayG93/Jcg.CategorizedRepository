@@ -5,8 +5,9 @@ using Support.UnitOfWork.Api.Exceptions;
 namespace Support.UnitOfWork;
 
 internal interface IUnitOfWork<TAggregateDatabaseModel,
-    TLookupDatabaseModel> where TAggregateDatabaseModel : IRepositoryKey
-    where TLookupDatabaseModel : IRepositoryKey
+    TLookupDatabaseModel>
+    where TAggregateDatabaseModel : class, IAggregateDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     /// <summary>
     ///     Gets the non deleted items category index

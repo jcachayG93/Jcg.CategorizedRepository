@@ -7,7 +7,7 @@ namespace Common.InternalContracts
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
-        where TLookupDatabaseModel : class, IRepositoryKey
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Initializes the category indexes for the category

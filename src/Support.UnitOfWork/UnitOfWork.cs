@@ -8,8 +8,8 @@ namespace Support.UnitOfWork
     internal class
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IRepositoryKey
-        where TLookupDatabaseModel : class, IRepositoryKey
+        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

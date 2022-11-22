@@ -7,7 +7,7 @@ namespace Support.UnitOfWork.Api
     /// </summary>
     /// <typeparam name="TLookupDatabaseModel"></typeparam>
     public class CategoryIndex<TLookupDatabaseModel>
-        where TLookupDatabaseModel : IRepositoryKey
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         public IEnumerable<TLookupDatabaseModel> Lookups { get; set; }
             = Array.Empty<TLookupDatabaseModel>();
