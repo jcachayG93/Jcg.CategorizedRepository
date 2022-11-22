@@ -3,7 +3,7 @@
 namespace Support.UnitOfWork.Cache
 {
     internal interface IAggregatesCacheManager<TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class, IRepositoryKey
+        where TAggregateDatabaseModel : class, IAggregateDataModel
     {
         /// <summary>
         ///     All the aggregates that were upserted in the local cache. The data includes the ETag
