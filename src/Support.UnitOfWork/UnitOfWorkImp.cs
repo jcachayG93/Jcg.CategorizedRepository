@@ -3,7 +3,9 @@ using Support.UnitOfWork.Cache;
 
 namespace Support.UnitOfWork
 {
-    internal class UnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>
+    internal class
+        UnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel> :
+            IUnitOfWorkImp<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class
         where TLookupDatabaseModel : class
     {
