@@ -25,8 +25,9 @@ namespace Testing.Common.Doubles
             }
         }
 
+
         /// <inheritdoc />
-        public Task UpsertAggregateAsync(string key, string eTag,
+        public Task UpsertAggregateAsync(string eTag,
             AggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
@@ -34,13 +35,13 @@ namespace Testing.Common.Doubles
             {
                 var item = new AggregateETag(eTag, aggregate);
 
-                if (_aggregateChanges.ContainsKey(key))
+                if (_aggregateChanges.ContainsKey(aggregate.Key))
                 {
-                    _aggregateChanges[key] = item;
+                    _aggregateChanges[aggregate.Key] = item;
                 }
                 else
                 {
-                    _aggregateChanges.Add(key, item);
+                    _aggregateChanges.Add(aggregate.Key, item);
                 }
 
                 return Task.CompletedTask;

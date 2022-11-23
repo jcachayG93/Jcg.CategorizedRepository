@@ -59,11 +59,12 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
             _moq.VerifyNoOtherCalls();
         }
 
-        public void VerifyUpsertAggregate(string key, string eTag,
+
+        public void VerifyUpsertAggregate(string eTag,
             AggregateDatabaseModel aggregate)
         {
             _moq.Verify(s =>
-                s.UpsertAggregateAsync(key, eTag, aggregate, AnyCt()));
+                s.UpsertAggregateAsync(eTag, aggregate, AnyCt()));
         }
 
         public void VerifyGetCategoryIndex(string categoryKey)

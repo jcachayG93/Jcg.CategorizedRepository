@@ -124,7 +124,6 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var aggregate = CreateAggregateDatabaseModel(out var value);
 
-            var key = RandomString();
 
             var sut1 = CreateSut();
 
@@ -133,7 +132,7 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ACT ****************
 
-            await sut1.UpsertAggregateAsync(key, aggregate,
+            await sut1.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             if (callCommit)
@@ -146,13 +145,15 @@ namespace Support.UnitOfWork.IntegrationTests
             if (dataShouldExistInSut2)
             {
                 var result =
-                    await sut2.GetAggregateAsync(key, CancellationToken.None);
+                    await sut2.GetAggregateAsync(aggregate.Key,
+                        CancellationToken.None);
 
                 result!.SomeValue.Should().Be(value);
             }
             else
             {
-                (await sut2.GetAggregateAsync(key, CancellationToken.None))
+                (await sut2.GetAggregateAsync(aggregate.Key,
+                        CancellationToken.None))
                     .Should().BeNull();
             }
         }
@@ -256,7 +257,7 @@ namespace Support.UnitOfWork.IntegrationTests
         {
             // ************ ARRANGE ************
 
-            var key = RandomString();
+            var aggregate = RandomAggregateDatabaseModel();
 
             var sut1 = CreateSut();
 
@@ -264,10 +265,12 @@ namespace Support.UnitOfWork.IntegrationTests
 
             // ************ ACT ****************
 
-            await sut1.UpsertAggregateAsync(key, RandomAggregateDatabaseModel(),
+            await sut1.UpsertAggregateAsync(
+                aggregate,
                 CancellationToken.None);
 
-            await sut2.UpsertAggregateAsync(key, RandomAggregateDatabaseModel(),
+            await sut2.UpsertAggregateAsync(
+                aggregate,
                 CancellationToken.None);
 
             if (sut1WasCommittedBeforeSut2)

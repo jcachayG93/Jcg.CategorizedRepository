@@ -149,18 +149,16 @@ namespace Support.UnitOfWork.UnitTests
         {
             // ************ ARRANGE ************
 
-            var key = RandomString();
-
             var aggregate = RandomAggregateDatabaseModel();
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             // ************ ASSERT *************
 
-            AggregatesCache.VerifyUpsert(key, aggregate);
+            AggregatesCache.VerifyUpsert(aggregate);
         }
 
         [Fact]
@@ -189,7 +187,7 @@ namespace Support.UnitOfWork.UnitTests
 
             foreach (var aggregate in AggregatesCache.UpsertedItemsReturns)
             {
-                DbClient.VerifyUpsertAggregate(aggregate.Key, aggregate.ETag,
+                DbClient.VerifyUpsertAggregate(aggregate.ETag,
                     aggregate.PayLoad);
             }
 
@@ -201,8 +199,8 @@ namespace Support.UnitOfWork.UnitTests
         {
             // ************ ARRANGE ************
 
-            await Sut.UpsertAggregateAsync(RandomString(),
-                RandomAggregateDatabaseModel(), CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomAggregateDatabaseModel(),
+                CancellationToken.None);
 
             // ************ ACT ****************
 
@@ -274,7 +272,7 @@ namespace Support.UnitOfWork.UnitTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
@@ -284,7 +282,7 @@ namespace Support.UnitOfWork.UnitTests
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                await Sut.UpsertAggregateAsync(aggregate,
                     CancellationToken.None);
             });
 
@@ -345,7 +343,7 @@ namespace Support.UnitOfWork.UnitTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);

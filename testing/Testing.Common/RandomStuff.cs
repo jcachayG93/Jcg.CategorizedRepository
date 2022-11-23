@@ -24,7 +24,11 @@ namespace Testing.Common
 
         public static AggregateDatabaseModel RandomAggregateDatabaseModel()
         {
-            return new();
+            return new()
+            {
+                SomeValue = RandomString(),
+                Key = RandomString()
+            };
         }
 
         public static CategoryIndex<LookupDatabaseModel> RandomCategoryIndex()
@@ -68,7 +72,8 @@ namespace Testing.Common
 
             return new()
             {
-                SomeValue = value
+                SomeValue = value,
+                Key = RandomString()
             };
         }
 
@@ -77,7 +82,8 @@ namespace Testing.Common
         {
             return new()
             {
-                Key = key
+                Key = key,
+                SomeValue = RandomString()
             };
         }
 

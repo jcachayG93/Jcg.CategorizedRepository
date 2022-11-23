@@ -12,7 +12,7 @@ namespace Support.DataModelRepository.UnitTests.Strategies
             IndexManipulator = new();
             UnitOfWork = new();
             Sut = new(IndexManipulator.Object, UnitOfWork.Object);
-            Key = Guid.NewGuid();
+
             Aggregate = RandomAggregateDatabaseModel();
         }
 

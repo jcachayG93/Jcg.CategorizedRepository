@@ -126,15 +126,15 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var aggregate = CreateAggregateDatabaseModel(out var value);
 
-            var key = RandomString();
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             var result =
-                await Sut.GetAggregateAsync(key, CancellationToken.None);
+                await Sut.GetAggregateAsync(aggregate.Key,
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -146,7 +146,7 @@ namespace Support.UnitOfWork.IntegrationTests
         {
             // ************ ARRANGE ************
 
-            await Sut.UpsertAggregateAsync(RandomString(),
+            await Sut.UpsertAggregateAsync(
                 RandomAggregateDatabaseModel(), CancellationToken.None);
 
             // ************ ACT ****************
@@ -219,7 +219,7 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
@@ -229,7 +229,7 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                await Sut.UpsertAggregateAsync(aggregate,
                     CancellationToken.None);
             });
 
@@ -293,9 +293,8 @@ namespace Support.UnitOfWork.IntegrationTests
 
             var aggregate = CreateAggregateDatabaseModel(out var value);
 
-            var key = RandomString();
 
-            await Sut.UpsertAggregateAsync(key, aggregate,
+            await Sut.UpsertAggregateAsync(aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
@@ -303,7 +302,8 @@ namespace Support.UnitOfWork.IntegrationTests
             // ************ ACT ****************
 
             var result =
-                await Sut.GetAggregateAsync(key, CancellationToken.None);
+                await Sut.GetAggregateAsync(aggregate.Key,
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 

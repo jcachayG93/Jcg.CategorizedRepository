@@ -76,11 +76,6 @@ namespace Testing.Common.Mocks
             _moq.Verify(s => s.GetAggregateAsync(key, AnyCt()));
         }
 
-        public void VerifyUpsertAggregate(string key,
-            AggregateDatabaseModel aggregate)
-        {
-            _moq.Verify(s => s.UpsertAggregateAsync(key, aggregate, AnyCt()));
-        }
 
         public void VerifyCommitChanges()
         {
