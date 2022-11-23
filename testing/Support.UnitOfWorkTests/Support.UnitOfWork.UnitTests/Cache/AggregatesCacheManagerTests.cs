@@ -86,19 +86,17 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
             Cache.SetupHasKey(false);
 
-            var key = RandomString();
-
             var data = RandomAggregateDatabaseModel();
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(key, data);
+            await Sut.UpsertAsync(data);
 
             // ************ ASSERT *************
 
-            DbClient.VerifyGetAggregate(key);
+            DbClient.VerifyGetAggregate(data.Key);
 
-            Cache.VerifyAdd(key, DbClient.GetAggregateReturns);
+            Cache.VerifyAdd(data.Key, DbClient.GetAggregateReturns);
         }
 
 
@@ -111,7 +109,7 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(RandomString(),
+            await Sut.UpsertAsync(
                 RandomAggregateDatabaseModel());
 
             // ************ ASSERT *************
@@ -127,18 +125,17 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
             Cache.SetupHasKey(true);
 
-            var key = RandomString();
 
             var data = RandomPayload();
 
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(key, data);
+            await Sut.UpsertAsync(data);
 
             // ************ ASSERT *************
 
-            Cache.VerifyUpsert(key, data);
+            Cache.VerifyUpsert(data.Key, data);
         }
 
         [Fact]

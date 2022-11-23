@@ -31,10 +31,11 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
             _moq.Verify(s => s.GetAsync(key));
         }
 
-        public void VerifyUpsert(string key, AggregateDatabaseModel aggregate)
+
+        public void VerifyUpsert(AggregateDatabaseModel aggregate)
         {
             _moq.Verify(s =>
-                s.UpsertAsync(key, aggregate));
+                s.UpsertAsync(aggregate));
         }
 
         public void SetupUpsertedItemsReturns(int count)

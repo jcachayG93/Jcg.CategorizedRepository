@@ -27,7 +27,8 @@ namespace Testing.Common.MemoryDatabase
         {
             return new()
             {
-                SomeValue = RandomString()
+                SomeValue = RandomString(),
+                Key = RandomString()
             };
         }
 
@@ -36,10 +37,10 @@ namespace Testing.Common.MemoryDatabase
             out string Key,
             out string Etag)
         {
-            Key = RandomString();
             Etag = RandomString();
 
             aggregate = RandomAggregate();
+            Key = aggregate.Key;
         }
 
         private void CreateUpsertCategoryIndexData(
@@ -91,7 +92,7 @@ namespace Testing.Common.MemoryDatabase
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, eTag, aggregate,
+            await Sut.UpsertAggregateAsync(eTag, aggregate,
                 CancellationToken.None);
 
             await Sut.CommitTransactionAsync(CancellationToken.None);
@@ -117,7 +118,7 @@ namespace Testing.Common.MemoryDatabase
 
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(key, eTag, aggregate,
+            await Sut.UpsertAggregateAsync(eTag, aggregate,
                 CancellationToken.None);
 
             await Sut.CommitTransactionAsync(CancellationToken.None);

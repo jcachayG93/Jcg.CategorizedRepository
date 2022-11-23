@@ -23,6 +23,7 @@ namespace Support.UnitOfWork.Cache
         /// <returns>Null if the data for the key does not exist in the database</returns>
         Task<TAggregateDatabaseModel?> GetAsync(string key);
 
+
         /// <summary>
         ///     Upserts the data in the local cache. If the key was not read before will read it from the database and add it to
         ///     the cache.
@@ -30,6 +31,6 @@ namespace Support.UnitOfWork.Cache
         /// </summary>
         /// <param name="key">The aggregate key</param>
         /// <param name="aggregate">The aggregate</param>
-        Task UpsertAsync(string key, TAggregateDatabaseModel aggregate);
+        Task UpsertAsync(TAggregateDatabaseModel aggregate);
     }
 }

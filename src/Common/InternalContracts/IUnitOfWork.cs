@@ -57,14 +57,14 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
     Task<TAggregateDatabaseModel?> GetAggregateAsync(string key,
         CancellationToken cancellationToken);
 
+
     /// <summary>
     ///     Upserts the aggregate
     /// </summary>
-    /// <param name="key"></param>
     /// <param name="aggregate"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task UpsertAggregateAsync(string key,
+    Task UpsertAggregateAsync(
         TAggregateDatabaseModel aggregate,
         CancellationToken cancellationToken);
 

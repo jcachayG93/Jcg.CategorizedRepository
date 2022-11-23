@@ -30,12 +30,7 @@ namespace Support.UnitOfWork
             _commitWasCalled = false;
         }
 
-        /// <summary>
-        ///     Gets the non deleted items category index
-        /// </summary>
-        /// <param name="categoryKey">The category key</param>
-        /// <returns>The category index, null if it not initialized</returns>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
+        /// <inheritdoc />
         public Task<CategoryIndex<TLookupDatabaseModel>>
             GetNonDeletedItemsCategoryIndex(
                 CancellationToken cancellationToken)
@@ -43,12 +38,7 @@ namespace Support.UnitOfWork
             return _nonDeletedItemsCategoryIndexCache.GetAsync();
         }
 
-        /// <summary>
-        ///     Gets the deleted items category index
-        /// </summary>
-        /// <param name="categoryKey">The category key</param>
-        /// <returns>The category index, null if it not initialized</returns>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
+        /// <inheritdoc />
         public Task<CategoryIndex<TLookupDatabaseModel>>
             GetDeletedItemsCategoryIndex(
                 CancellationToken cancellationToken)
@@ -78,9 +68,7 @@ namespace Support.UnitOfWork
             return deletedIndexExist;
         }
 
-        /// <summary>
-        ///     Upsert the deleted items category index
-        /// </summary>
+        /// <inheritdoc />
         public Task UpsertDeletedItemsCategoryIndex(
             CategoryIndex<TLookupDatabaseModel> deletedItemsCategoryIndex,
             CancellationToken cancellationToken)
@@ -90,9 +78,7 @@ namespace Support.UnitOfWork
                 deletedItemsCategoryIndex);
         }
 
-        /// <summary>
-        ///     Upsert the non-deleted items category index
-        /// </summary>
+        /// <inheritdoc />
         public Task UpsertNonDeletedItemsCategoryIndex(
             CategoryIndex<TLookupDatabaseModel> nonDeletedItemsCategoryIndex,
             CancellationToken cancellationToken)
@@ -103,40 +89,23 @@ namespace Support.UnitOfWork
         }
 
 
-        /// <summary>
-        ///     Gets the aggregate for the matching key.
-        /// </summary>
-        /// <param name="key">The aggregate key key</param>
-        /// <returns>The aggregate, null if not found</returns>
+        /// <inheritdoc />
         public Task<TAggregateDatabaseModel?> GetAggregateAsync(string key,
             CancellationToken cancellationToken)
         {
             return _aggregatesCache.GetAsync(key);
         }
 
-        /// <summary>
-        ///     Upserts the aggregate
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="aggregate"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task UpsertAggregateAsync(string key,
-            TAggregateDatabaseModel aggregate,
+
+        /// <inheritdoc />
+        public Task UpsertAggregateAsync(TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
             AssertCommitWasNotCalled();
-            return _aggregatesCache.UpsertAsync(key, aggregate);
+            return _aggregatesCache.UpsertAsync(aggregate);
         }
 
-        /// <summary>
-        ///     Commits all the changes. This operation can be called only once for the lifetime of this UnitOfWork
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="CommitMayBeCalledOnlyOnceException">
-        ///     When called more than once. Once changes are committed, you must use a different instance for the
-        ///     unit of work
-        /// </exception>
+        /// <inheritdoc />
         public async Task CommitChangesAsync(
             CancellationToken cancellationToken)
         {
@@ -211,7 +180,7 @@ namespace Support.UnitOfWork
 
             var taskList = _aggregatesCache
                 .UpsertedItems.Select(i =>
-                    _dbClient.UpsertAggregateAsync(i.Key, i.ETag, i.PayLoad!,
+                    _dbClient.UpsertAggregateAsync(i.ETag, i.PayLoad!,
                         CancellationToken.None))
                 .ToList();
 

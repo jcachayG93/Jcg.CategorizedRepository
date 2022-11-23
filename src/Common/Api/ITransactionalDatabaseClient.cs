@@ -20,20 +20,20 @@ namespace Support.UnitOfWork.Api
         Task<IETagDto<TAggregateDatabaseModel>?> GetAggregateAsync(string key,
             CancellationToken cancellationToken);
 
+
         /// <summary>
         ///     Adds an Upsert operation to the list of transactions to be commited.
         /// </summary>
-        /// <param name="key">The key</param>
         /// <param name="eTag">
         ///     The ETag value for the payload. Blank if this is an insert operation. Value returned by GetAggregate
         ///     if this is a replace operation.
         /// </param>
-        /// <param name="aggregate">The aggregate</param>
+        /// <param name="aggregate">The aggregate, which has a key</param>
         /// <remarks>
         ///     This method is responsible for checking that the eTag matches the expected value for the key, but that
         ///     exception will be thrown after commit
         /// </remarks>
-        Task UpsertAggregateAsync(string key, string eTag,
+        Task UpsertAggregateAsync(string eTag,
             TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken);
 

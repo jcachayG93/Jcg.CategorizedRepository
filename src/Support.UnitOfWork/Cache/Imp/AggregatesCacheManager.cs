@@ -25,12 +25,13 @@ namespace Support.UnitOfWork.Cache.Imp
             return _aggregatesCache.Get(key);
         }
 
-        public async Task UpsertAsync(string key,
-            TAggregateDatabaseModel aggregate)
-        {
-            await ReadAndAddToCacheIfNeededAsync(key);
 
-            _aggregatesCache.Upsert(key, aggregate);
+        /// <inheritdoc />
+        public async Task UpsertAsync(TAggregateDatabaseModel aggregate)
+        {
+            await ReadAndAddToCacheIfNeededAsync(aggregate.Key);
+
+            _aggregatesCache.Upsert(aggregate.Key, aggregate);
         }
 
         public IEnumerable<UpsertedItem<TAggregateDatabaseModel>>
