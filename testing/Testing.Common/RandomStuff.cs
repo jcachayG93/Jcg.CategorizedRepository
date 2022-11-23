@@ -32,19 +32,53 @@ namespace Testing.Common
             return new();
         }
 
-        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(int numberOfLookups)
+        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(
+            int numberOfLookups)
         {
             var lookups = Enumerable.Range(0, numberOfLookups)
-                .Select(i => new LookupDatabaseModel(){SomeValue = RandomString()}).ToList();
+                .Select(i => new LookupDatabaseModel()
+                {
+                    SomeValue = RandomString()
+                }).ToList();
 
-            return new CategoryIndex<LookupDatabaseModel>() {Lookups = lookups};
+            return new CategoryIndex<LookupDatabaseModel>()
+            {
+                Lookups = lookups
+            };
         }
 
-        public static AggregateDatabaseModel CreateAggregateDatabaseModel(out string value)
+        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(
+            params string[] keys)
+        {
+            var lookups = keys.Select(k => new LookupDatabaseModel()
+            {
+                Key = k
+            }).ToList();
+
+            return new()
+            {
+                Lookups = lookups
+            };
+        }
+
+        public static AggregateDatabaseModel CreateAggregateDatabaseModel(
+            out string value)
         {
             value = RandomString();
 
-            return new() {SomeValue = value};
+            return new()
+            {
+                SomeValue = value
+            };
+        }
+
+        public static AggregateDatabaseModel CreateAggregateDatabaseModel(
+            string key)
+        {
+            return new()
+            {
+                Key = key
+            };
         }
 
 

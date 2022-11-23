@@ -10,7 +10,7 @@
 ///     A model that represents the aggregate but is designed to work with the chosen
 ///     database. Typically a class with a parameterless constructor and public automatic properties
 /// </typeparam>
-/// <typeparam name="TLookupModel">
+/// <typeparam name="TLookupDatabaseModel">
 ///     This is the same model that the user will interact with when querying the category and
 ///     to be stored in the database
 /// </typeparam>
@@ -20,9 +20,9 @@
 ///     to keep the library as simple as possible, I decided to use the same model for the database and the client
 /// </remarks>
 public interface IAggregateToLookupMapper<TAggregateDatabaseModel,
-    TLookupModel>
-    where TAggregateDatabaseModel : class, new()
-    where TLookupModel : class, new()
+    TLookupDatabaseModel>
+    where TAggregateDatabaseModel : class, IAggregateDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
-    TLookupModel ToLookup(TAggregateDatabaseModel aggregate);
+    TLookupDatabaseModel ToLookup(TAggregateDatabaseModel aggregate);
 }

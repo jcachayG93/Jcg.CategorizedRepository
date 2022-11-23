@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\Common\Common
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Support.DataModelRepository", "src\Support.DataModelRepository\Support.DataModelRepository.csproj", "{23A70C96-683C-4757-9179-E53B76836A2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Support.DataModelRepository.UnitTests", "testing\Support.DataModelRepository.UnitTests\Support.DataModelRepository.UnitTests.csproj", "{EA749094-636F-456A-9A2D-69A04D58C43E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{23A70C96-683C-4757-9179-E53B76836A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23A70C96-683C-4757-9179-E53B76836A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23A70C96-683C-4757-9179-E53B76836A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA749094-636F-456A-9A2D-69A04D58C43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA749094-636F-456A-9A2D-69A04D58C43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA749094-636F-456A-9A2D-69A04D58C43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA749094-636F-456A-9A2D-69A04D58C43E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{67842C65-0895-41A6-A889-472DC5B4E181} = {99FC7333-C16A-44C7-ACAF-CE0341C4B3F9}
 		{02050D31-B0D3-4FA1-9F6E-9CBEA894200C} = {FE863079-F1FA-4BA7-94D8-72FB90CE0E56}
 		{23A70C96-683C-4757-9179-E53B76836A2A} = {7D8E5F20-4229-4738-B861-B15D051285EB}
+		{EA749094-636F-456A-9A2D-69A04D58C43E} = {4D33CF4A-53DA-488B-8535-5F421970EE42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB0574CD-BB26-4770-9663-0F12027C0BC7}

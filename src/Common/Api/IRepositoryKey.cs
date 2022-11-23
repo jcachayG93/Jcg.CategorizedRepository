@@ -1,12 +1,5 @@
 ﻿namespace Common.Api
 {
-    [Obsolete]
-// TODO: R200 Remove
-    public interface IRepositoryKey
-    {
-        string Key { get; set; }
-    }
-
     public interface IRepositoryLookup
     {
         string Key { get; set; }

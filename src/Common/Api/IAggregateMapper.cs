@@ -16,7 +16,8 @@
     ///     database. Typically a class with a parameterless constructor and public automatic properties
     /// </typeparam>
     public interface IAggregateMapper<TAggregate, TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class, new()
+        where TAggregateDatabaseModel : class, IAggregateDataModel
+
     {
         /// <summary>
         ///     Maps the database model to the aggregate model

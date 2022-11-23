@@ -4,7 +4,7 @@
     ///     A Dto that wraps a Payload with an associated ETag value
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IETagDto<out T>
+    public interface IETagDto<T>
     {
         /// <summary>
         ///     The ETag value for the associated payload
