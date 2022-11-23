@@ -1,0 +1,78 @@
+﻿using Moq;
+using Support.UnitOfWork;
+using Support.UnitOfWork.Api;
+using Testing.Common.Types;
+
+namespace Testing.Common.Mocks
+{
+    internal class UnitOfWorkMock
+    {
+        public UnitOfWorkMock()
+        {
+            _moq = new();
+            GetNonDeletedItemsCategoryIndexReturns = RandomCategoryIndex();
+            GetDeletedItemsCategoryIndexReturns = RandomCategoryIndex();
+            GetAggregateReturns = RandomAggregateDatabaseModel();
+
+            _moq.Setup(s =>
+                    s.GetNonDeletedItemsCategoryIndex(AnyCt()).Result)
+                .Returns(GetNonDeletedItemsCategoryIndexReturns);
+
+            _moq.Setup(s =>
+                    s.GetDeletedItemsCategoryIndex(AnyCt()).Result)
+                .Returns(GetDeletedItemsCategoryIndexReturns);
+
+            _moq.Setup(s =>
+                    s.GetAggregateAsync(AnyString(), AnyCt()).Result)
+                .Returns(GetAggregateReturns);
+        }
+
+        public IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
+            Object => _moq.Object;
+
+
+        public CategoryIndex<LookupDatabaseModel>
+            GetNonDeletedItemsCategoryIndexReturns { get; }
+
+
+        public CategoryIndex<LookupDatabaseModel>
+            GetDeletedItemsCategoryIndexReturns { get; }
+
+        public AggregateDatabaseModel GetAggregateReturns { get; }
+
+        public void VerifyUpsertDeletedItemsCategoryIndex(
+            CategoryIndex<LookupDatabaseModel> deletedItemsCategoryIndex)
+        {
+            _moq.Verify(s =>
+                s.UpsertDeletedItemsCategoryIndex(deletedItemsCategoryIndex,
+                    AnyCt()));
+        }
+
+        public void VerifyUpsertNonDeletedItemsCategoryIndex(
+            CategoryIndex<LookupDatabaseModel> nonDeletedItemsCategoryIndex)
+        {
+            _moq.Verify(s =>
+                s.UpsertNonDeletedItemsCategoryIndex(
+                    nonDeletedItemsCategoryIndex, AnyCt()));
+        }
+
+        public void VerifyGetAggregate(string key)
+        {
+            _moq.Verify(s => s.GetAggregateAsync(key, AnyCt()));
+        }
+
+        public void VerifyUpsertAggregate(string key,
+            AggregateDatabaseModel aggregate)
+        {
+            _moq.Verify(s => s.UpsertAggregateAsync(key, aggregate, AnyCt()));
+        }
+
+        public void VerifyCommitChanges()
+        {
+            _moq.Verify(s => s.CommitChangesAsync(AnyCt()));
+        }
+
+        private readonly
+            Mock<IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>> _moq;
+    }
+}

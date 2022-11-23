@@ -6,7 +6,7 @@ namespace Common.InternalContracts
 {
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class
+        where TAggregateDatabaseModel : class, IAggregateDataModel
         where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
