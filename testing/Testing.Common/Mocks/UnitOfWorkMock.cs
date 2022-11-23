@@ -82,9 +82,9 @@ namespace Testing.Common.Mocks
         }
 
 
-        public void VerifyCommitChanges()
+        public void VerifyCommitChanges(CancellationToken cancellationToken)
         {
-            _moq.Verify(s => s.CommitChangesAsync(AnyCt()));
+            _moq.Verify(s => s.CommitChangesAsync(cancellationToken));
         }
 
         public void SetupCategoryIndexIsInitialized(bool returns)

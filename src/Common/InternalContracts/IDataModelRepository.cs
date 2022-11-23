@@ -45,13 +45,13 @@ namespace Common.InternalContracts
         /// <summary>
         ///     Upsers the aggregate.
         /// </summary>
-        /// <param name="key">The aggregate key</param>
         /// <param name="aggregate">The aggregate</param>
+        /// <param name="cancellationToken"></param>
         /// <exception cref="CategoryIndexIsUninitializedException">
         ///     When the CategoryIndex
         ///     is not found
         /// </exception>
-        Task UpsertAsync(Guid key, TAggregateDatabaseModel aggregate,
+        Task UpsertAsync(TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken);
 
         /// <summary>

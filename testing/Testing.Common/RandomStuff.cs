@@ -93,6 +93,11 @@ namespace Testing.Common
             return It.IsAny<CancellationToken>();
         }
 
+        public static Guid AnyId()
+        {
+            return It.IsAny<Guid>();
+        }
+
         public static string AnyString()
         {
             return It.IsAny<string>();

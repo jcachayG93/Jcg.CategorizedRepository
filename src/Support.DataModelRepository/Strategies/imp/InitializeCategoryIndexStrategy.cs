@@ -5,11 +5,6 @@ using Support.UnitOfWork;
 
 namespace Support.DataModelRepository.Strategies
 {
-    internal interface IInitializeCategoryIndexStrategy
-    {
-        Task InitializeCategoryIndexes(CancellationToken cancellationToken);
-    }
-
     internal class InitializeCategoryIndexStrategy<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IInitializeCategoryIndexStrategy
