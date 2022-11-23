@@ -9,7 +9,7 @@ namespace IntegrationTests.Common.Types
     ///     change more frequently.
     /// </summary>
     public class CustomerDataModel : IAggregateDataModel,
-        IClone<CustomerDataModel>
+        IClone
     {
         public string Name { get; set; } = "";
 
@@ -20,7 +20,7 @@ namespace IntegrationTests.Common.Types
         public string Key { get; set; } = "";
 
         /// <inheritdoc />
-        public CustomerDataModel Clone()
+        public object Clone()
         {
             var orders = Orders.Select(o =>
                 new OrderDataModel

@@ -50,14 +50,18 @@ namespace IntegrationTests.Common.Parts
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CategoryIndex<LookupDataModel>>?> GetCategoryIndex(
-            string categoryKey, CancellationToken cancellationToken)
+        public async Task<IETagDto<CategoryIndex<LookupDataModel>>?>
+            GetCategoryIndex(
+                string categoryKey, CancellationToken cancellationToken)
         {
             lock (_lockObject)
             {
-                return Task.FromResult(
-                    _database.GetAggregate<CategoryIndex<LookupDataModel>>(
-                        categoryKey));
+                var data =
+                    _database.GetAggregate<CustomCategoryIndex>(categoryKey);
+
+                var result =
+                    new ETagDtoImp<CategoryIndex<LookupDataModel>>(data.Etag,
+                        data.Payload);
             }
         }
 

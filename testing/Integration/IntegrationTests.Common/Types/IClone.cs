@@ -1,7 +1,7 @@
 ﻿namespace IntegrationTests.Common.Types
 {
-    public interface IClone<T>
+    public interface IClone
     {
-        T Clone();
+        object Clone();
     }
 }

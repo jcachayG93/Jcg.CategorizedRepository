@@ -1,3 +1,5 @@
-﻿namespace IntegrationTests.Common.Database;
+﻿using IntegrationTests.Common.Types;
 
-public record UpsertOperation(string Key, string ETag, object Payload);
+namespace IntegrationTests.Common.Database;
+
+public record UpsertOperation(string Key, string ETag, IClone Payload);

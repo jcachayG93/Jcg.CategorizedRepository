@@ -2,14 +2,14 @@
 
 namespace IntegrationTests.Common.Types;
 
-public class LookupDataModel : ILookupDataModel, IClone<LookupDataModel>
+public class LookupDataModel : ILookupDataModel, IClone
 {
     public string CustomerName { get; set; } = "";
 
     public int NumberOfOrders { get; set; }
 
     /// <inheritdoc />
-    public LookupDataModel Clone()
+    public object Clone()
     {
         return new()
         {

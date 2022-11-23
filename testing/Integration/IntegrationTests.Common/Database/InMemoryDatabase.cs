@@ -1,4 +1,5 @@
-﻿using Support.UnitOfWork.Api;
+﻿using IntegrationTests.Common.Types;
+using Support.UnitOfWork.Api;
 
 namespace IntegrationTests.Common.Database;
 
@@ -6,12 +7,13 @@ public class InMemoryDatabase : IInMemoryDatabase
 {
     /// <inheritdoc />
     public IETagDto<T>? GetAggregate<T>(string key)
+        where T : IClone
     {
         if (_data.TryGetValue(key, out var data))
         {
             var payload = (T)data.Payload;
 
-            return new ETagDto<T>(data.ETag, payload);
+            return new ETagDtoImp<T>(data.ETag, (T)payload.Clone());
         }
 
         return null;
@@ -77,7 +79,7 @@ public class InMemoryDatabase : IInMemoryDatabase
     {
         foreach (var op in operations.ToList())
         {
-            var dr = new DataRecord(op.ETag, op.Payload);
+            var dr = new DataRecord(op.ETag, (IClone)op.Payload.Clone());
 
             if (_data.ContainsKey(op.Key))
             {
@@ -94,20 +96,21 @@ public class InMemoryDatabase : IInMemoryDatabase
 
     private readonly Dictionary<string, DataRecord> _data = new();
 
-    private class ETagDto<T> : IETagDto<T>
+
+    private record DataRecord(string ETag, IClone Payload);
+}
+
+internal class ETagDtoImp<T> : IETagDto<T>
+{
+    public ETagDtoImp(string etag, T payload)
     {
-        public ETagDto(string etag, T payload)
-        {
-            Etag = etag;
-            Payload = payload;
-        }
-
-        /// <inheritdoc />
-        public string Etag { get; }
-
-        /// <inheritdoc />
-        public T Payload { get; }
+        Etag = etag;
+        Payload = payload;
     }
 
-    private record DataRecord(string ETag, object Payload);
+    /// <inheritdoc />
+    public string Etag { get; }
+
+    /// <inheritdoc />
+    public T Payload { get; }
 }
