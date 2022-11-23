@@ -9,3 +9,4 @@
 [assembly: InternalsVisibleTo("Common")]
 [assembly: InternalsVisibleTo("Common.UnitTests")]
 [assembly: InternalsVisibleTo("Testing.Common")]
+[assembly: InternalsVisibleTo("CategorizedRepository.Factories")]

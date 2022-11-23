@@ -4,4 +4,5 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
-[assembly: InternalsVisibleTo("Support.CategorizedRepository.UnitTests")] 
+[assembly: InternalsVisibleTo("Support.CategorizedRepository.UnitTests")]
+[assembly: InternalsVisibleTo("CategorizedRepository.Factories")]
