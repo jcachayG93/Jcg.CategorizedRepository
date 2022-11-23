@@ -5,7 +5,7 @@ using Support.DataModelRepository.UnitTests.TestCommon;
 using Testing.Common.Mocks;
 using Testing.Common.Types;
 
-namespace Support.DataModelRepository.UnitTests
+namespace Support.DataModelRepository.UnitTests.Strategies
 {
     public class InitializeCategoryIndexStrategyTests
     {
