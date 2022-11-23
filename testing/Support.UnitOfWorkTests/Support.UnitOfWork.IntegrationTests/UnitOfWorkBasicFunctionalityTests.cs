@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Common.Api.Exceptions;
+using FluentAssertions;
 using Support.UnitOfWork.Api.Exceptions;
 using Testing.Common.Assertions;
 using Testing.Common.Types;
@@ -307,6 +308,90 @@ namespace Support.UnitOfWork.IntegrationTests
             // ************ ASSERT *************
 
             result.SomeValue.Should().Be(value);
+        }
+
+
+        [Theory]
+        [InlineData(true, true, true)]
+        [InlineData(false, false, false)]
+        public async Task
+            CategoryIndexIsInitialized_True_IfDeletedAndNonDeletedCategoryIndexExists(
+                bool deletedIndexExists, bool nonDeletedIndexExists,
+                bool expectedResult)
+        {
+            // ************ ARRANGE ************
+
+            if (deletedIndexExists)
+            {
+                await Sut.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                    CancellationToken.None);
+            }
+
+            if (nonDeletedIndexExists)
+            {
+                await Sut.UpsertNonDeletedItemsCategoryIndex(
+                    RandomCategoryIndex(), CancellationToken.None);
+            }
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+            // ************ ACT ****************
+
+            var result =
+                await Sut.CategoryIndexIsInitializedAsync(
+                    CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().Be(expectedResult);
+        }
+
+
+        [Theory]
+        [InlineData(true, true, false)]
+        [InlineData(false, false, false)]
+        [InlineData(true, false, true)]
+        [InlineData(false, true, true)]
+        public async Task OneCategoryIndexExistButTheOtherDont_Throws(
+            bool deletedIndexExists, bool nonDeletedIndexExists,
+            bool shouldThrow)
+        {
+            // ************ ARRANGE ************
+
+            if (deletedIndexExists)
+            {
+                await Sut.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                    CancellationToken.None);
+            }
+
+            if (nonDeletedIndexExists)
+            {
+                await Sut.UpsertNonDeletedItemsCategoryIndex(
+                    RandomCategoryIndex(), CancellationToken.None);
+            }
+
+            await Sut.CommitChangesAsync(CancellationToken.None);
+
+
+            // ************ ACT ****************
+
+            Func<Task> fun = async () =>
+            {
+                await Sut.CategoryIndexIsInitializedAsync(
+                    CancellationToken.None);
+            };
+
+            // ************ ASSERT *************
+
+            if (shouldThrow)
+            {
+                await fun.Should()
+                    .ThrowAsync<InternalRepositoryErrorException>();
+            }
+            else
+            {
+                await fun.Should().NotThrowAsync();
+            }
         }
     }
 }

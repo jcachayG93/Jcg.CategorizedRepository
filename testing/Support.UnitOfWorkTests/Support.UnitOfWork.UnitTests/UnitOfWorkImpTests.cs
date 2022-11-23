@@ -366,18 +366,21 @@ namespace Support.UnitOfWork.UnitTests
         [InlineData(true, true)]
         [InlineData(false, false)]
         public async Task
-            CategoryIndexIsInitialized_DelegatesToDeletedIndexCache(
-                bool cacheIndexExistsResult, bool expectedResult)
+            CategoryIndexIsInitialized_TrueWhenBothIndexesAreInitialized(
+                bool bothIndexesExist, bool expectedResult)
         {
             // ************ ARRANGE ************
 
             DeletedItemsCategoryIndexCache.SetupIndexExist(
-                cacheIndexExistsResult);
+                bothIndexesExist);
+
+            NonDeletedItemsCategoryIndexCache.SetupIndexExist(
+                bothIndexesExist);
 
             // ************ ACT ****************
 
             var result =
-                await Sut.CheckIfDeletedCategoryIndexesExistsAsync(
+                await Sut.CategoryIndexIsInitializedAsync(
                     CancellationToken.None);
 
             // ************ ASSERT *************
@@ -407,7 +410,7 @@ namespace Support.UnitOfWork.UnitTests
 
             Func<Task> fun = async () =>
             {
-                await Sut.CheckIfDeletedCategoryIndexesExistsAsync(
+                await Sut.CategoryIndexIsInitializedAsync(
                     CancellationToken
                         .None);
             };

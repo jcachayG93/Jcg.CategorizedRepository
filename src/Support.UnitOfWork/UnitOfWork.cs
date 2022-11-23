@@ -1,4 +1,5 @@
 ﻿using Common.Api;
+using Common.Api.Exceptions;
 using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Api.Exceptions;
 using Support.UnitOfWork.Cache;
@@ -56,10 +57,25 @@ namespace Support.UnitOfWork
         }
 
         /// <inheritdoc />
-        public Task<bool> CheckIfDeletedCategoryIndexesExistsAsync(
+        public async Task<bool> CategoryIndexIsInitializedAsync(
             CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var deletedIndexExist =
+                await _deletedItemsCategoryIndexCache.IndexExistsAsync();
+
+            var nonDeletedIndexExist =
+                await _nonDeletedItemsCategoryIndexCache.IndexExistsAsync();
+
+            if (deletedIndexExist != nonDeletedIndexExist)
+            {
+                var errorMessage = deletedIndexExist
+                    ? "Deleted items Category Index Exists but Non Deleted Category index does not."
+                    : "Non Deleted items Category Index Exists but Deleted Category index does not.";
+
+                throw new InternalRepositoryErrorException(errorMessage);
+            }
+
+            return deletedIndexExist;
         }
 
         /// <summary>
