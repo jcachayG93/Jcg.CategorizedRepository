@@ -5,6 +5,7 @@ namespace Common.Api
 {
     public interface ICategorizedRepository
         <TAggregate, TLookup>
+
     {
         /// <summary>
         ///     Adds an operation that initializes a category so aggregates can be added to it.

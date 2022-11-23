@@ -1,5 +1,6 @@
 ﻿using Moq;
 using Support.UnitOfWork.Api;
+using Testing.Common.Extensions;
 using Testing.Common.Types;
 
 namespace Testing.Common
@@ -44,6 +45,20 @@ namespace Testing.Common
                 {
                     SomeValue = RandomString()
                 }).ToList();
+
+            return new CategoryIndex<LookupDatabaseModel>()
+            {
+                Lookups = lookups
+            };
+        }
+
+        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(out LookupDatabaseModel item1,
+            out LookupDatabaseModel item2)
+        {
+            item1 = new();
+            item2 = new();
+
+            var lookups = item1.ToCollection(item2);
 
             return new CategoryIndex<LookupDatabaseModel>()
             {

@@ -33,7 +33,8 @@ namespace Support.CategorizedRepository.UnitTests
 
             Key = new RepositoryIdentity(Guid.NewGuid());
 
-            AggregateMapper = new();
+
+            Aggregate = new();
         }
         private AggregateMapperMock AggregateMapper { get; }
 

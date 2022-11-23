@@ -15,23 +15,27 @@ namespace Testing.Common.Mocks
         {
             _moq = new Mock<ILookupMapper<LookupDatabaseModel, Lookup>>();
 
-            MapReturns = new();
-
-            _moq.Setup(s=>
-                s.Map(It.IsAny<LookupDatabaseModel>()))
-                .Returns(MapReturns);
+           
         }
 
         private readonly Mock<ILookupMapper<LookupDatabaseModel, Lookup>> _moq;
 
         public ILookupMapper<LookupDatabaseModel, Lookup> Object => _moq.Object;
 
-        public Lookup MapReturns { get; }
+      
 
         public void VerifyMap(LookupDatabaseModel databaseModel)
         {
             _moq.Verify(s=>
                 s.Map(databaseModel));
         }
+
+        public void Setup(LookupDatabaseModel forInput, out Lookup returns)
+        {
+            returns = new();
+
+            _moq.Setup(s=>s.Map(forInput)).Returns(returns);
+        }
+
     }
 }

@@ -10,7 +10,7 @@ public class AggregateMapperMock
     {
         _moq = new Mock<IAggregateMapper<Aggregate, AggregateDatabaseModel>>();
 
-        ToAggregateReturns = new();
+        ToAggregateReturns = new ();
 
         ToDatabaseModelReturns = new();
 

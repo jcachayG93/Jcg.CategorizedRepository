@@ -3,8 +3,8 @@ using Support.UnitOfWork.Api;
 
 namespace Support.CategorizedRepository.Support;
 
-internal interface ILookupMapperAdapter<TLookupDatabaseModel, Lookup>
+internal interface ILookupMapperAdapter<TLookupDatabaseModel, TLookup>
     where TLookupDatabaseModel : IRepositoryLookup
 {
-    IEnumerable<Lookup> Map(CategoryIndex<TLookupDatabaseModel> lookups);
+    IEnumerable<TLookup> Map(CategoryIndex<TLookupDatabaseModel> categoryIndex);
 }

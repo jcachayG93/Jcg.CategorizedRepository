@@ -11,54 +11,79 @@ namespace Support.CategorizedRepository
         where TAggregateDatabaseModel : class, IAggregateDataModel
         where TLookupDatabaseModel : IRepositoryLookup
     {
-     
+        private readonly IAggregateMapper<TAggregate, TAggregateDatabaseModel> _aggregateMapper;
+        private readonly IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> _aggregateToLookupMapper;
+        private readonly ILookupMapperAdapter<TLookupDatabaseModel, TLookup> _lookupMapper;
+        private readonly IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel> _dataModelRepository;
+
         public CategorizedRepository(
             IAggregateMapper<TAggregate, TAggregateDatabaseModel> aggregateMapper,
             IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> aggregateToLookupMapper,
             ILookupMapperAdapter<TLookupDatabaseModel, TLookup> lookupMapper,
             IDataModelRepository<TAggregateDatabaseModel,TLookupDatabaseModel> dataModelRepository)
         {
-            
+            _aggregateMapper = aggregateMapper;
+            _aggregateToLookupMapper = aggregateToLookupMapper;
+            _lookupMapper = lookupMapper;
+            _dataModelRepository = dataModelRepository;
         }
         public Task InitializeCategoryIndexAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _dataModelRepository.InitializeCategoryIndexes(cancellationToken);
         }
 
-        public Task<TAggregate?> GetAggregateAsync(RepositoryIdentity key, CancellationToken cancellationToken)
+        public async Task<TAggregate?> GetAggregateAsync(RepositoryIdentity key, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await _dataModelRepository.GetAggregateAsync(key.Value, CancellationToken.None);
+
+            if (data is null)
+            {
+                return default(TAggregate);
+            }
+
+           
+
+            return _aggregateMapper.ToAggregate(data);
         }
 
-        public Task UpsertAsync(RepositoryIdentity key, 
+        public async Task UpsertAsync(RepositoryIdentity key, 
             TAggregate aggregate, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var dataModel = _aggregateMapper.ToDatabaseModel(aggregate);
+
+            if (dataModel != null)
+            {
+                await _dataModelRepository.UpsertAsync(dataModel, CancellationToken.None);
+            }
         }
 
-        public Task<IEnumerable<TLookup>> LookupNonDeletedAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<TLookup>> LookupNonDeletedAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await _dataModelRepository.LookupNonDeletedAsync(cancellationToken);
+
+            return _lookupMapper.Map(data);
         }
 
-        public Task<IEnumerable<TLookup>> LookupDeletedAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<TLookup>> LookupDeletedAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await _dataModelRepository.LookupDeletedAsync(cancellationToken);
+
+            return _lookupMapper.Map(data);
         }
 
         public Task DeleteAsync(RepositoryIdentity key, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _dataModelRepository.DeleteAsync(key.Value, cancellationToken);
         }
 
         public Task RestoreAsync(RepositoryIdentity key, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _dataModelRepository.RestoreAsync(key.Value, cancellationToken);
         }
 
         public Task CommitChangesAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _dataModelRepository.CommitChangesAsync(cancellationToken);
         }
     }
 }
