@@ -21,6 +21,12 @@ internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
     Task<CategoryIndex<TLookupDatabaseModel>> GetAsync();
 
     /// <summary>
+    ///     True if the index exists in the database
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> IndexExistsAsync();
+
+    /// <summary>
     ///     Replaces the category index in the cache.
     /// </summary>
     /// <param name="categoryIndex">The updated category index</param>

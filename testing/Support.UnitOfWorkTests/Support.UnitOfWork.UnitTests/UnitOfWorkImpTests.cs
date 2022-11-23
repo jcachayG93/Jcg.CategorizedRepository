@@ -1,8 +1,7 @@
-﻿using FluentAssertions;
+﻿using Common.Api.Exceptions;
+using FluentAssertions;
 using Support.UnitOfWork.Api.Exceptions;
 using Support.UnitOfWork.UnitTests.TestCommon;
-using System;
-using Testing.Common.Assertions;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.UnitTests
@@ -202,7 +201,8 @@ namespace Support.UnitOfWork.UnitTests
         {
             // ************ ARRANGE ************
 
-            await Sut.UpsertAggregateAsync(RandomString(), RandomAggregateDatabaseModel(), CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomString(),
+                RandomAggregateDatabaseModel(), CancellationToken.None);
 
             // ************ ACT ****************
 
@@ -215,7 +215,8 @@ namespace Support.UnitOfWork.UnitTests
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -225,18 +226,21 @@ namespace Support.UnitOfWork.UnitTests
 
             var index = RandomCategoryIndex();
 
-            await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertDeletedItemsCategoryIndex(index, CancellationToken.None);
+                await Sut.UpsertDeletedItemsCategoryIndex(index,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -246,18 +250,21 @@ namespace Support.UnitOfWork.UnitTests
 
             var index = RandomCategoryIndex();
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+            await Sut.UpsertNonDeletedItemsCategoryIndex(index,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertNonDeletedItemsCategoryIndex(index, CancellationToken.None);
+                await Sut.UpsertNonDeletedItemsCategoryIndex(index,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
@@ -267,37 +274,41 @@ namespace Support.UnitOfWork.UnitTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
-
 
 
             // ************ ACT ****************
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+                await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                    CancellationToken.None);
             });
 
             // ************ ASSERT *************
 
-            await fun.Should().ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
+            await fun.Should()
+                .ThrowAsync<UnitOfWorkWasAlreadyCommittedException>();
         }
 
         [Fact]
         public async Task DeletedCategoryIndex_GetAfterCommit_WorksAsUsual()
         {
             // ************ ARRANGE ************
-            
 
-            await Sut.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(), CancellationToken.None);
+
+            await Sut.UpsertDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetDeletedItemsCategoryIndex(CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -310,17 +321,21 @@ namespace Support.UnitOfWork.UnitTests
             // ************ ARRANGE ************
 
 
-            await Sut.UpsertNonDeletedItemsCategoryIndex(RandomCategoryIndex(), CancellationToken.None);
+            await Sut.UpsertNonDeletedItemsCategoryIndex(RandomCategoryIndex(),
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetNonDeletedItemsCategoryIndex(CancellationToken.None);
+            var result =
+                await Sut.GetNonDeletedItemsCategoryIndex(
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
-            result.Should().BeSameAs(NonDeletedItemsCategoryIndexCache.GetReturns);
+            result.Should()
+                .BeSameAs(NonDeletedItemsCategoryIndexCache.GetReturns);
         }
 
         [Fact]
@@ -330,17 +345,84 @@ namespace Support.UnitOfWork.UnitTests
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(RandomString(), aggregate, CancellationToken.None);
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
+                CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
 
             // ************ ACT ****************
 
-            var result = await Sut.GetAggregateAsync(RandomString(), CancellationToken.None);
+            var result =
+                await Sut.GetAggregateAsync(RandomString(),
+                    CancellationToken.None);
 
             // ************ ASSERT *************
 
             result.Should().BeSameAs(AggregatesCache.GetReturns);
+        }
+
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task
+            CategoryIndexIsInitialized_DelegatesToDeletedIndexCache(
+                bool cacheIndexExistsResult, bool expectedResult)
+        {
+            // ************ ARRANGE ************
+
+            DeletedItemsCategoryIndexCache.SetupIndexExist(
+                cacheIndexExistsResult);
+
+            // ************ ACT ****************
+
+            var result =
+                await Sut.CheckIfDeletedCategoryIndexesExistsAsync(
+                    CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().Be(expectedResult);
+        }
+
+
+        [Theory]
+        [InlineData(true, true, false)]
+        [InlineData(false, false, false)]
+        [InlineData(true, false, true)]
+        [InlineData(false, true, true)]
+        public async Task
+            CategoryIndexIsInitialized_OneIndexExistButTheOtherDont_Throws(
+                bool deletedIndexExists, bool nonDeletedIndexExist,
+                bool shouldThrow)
+        {
+            // ************ ARRANGE ************
+
+            DeletedItemsCategoryIndexCache.SetupIndexExist(deletedIndexExists);
+
+            NonDeletedItemsCategoryIndexCache.SetupIndexExist(
+                nonDeletedIndexExist);
+
+            // ************ ACT ****************
+
+            Func<Task> fun = async () =>
+            {
+                await Sut.CheckIfDeletedCategoryIndexesExistsAsync(
+                    CancellationToken
+                        .None);
+            };
+
+            // ************ ASSERT *************
+
+            if (shouldThrow)
+            {
+                await fun.Should()
+                    .ThrowAsync<InternalRepositoryErrorException>();
+            }
+            else
+            {
+                await fun.Should().NotThrowAsync();
+            }
         }
     }
 }

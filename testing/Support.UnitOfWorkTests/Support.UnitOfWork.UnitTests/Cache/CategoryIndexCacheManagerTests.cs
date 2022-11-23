@@ -72,6 +72,64 @@ namespace Support.UnitOfWork.UnitTests.Cache
         }
 
 
+        [Theory]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        public async Task
+            IndexExist_CacheDoesNotHaveKey_ReadsFromDatabase_AddsToCache(
+                bool cacheHasKey, bool shouldLoadAndAdd)
+        {
+            // ************ ARRANGE ************
+
+            Cache.SetupHasKey(cacheHasKey);
+
+            // ************ ACT ****************
+
+            await Sut.IndexExistsAsync();
+
+            // ************ ASSERT *************
+
+            if (shouldLoadAndAdd)
+            {
+                DbClient.VerifyGetCategoryIndex(CategoryKey);
+
+                Cache.VerifyAdd(CategoryKey, DbClient.GetCategoryIndexReturns);
+            }
+            else
+            {
+                DbClient.VerifyNoOtherCalls();
+            }
+        }
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public async Task IndexExists_TrueIfCacheGetIsNotNull(
+            bool cacheReturnsNotNull, bool expectedResult)
+        {
+            // ************ ARRANGE ************
+
+            Cache.SetupHasKey(true);
+
+            if (cacheReturnsNotNull)
+            {
+                Cache.SetupGetReturnsNotNull();
+            }
+            else
+            {
+                Cache.SetupGetReturnsNull();
+            }
+
+            // ************ ACT ****************
+
+            var result = await Sut.IndexExistsAsync();
+
+            // ************ ASSERT *************
+
+            result.Should().Be(expectedResult);
+        }
+
+
         [Fact]
         public async Task
             Get_CacheDoesNotHaveKey_ReadsFromDatabase_AddsResultToCache_ReturnsCacheData()
@@ -140,7 +198,6 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
             Cache.VerifyUpsert(CategoryKey, payload);
         }
-
 
 
         [Fact]

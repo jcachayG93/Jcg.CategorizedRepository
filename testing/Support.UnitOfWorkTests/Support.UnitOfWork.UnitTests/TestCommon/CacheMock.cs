@@ -71,6 +71,16 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
                 s.Get(AnyString())).Returns(returns);
         }
 
+        public void SetupGetReturnsNull()
+        {
+            SetupGet(null);
+        }
+
+        public void SetupGetReturnsNotNull()
+        {
+            SetupGet(new());
+        }
+
         public void VerifyAdd(string key, IETagDto<TData> data)
         {
             _moq.Verify(s =>

@@ -21,6 +21,8 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
 
             _moq.Setup(s => s.GetAsync().Result)
                 .Returns(GetReturns);
+
+            SetupIndexExist(false);
         }
 
         public ICategoryIndexCacheManager<LookupDatabaseModel> Object =>
@@ -36,6 +38,12 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
         {
             _moq.Verify(s =>
                 s.UpsertAsync(categoryIndex));
+        }
+
+        public void SetupIndexExist(bool returns)
+        {
+            _moq.Setup(s => s.IndexExistsAsync().Result)
+                .Returns(returns);
         }
 
         private readonly Mock<ICategoryIndexCacheManager<LookupDatabaseModel>>

@@ -30,6 +30,12 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
             CancellationToken cancellationToken);
 
     /// <summary>
+    ///     Checks if the deleted category index exists in the database
+    /// </summary>
+    Task<bool> CheckIfDeletedCategoryIndexesExistsAsync(
+        CancellationToken cancellationToken);
+
+    /// <summary>
     ///     Upsert the deleted items category index
     /// </summary>
     Task UpsertDeletedItemsCategoryIndex(

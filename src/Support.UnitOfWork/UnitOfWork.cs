@@ -55,6 +55,13 @@ namespace Support.UnitOfWork
             return _deletedItemsCategoryIndexCache.GetAsync();
         }
 
+        /// <inheritdoc />
+        public Task<bool> CheckIfDeletedCategoryIndexesExistsAsync(
+            CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Upsert the deleted items category index
         /// </summary>
