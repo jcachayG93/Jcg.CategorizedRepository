@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CategorizedRepository.Factories\CategorizedRepository.Factories.csproj" />
+  </ItemGroup>
+
 </Project>

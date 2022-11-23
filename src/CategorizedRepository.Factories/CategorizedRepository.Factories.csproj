@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Support.CategorizedRepositry\Support.CategorizedRepository.csproj" />
+    <ProjectReference Include="..\Support.DataModelRepository\Support.DataModelRepository.csproj" />
+    <ProjectReference Include="..\Support.UnitOfWork\Support.UnitOfWork.csproj" />
+  </ItemGroup>
+
 </Project>
