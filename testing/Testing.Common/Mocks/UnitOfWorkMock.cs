@@ -29,6 +29,7 @@ namespace Testing.Common.Mocks
             SetupCategoryIndexIsInitialized(true);
         }
 
+
         public IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
             Object => _moq.Object;
 
@@ -41,6 +42,18 @@ namespace Testing.Common.Mocks
             GetDeletedItemsCategoryIndexReturns { get; }
 
         public AggregateDatabaseModel GetAggregateReturns { get; }
+
+        public void VerifyGetNonDeletedCategoryIndex()
+        {
+            _moq.Verify(s =>
+                s.GetNonDeletedItemsCategoryIndex(AnyCt()));
+        }
+
+        public void VerifyGetDeletedCategoryIndex()
+        {
+            _moq.Verify(s =>
+                s.GetDeletedItemsCategoryIndex(AnyCt()));
+        }
 
         public void VerifyUpsertDeletedItemsCategoryIndex(
             CategoryIndex<LookupDatabaseModel> deletedItemsCategoryIndex)
