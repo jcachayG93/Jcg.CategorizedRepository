@@ -1,4 +1,5 @@
 ﻿using Common.Api;
+using Common.Api.Exceptions;
 using Support.DataModelRepository.Support;
 using Support.UnitOfWork;
 
@@ -20,13 +21,32 @@ namespace Support.DataModelRepository.Strategies
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
                 unitOfWork)
         {
+            _indexFactory = indexFactory;
+            _unitOfWork = unitOfWork;
         }
 
         /// <inheritdoc />
-        public Task InitializeCategoryIndexes(
+        public async Task InitializeCategoryIndexes(
             CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (await _unitOfWork.CategoryIndexIsInitializedAsync(
+                    CancellationToken.None))
+            {
+                throw new CategoryIndexIsAlreadyInitializedException();
+            }
+
+            await _unitOfWork.UpsertDeletedItemsCategoryIndex(
+                _indexFactory.Create(), CancellationToken.None);
+
+            await _unitOfWork.UpsertNonDeletedItemsCategoryIndex(
+                _indexFactory.Create(), CancellationToken.None);
         }
+
+        private readonly CategoryIndexFactory<TLookupDatabaseModel>
+            _indexFactory;
+
+        private readonly
+            IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
+            _unitOfWork;
     }
 }

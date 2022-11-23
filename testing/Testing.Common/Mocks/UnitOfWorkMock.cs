@@ -25,6 +25,8 @@ namespace Testing.Common.Mocks
             _moq.Setup(s =>
                     s.GetAggregateAsync(AnyString(), AnyCt()).Result)
                 .Returns(GetAggregateReturns);
+
+            SetupCategoryIndexIsInitialized(true);
         }
 
         public IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
@@ -70,6 +72,12 @@ namespace Testing.Common.Mocks
         public void VerifyCommitChanges()
         {
             _moq.Verify(s => s.CommitChangesAsync(AnyCt()));
+        }
+
+        public void SetupCategoryIndexIsInitialized(bool returns)
+        {
+            _moq.Setup(s => s.CategoryIndexIsInitializedAsync(AnyCt()).Result)
+                .Returns(returns);
         }
 
         private readonly
