@@ -1,4 +1,5 @@
 ﻿using Common.Api.Exceptions;
+using Support.UnitOfWork.Api.Exceptions;
 
 namespace Common.Api
 {
@@ -55,7 +56,7 @@ namespace Common.Api
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
         /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
-        Task<IEnumerable<TLookup>> LookupAsync(
+        Task<IEnumerable<TLookup>> LookupNonDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>

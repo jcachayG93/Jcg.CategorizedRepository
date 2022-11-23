@@ -14,11 +14,7 @@
 ///     This is the same model that the user will interact with when querying the category and
 ///     to be stored in the database
 /// </typeparam>
-/// <remarks>
-///     In this library, the aggregate has two representations, one for the database and one for the client. That is
-///     because a common use case is to store a ddd aggregate. For the lookup, that is not the case, so,
-///     to keep the library as simple as possible, I decided to use the same model for the database and the client
-/// </remarks>
+
 public interface IAggregateToLookupMapper<TAggregateDatabaseModel,
     TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
