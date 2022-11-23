@@ -5,9 +5,9 @@ using Support.UnitOfWork.Cache.Imp;
 
 namespace Support.UnitOfWork
 {
-    internal class UnitOfWorkFactory
+    internal static class UnitOfWorkFactory
     {
-        public IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
+        public static IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
             Create<TAggregateDatabaseModel, TLookupDatabaseModel>(
                 string nonDeletedCategoryIndexKey,
                 string deletedCategoryIndexKey,
@@ -37,7 +37,7 @@ namespace Support.UnitOfWork
                 );
         }
 
-        private ICategoryIndexCacheManager<TLookupDatabaseModel>
+        private static ICategoryIndexCacheManager<TLookupDatabaseModel>
             CreateCategoryIndexCache
             <TAggregateDatabaseModel, TLookupDatabaseModel>(
                 string categoryIndexKey,

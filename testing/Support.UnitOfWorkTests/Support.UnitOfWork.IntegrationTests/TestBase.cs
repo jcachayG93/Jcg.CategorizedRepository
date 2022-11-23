@@ -14,8 +14,7 @@ namespace Support.UnitOfWork.IntegrationTests
             DeletedCategoryIndexKey = RandomString();
 
             NonDeletedCategoryIndexKey = RandomString();
-
-            UnitOfWorkFactory = new UnitOfWorkFactory();
+            
         }
 
         public string DeletedCategoryIndexKey { get; }
@@ -23,8 +22,7 @@ namespace Support.UnitOfWork.IntegrationTests
         public string NonDeletedCategoryIndexKey { get; }
 
         private TransactionalDatabaseClient DatabaseClient { get; }
-
-        private UnitOfWorkFactory UnitOfWorkFactory { get; }
+        
 
         protected InMemoryDataSource DataSource { get; }
 

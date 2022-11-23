@@ -8,9 +8,4 @@
 
         string DeletedTimeStamp { get; set; }
     }
-
-    public interface IAggregateDataModel
-    {
-        string Key { get; set; }
-    }
 }
