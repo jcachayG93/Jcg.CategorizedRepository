@@ -63,6 +63,11 @@ namespace Testing.Common.Mocks
                     AnyCt()));
         }
 
+        public void VerifyUpsertAggregate(AggregateDatabaseModel aggregate)
+        {
+            _moq.Verify(s => s.UpsertAggregateAsync(aggregate, AnyCt()));
+        }
+
         public void VerifyUpsertNonDeletedItemsCategoryIndex(
             CategoryIndex<LookupDatabaseModel> nonDeletedItemsCategoryIndex)
         {

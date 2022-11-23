@@ -2,7 +2,7 @@
 using Support.UnitOfWork;
 using Support.UnitOfWork.Api;
 
-namespace Support.DataModelRepository.Strategies;
+namespace Support.DataModelRepository.Strategies.imp;
 
 internal class QueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>
     : IQueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>

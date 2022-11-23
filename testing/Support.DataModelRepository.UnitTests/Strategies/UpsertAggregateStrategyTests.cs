@@ -42,7 +42,7 @@ namespace Support.DataModelRepository.UnitTests.Strategies
         }
 
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public async Task Upsert_UpsertsAggregateToIndexManipulator()
         {
             // ************ ARRANGE ************
@@ -58,7 +58,7 @@ namespace Support.DataModelRepository.UnitTests.Strategies
         }
 
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public async Task Upsert_UpsertsAggregateToUnitOfWork()
         {
             // ************ ARRANGE ************
@@ -69,17 +69,22 @@ namespace Support.DataModelRepository.UnitTests.Strategies
 
             // ************ ASSERT *************
 
-            // TODO: Continue here...
+            UnitOfWork.VerifyUpsertAggregate(Aggregate);
         }
 
-        [Fact(Skip = "not implemented")]
+        [Fact]
         public async Task Upsert_UpsertsNonDeletedCategoryIndexToUnitOfWork()
         {
             // ************ ARRANGE ************
 
             // ************ ACT ****************
 
+            await Sut.UpsertAsync(Aggregate, CancellationToken.None);
+
             // ************ ASSERT *************
+
+            UnitOfWork.VerifyUpsertNonDeletedItemsCategoryIndex(UnitOfWork
+                .GetNonDeletedItemsCategoryIndexReturns);
         }
     }
 }
