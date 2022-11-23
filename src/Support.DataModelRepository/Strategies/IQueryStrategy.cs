@@ -7,7 +7,7 @@ namespace Support.DataModelRepository.Strategies
     internal interface IQueryStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         /// <summary>
         ///     Gets the aggregate

@@ -10,7 +10,7 @@ namespace Support.DataModelRepository.IndexManipulator
         : ICategoryIndexManipulator<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         public CategoryIndexManipulator(
             IAggregateToLookupMapper<TAggregateDatabaseModel,

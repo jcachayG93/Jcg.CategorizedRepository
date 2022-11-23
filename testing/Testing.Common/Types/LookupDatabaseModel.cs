@@ -2,7 +2,7 @@
 
 namespace Testing.Common.Types;
 
-public class LookupDatabaseModel : IRepositoryLookup
+public class LookupDatabaseModel : ILookupDataModel
 {
     public string SomeValue { get; set; }
 

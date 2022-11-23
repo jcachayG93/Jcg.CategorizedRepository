@@ -10,4 +10,6 @@ public class Lookup
     public Guid CustomerId { get; init; }
 
     public int NumberOfOrders { get; init; }
+
+    public string Name { get; init; } = "";
 }

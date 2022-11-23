@@ -6,7 +6,7 @@ namespace Support.DataModelRepository.Strategies
     internal interface IUpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         /// <summary>
         ///     Upsers the aggregate.

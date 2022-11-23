@@ -13,7 +13,7 @@ namespace Support.UnitOfWork
                 string deletedCategoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
+            where TLookupDatabaseModel : ILookupDataModel
             where TAggregateDatabaseModel : class, IAggregateDataModel
 
         {
@@ -43,7 +43,7 @@ namespace Support.UnitOfWork
                 string categoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
+            where TLookupDatabaseModel : ILookupDataModel
             where TAggregateDatabaseModel : class, IAggregateDataModel
         {
             return new CategoryIndexCacheManager<TAggregateDatabaseModel,

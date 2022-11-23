@@ -22,7 +22,7 @@ namespace CategorizedRepository.Factories
             IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> aggregateToLookupMapper,
             ILookupMapper<TLookupDatabaseModel, TLookup> lookupMapper)
             where TAggregateDatabaseModel : class, IAggregateDataModel
-            where TLookupDatabaseModel : IRepositoryLookup
+            where TLookupDatabaseModel : ILookupDataModel
         {
             var unitOfWork = UnitOfWorkFactory.Create(categoryKey.Value.ToString(),
                 categoryKey.ToDeletedCategoryIndexKey(),

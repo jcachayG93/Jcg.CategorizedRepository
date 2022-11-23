@@ -11,7 +11,7 @@ namespace Support.CategorizedRepository.Support
 {
     internal class LookupMapperAdapter<TLookupDatabaseModel, TLookup>
     : ILookupMapperAdapter<TLookupDatabaseModel, TLookup>
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         private readonly ILookupMapper<TLookupDatabaseModel, TLookup> _adaptee;
 

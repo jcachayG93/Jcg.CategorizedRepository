@@ -9,7 +9,7 @@ internal class DeleteAndRestoreStrategy<TAggregateDatabaseModel,
     : IDeleteAndRestoreStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : IRepositoryLookup
+    where TLookupDatabaseModel : ILookupDataModel
 {
     public DeleteAndRestoreStrategy(
         ICategoryIndexManipulator<TAggregateDatabaseModel,

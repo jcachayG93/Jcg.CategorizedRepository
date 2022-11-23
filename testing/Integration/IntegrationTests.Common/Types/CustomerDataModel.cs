@@ -28,11 +28,4 @@ namespace IntegrationTests.Common.Types
             public Guid Id { get; set; }
         }
     }
-
-    public class LookupDataModel : IRepositoryLookup
-    {
-        public string Key { get; set; }
-        public bool IsDeleted { get; set; }
-        public string DeletedTimeStamp { get; set; }
-    }
 }

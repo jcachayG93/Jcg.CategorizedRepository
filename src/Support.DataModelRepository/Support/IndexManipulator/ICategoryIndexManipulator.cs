@@ -9,7 +9,7 @@ namespace Support.DataModelRepository.IndexManipulator
     internal interface ICategoryIndexManipulator
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         /// <summary>
         ///     Upserts: If data for the key exists, it replaces it. IF it doesnt, it inserts it.

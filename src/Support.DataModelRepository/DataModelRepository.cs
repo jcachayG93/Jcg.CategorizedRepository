@@ -9,7 +9,7 @@ namespace Support.DataModelRepository
             TLookupDatabaseModel>
         : IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         public DataModelRepository(
             IInitializeCategoryIndexStrategy initializeCategoryStrategy,
