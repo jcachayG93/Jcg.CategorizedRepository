@@ -15,7 +15,7 @@ namespace Support.UnitOfWork.IntegrationTests
 
             NonDeletedCategoryIndexKey = RandomString();
 
-            UnitOfWorkFactoryImp = new UnitOfWorkFactoryImp();
+            UnitOfWorkFactory = new UnitOfWorkFactory();
         }
 
         public string DeletedCategoryIndexKey { get; }
@@ -24,7 +24,7 @@ namespace Support.UnitOfWork.IntegrationTests
 
         private TransactionalDatabaseClient DatabaseClient { get; }
 
-        private UnitOfWorkFactoryImp UnitOfWorkFactoryImp { get; }
+        private UnitOfWorkFactory UnitOfWorkFactory { get; }
 
         protected InMemoryDataSource DataSource { get; }
 
@@ -37,7 +37,7 @@ namespace Support.UnitOfWork.IntegrationTests
         internal IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
             CreateSut()
         {
-            return UnitOfWorkFactoryImp.Create(NonDeletedCategoryIndexKey,
+            return UnitOfWorkFactory.Create(NonDeletedCategoryIndexKey,
                 DeletedCategoryIndexKey, DatabaseClient);
         }
     }
