@@ -1,0 +1,40 @@
+name: Release
+on:
+  push:
+    branches: [main] # remove later
+  release:
+    types: [created]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/Jcg.Repositories
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: build
+        run: dotnet build
+      - name: Run Unit Tests
+        run: dotnet test ../../**/Support.UnitOfWork.UnitTests
+     
+      ###############  
+      - name: Pack
+        run: dotnet pack
+      - name: Push nuget
+        env:
+          NUGET_URL: https://api.nuget.org/v3/index.json
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: ../../scripts/push.ps1
+        shell: pwsh
+
+        
+      
