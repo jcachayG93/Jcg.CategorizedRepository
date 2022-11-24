@@ -5,7 +5,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <RootNamespace>Jcg.DataAccessRepositories</RootNamespace>
+	  <PackageId>Jcg.DataAccessRepositories</PackageId>
+	  <Title>Jcg.DataAccessRepositories</Title>
+	  <Version>2.0.0-alpha</Version>
+	  <Authors>Julio Cachay</Authors>
+	  <Product>Jcg.DataAccessRepositories</Product>
+	  <Description>Data access repositories that plug between the database and the client app, seamlessly providing advanced features including: soft delete, unit of work, cache, optimistic concurrency, and others. </Description>
+	  <Copyright>Copyright(c) Julio Cachay 2022</Copyright>
+	  <PackageProjectUrl>https://github.com/jcachayG93/Jcg.DataAccessRepositories/wiki</PackageProjectUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/jcachayG93/Jcg.DataAccessRepositories</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>Repository; soft delete; unit of work; optimistic</PackageTags>
+	  <PackageReleaseNotes>First alpha release</PackageReleaseNotes>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Support.CategorizedRepositry\Support.CategorizedRepository.csproj" />

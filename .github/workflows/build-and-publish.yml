@@ -1,7 +1,7 @@
 name: Release
 on:
-  push:
-    branches: [main] # remove later
+ # push:
+ #   branches: [main] # remove later
   release:
     types: [created]
   
