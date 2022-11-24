@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Api;
-using Common.Api.Api;
-using Support.UnitOfWork.Api;
+using Jcg.Repositories.Api;
 
 namespace Support.CategorizedRepository.Support
 {

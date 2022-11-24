@@ -1,6 +1,7 @@
-﻿using Moq;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
+using Moq;
 using Support.UnitOfWork;
-using Support.UnitOfWork.Api;
 using Testing.Common.Types;
 
 namespace Testing.Common.Mocks

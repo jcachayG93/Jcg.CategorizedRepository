@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Api;
-using Common.Api.Api;
 using Common.InternalContracts;
-using Support.DataModelRepository.IndexManipulator;
+using Jcg.Repositories.Api;
 using Support.DataModelRepository.Strategies;
 using Support.DataModelRepository.Strategies.imp;
 using Support.DataModelRepository.Support;
-using Support.UnitOfWork;
+using Support.DataModelRepository.Support.IndexManipulator;
 
 namespace Support.DataModelRepository
 {

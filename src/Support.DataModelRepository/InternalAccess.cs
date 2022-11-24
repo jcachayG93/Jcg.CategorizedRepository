@@ -2,4 +2,4 @@
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("Support.DataModelRepository.UnitTests")]
-[assembly: InternalsVisibleTo("CategorizedRepository.Factories")]
+[assembly: InternalsVisibleTo("Jcg.Repositories")]

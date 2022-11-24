@@ -1,5 +1,5 @@
-﻿using Moq;
-using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
+using Moq;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.UnitTests.TestCommon
@@ -28,7 +28,7 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
             LookupDatabaseModel> Object => _moq.Object;
 
         private void SetupGetAggregate(
-            IETagDto<AggregateDatabaseModel>? returns)
+            IETagDto<AggregateDatabaseModel> returns)
         {
             _moq.Setup(s =>
                     s.GetAggregateAsync(AnyString(), AnyCt()).Result)
@@ -36,7 +36,7 @@ namespace Support.UnitOfWork.UnitTests.TestCommon
         }
 
         private void SetupGetCategoryIndex(
-            IETagDto<CategoryIndex<LookupDatabaseModel>>? returns)
+            IETagDto<CategoryIndex<LookupDatabaseModel>> returns)
         {
             _moq.Setup(s =>
                     s.GetCategoryIndex(AnyString(), AnyCt()).Result)

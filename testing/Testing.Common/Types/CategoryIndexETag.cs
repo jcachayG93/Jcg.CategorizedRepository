@@ -1,4 +1,4 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
 
 namespace Testing.Common.Types;
 

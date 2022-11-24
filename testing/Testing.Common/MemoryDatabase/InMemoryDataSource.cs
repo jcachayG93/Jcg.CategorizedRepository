@@ -1,8 +1,8 @@
-﻿namespace Testing.Common.Doubles;
+﻿namespace Testing.Common.MemoryDatabase;
 
 public class InMemoryDataSource
 {
-    public AggregateETag? GetAggregate(string key)
+    public AggregateETag GetAggregate(string key)
     {
         if (!_aggregates.ContainsKey(key))
         {
@@ -12,7 +12,7 @@ public class InMemoryDataSource
         return _aggregates[key].Clone();
     }
 
-    public CategoryIndexETag? GetCategoryIndex(string key)
+    public CategoryIndexETag GetCategoryIndex(string key)
     {
         if (!_categoryIndexes.ContainsKey(key))
         {

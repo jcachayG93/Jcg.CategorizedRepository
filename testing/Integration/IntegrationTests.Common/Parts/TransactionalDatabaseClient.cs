@@ -1,6 +1,6 @@
 ﻿using IntegrationTests.Common.Database;
 using IntegrationTests.Common.Types;
-using Support.UnitOfWork.Api;
+using Jcg.Repositories.Api;
 
 namespace IntegrationTests.Common.Parts
 {
@@ -15,16 +15,16 @@ namespace IntegrationTests.Common.Parts
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CustomerDataModel>?> GetAggregateAsync(string key,
+        public Task<IETagDto<CustomerDataModel>> GetAggregateAsync(string key,
             CancellationToken cancellationToken)
         {
-            lock (_lockObject)
+            lock (LockObject)
             {
                 var data = _database.Get(key);
 
                 if (data is null)
                 {
-                    return Task.FromResult<IETagDto<CustomerDataModel>?>(null);
+                    return Task.FromResult<IETagDto<CustomerDataModel>>(null);
                 }
 
                 var payload = (CustomerDataModel)data.Payload;
@@ -44,7 +44,7 @@ namespace IntegrationTests.Common.Parts
             CustomerDataModel aggregate,
             CancellationToken cancellationToken)
         {
-            lock (_lockObject)
+            lock (LockObject)
             {
                 var op = new UpsertOperation(aggregate.Key, eTag,
                     Clone(aggregate));
@@ -56,11 +56,11 @@ namespace IntegrationTests.Common.Parts
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CategoryIndex<CustomerLookupDataModel>>?>
+        public Task<IETagDto<CategoryIndex<CustomerLookupDataModel>>>
             GetCategoryIndex(
                 string categoryKey, CancellationToken cancellationToken)
         {
-            lock (_lockObject)
+            lock (LockObject)
             {
                 var data = _database.Get(categoryKey);
 
@@ -68,7 +68,7 @@ namespace IntegrationTests.Common.Parts
                 {
                     return Task
                         .FromResult<
-                            IETagDto<CategoryIndex<CustomerLookupDataModel>>?>(
+                            IETagDto<CategoryIndex<CustomerLookupDataModel>>>(
                             null);
                 }
 
@@ -95,7 +95,7 @@ namespace IntegrationTests.Common.Parts
             CategoryIndex<CustomerLookupDataModel> categoryIndex,
             CancellationToken cancellationToken)
         {
-            lock (_lockObject)
+            lock (LockObject)
             {
                 var op = new UpsertOperation(categoryKey, eTag,
                     Clone(categoryIndex));
@@ -109,7 +109,7 @@ namespace IntegrationTests.Common.Parts
         /// <inheritdoc />
         public Task CommitTransactionAsync(CancellationToken cancellationToken)
         {
-            lock (_lockObject)
+            lock (LockObject)
             {
                 _database.UpsertAndCommit(_operations.ToList());
 
@@ -119,7 +119,7 @@ namespace IntegrationTests.Common.Parts
             }
         }
 
-        private CategoryIndex<CustomerLookupDataModel> Clone(
+        private static CategoryIndex<CustomerLookupDataModel> Clone(
             CategoryIndex<CustomerLookupDataModel> input)
         {
             var lookups = input.Lookups.Select(l =>
@@ -138,7 +138,7 @@ namespace IntegrationTests.Common.Parts
             };
         }
 
-        private CustomerDataModel Clone(CustomerDataModel input)
+        private static CustomerDataModel Clone(CustomerDataModel input)
         {
             var orders = input.Orders.Select(o =>
                 new CustomerDataModel.OrderDataModel()
@@ -154,7 +154,7 @@ namespace IntegrationTests.Common.Parts
             };
         }
 
-        private static readonly object _lockObject = new object();
+        private static readonly object LockObject = new();
         private readonly IInMemoryDatabase _database;
 
         private List<UpsertOperation> _operations = new();

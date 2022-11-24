@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Jcg.Repositories.Api;
 using Moq;
 using Support.CategorizedRepository.Support;
-using Support.UnitOfWork.Api;
 using Testing.Common.Types;
 
 namespace Support.CategorizedRepository.UnitTests.TestCommon

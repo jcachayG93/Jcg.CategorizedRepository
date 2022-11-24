@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
-using Support.UnitOfWork.Api;
-using Testing.Common.Assertions;
-using Testing.Common.Doubles;
-using Testing.Common.Extensions;
+using Jcg.Repositories.Api;
+using Testing.Common.MemoryDatabase;
+using Testing.Common.Support.Assertions;
+using Testing.Common.Support.Extensions;
 using Testing.Common.Types;
 
-namespace Testing.Common.MemoryDatabase
+namespace Support.UnitOfWork.TestCommon.MockDatabase
 {
     public class TransactionalDatabaseClientTests
     {

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using IntegrationTests.Common.Types;
-using Testing.Common.Assertions;
+using Testing.Common.Support.Assertions;
 
 namespace IntegrationTests.Common.Verifications
 {

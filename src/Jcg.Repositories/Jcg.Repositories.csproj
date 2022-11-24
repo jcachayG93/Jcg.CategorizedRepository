@@ -4,10 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <RootNamespace>Jcg.Repositories.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CategorizedRepository.Factories\CategorizedRepository.Factories.csproj" />
+    <ProjectReference Include="..\Support.CategorizedRepositry\Support.CategorizedRepository.csproj" />
+    <ProjectReference Include="..\Support.DataModelRepository\Support.DataModelRepository.csproj" />
+    <ProjectReference Include="..\Support.UnitOfWork\Support.UnitOfWork.csproj" />
   </ItemGroup>
 
 </Project>

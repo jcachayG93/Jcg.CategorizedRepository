@@ -1,7 +1,6 @@
-﻿using Common.Api.Exceptions;
-using Support.UnitOfWork.Api.Exceptions;
+﻿using Jcg.Repositories.Api.Exceptions;
 
-namespace Common.Api
+namespace Jcg.Repositories.Api
 {
     /// <summary>
     /// A repository that sits between the database client and your application to automate several features. Works like a Unit of work, where changes are kept isolated in this instance until they are committed.

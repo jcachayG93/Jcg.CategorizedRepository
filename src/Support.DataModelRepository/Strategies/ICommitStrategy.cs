@@ -1,4 +1,4 @@
-﻿using Support.UnitOfWork.Api.Exceptions;
+﻿using Jcg.Repositories.Api.Exceptions;
 
 namespace Support.DataModelRepository.Strategies
 {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.InternalContracts;
+using Jcg.Repositories.Api;
 using Moq;
-using Support.UnitOfWork.Api;
 using Testing.Common.Types;
 
 namespace Testing.Common.Mocks

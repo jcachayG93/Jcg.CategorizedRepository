@@ -1,6 +1,4 @@
-﻿using Support.UnitOfWork.Api.Exceptions;
-
-namespace Common.Api.Exceptions
+﻿namespace Jcg.Repositories.Api.Exceptions
 {
     public class InternalRepositoryErrorException : RepositoryException
     {

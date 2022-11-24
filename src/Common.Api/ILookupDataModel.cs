@@ -1,4 +1,4 @@
-﻿namespace Common.Api
+﻿namespace Jcg.Repositories.Api
 {
     /// <summary>
     ///     The basic data needed for the Lookup Data Model which is the model

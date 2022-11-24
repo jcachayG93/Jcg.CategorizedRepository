@@ -1,8 +1,5 @@
-﻿
-
-
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("Support.CategorizedRepository.UnitTests")]
-[assembly: InternalsVisibleTo("CategorizedRepository.Factories")]
+[assembly: InternalsVisibleTo("Jcg.Repositories")]

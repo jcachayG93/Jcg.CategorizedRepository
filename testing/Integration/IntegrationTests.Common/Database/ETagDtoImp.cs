@@ -1,4 +1,4 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
 
 namespace IntegrationTests.Common.Database;
 

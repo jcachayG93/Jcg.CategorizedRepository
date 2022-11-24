@@ -1,5 +1,4 @@
-﻿using Common.Api;
-using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
 
 namespace Support.CategorizedRepository.Support;
 

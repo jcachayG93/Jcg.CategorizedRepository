@@ -1,6 +1,5 @@
-﻿using Common.Api;
-using Support.UnitOfWork;
-using Support.UnitOfWork.Api;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
 
 namespace Support.DataModelRepository.Strategies.imp;
 

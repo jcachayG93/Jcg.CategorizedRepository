@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Support.UnitOfWork.Api.Exceptions;
-using Testing.Common.Assertions;
-using Testing.Common.Doubles;
+using Jcg.Repositories.Api.Exceptions;
+using Testing.Common.MemoryDatabase;
+using Testing.Common.Support.Assertions;
 
 namespace Support.UnitOfWork.IntegrationTests
 {

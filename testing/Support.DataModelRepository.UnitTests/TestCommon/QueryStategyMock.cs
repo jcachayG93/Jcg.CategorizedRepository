@@ -1,6 +1,6 @@
-﻿using Moq;
+﻿using Jcg.Repositories.Api;
+using Moq;
 using Support.DataModelRepository.Strategies;
-using Support.UnitOfWork.Api;
 using Testing.Common.Types;
 
 namespace Support.DataModelRepository.UnitTests.TestCommon;

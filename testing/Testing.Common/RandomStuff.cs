@@ -1,6 +1,6 @@
-﻿using Moq;
-using Support.UnitOfWork.Api;
-using Testing.Common.Extensions;
+﻿using Jcg.Repositories.Api;
+using Moq;
+using Testing.Common.Support.Extensions;
 using Testing.Common.Types;
 
 namespace Testing.Common

@@ -1,5 +1,5 @@
-﻿using Common.Api.Api;
-using IntegrationTests.Common.Types;
+﻿using IntegrationTests.Common.Types;
+using Jcg.Repositories.Api;
 
 namespace IntegrationTests.Common.Parts
 {

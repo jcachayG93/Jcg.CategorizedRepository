@@ -1,7 +1,6 @@
-﻿using Common.Api;
-using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
 
-namespace Support.DataModelRepository.IndexManipulator
+namespace Support.DataModelRepository.Support.IndexManipulator
 {
     /// <summary>
     ///     Perform operations in category indexes

@@ -1,7 +1,7 @@
-﻿using Common.Api.Exceptions;
+﻿using Common.InternalContracts;
 using FluentAssertions;
-using Support.UnitOfWork.Api.Exceptions;
-using Testing.Common.Assertions;
+using Jcg.Repositories.Api.Exceptions;
+using Testing.Common.Support.Assertions;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.IntegrationTests

@@ -1,7 +1,7 @@
-﻿using Common.Api;
-using Support.UnitOfWork;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
 
-namespace Support.DataModelRepository.Strategies;
+namespace Support.DataModelRepository.Strategies.imp;
 
 internal class CommitStrategy<TAggregateDatabaseModel,
     TLookupDatabaseModel> : ICommitStrategy

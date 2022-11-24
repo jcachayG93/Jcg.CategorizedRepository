@@ -1,6 +1,6 @@
-﻿using Common.Api.Exceptions;
+﻿using Jcg.Repositories.Api.Exceptions;
 
-namespace Common.Api;
+namespace Jcg.Repositories.Api;
 
 /// <summary>
 ///     Represents a Key

@@ -1,7 +1,10 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Jcg.Repositories.Api;
+using Testing.Common.MemoryDatabase;
 using Testing.Common.Types;
+using AggregateETag = Testing.Common.MemoryDatabase.AggregateETag;
+using CategoryIndexETag = Testing.Common.MemoryDatabase.CategoryIndexETag;
 
-namespace Testing.Common.Doubles
+namespace Support.UnitOfWork.TestCommon.MockDatabase
 {
     public class TransactionalDatabaseClient
         : ITransactionalDatabaseClient<AggregateDatabaseModel,
@@ -13,14 +16,14 @@ namespace Testing.Common.Doubles
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<AggregateDatabaseModel>?> GetAggregateAsync(
+        public Task<IETagDto<AggregateDatabaseModel>> GetAggregateAsync(
             string key, CancellationToken cancellationToken)
         {
             lock (_lockObject)
             {
                 var result = _ds.GetAggregate(key);
 
-                return Task.FromResult<IETagDto<AggregateDatabaseModel>?>(
+                return Task.FromResult<IETagDto<AggregateDatabaseModel>>(
                     result);
             }
         }
@@ -49,7 +52,7 @@ namespace Testing.Common.Doubles
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CategoryIndex<LookupDatabaseModel>>?>
+        public Task<IETagDto<CategoryIndex<LookupDatabaseModel>>>
             GetCategoryIndex(string categoryKey,
                 CancellationToken cancellationToken)
         {
@@ -58,7 +61,7 @@ namespace Testing.Common.Doubles
                 var result = _ds.GetCategoryIndex(categoryKey);
 
                 return Task
-                    .FromResult<IETagDto<CategoryIndex<LookupDatabaseModel>>?>(
+                    .FromResult<IETagDto<CategoryIndex<LookupDatabaseModel>>>(
                         result);
             }
         }

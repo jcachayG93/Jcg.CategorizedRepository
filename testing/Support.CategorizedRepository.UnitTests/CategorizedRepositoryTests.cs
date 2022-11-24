@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Api;
 using FluentAssertions;
+using Jcg.Repositories.Api;
 using Support.CategorizedRepository.UnitTests.TestCommon;
 using Testing.Common.Mocks;
 using Testing.Common.Types;
@@ -17,15 +17,14 @@ namespace Support.CategorizedRepository.UnitTests
         {
             AggregateMapper = new();
 
-            AggregateToLookupMapper = new();
+          
 
             LookupMapper = new();
 
             DataModelRepository = new();
 
             Sut = new(
-                AggregateMapper.Object, 
-                AggregateToLookupMapper.Object,
+                AggregateMapper.Object,
                 LookupMapper.Object,
                 DataModelRepository.Object);
 
@@ -38,7 +37,7 @@ namespace Support.CategorizedRepository.UnitTests
         }
         private AggregateMapperMock AggregateMapper { get; }
 
-        private AggregateToLookupMapperMock AggregateToLookupMapper { get; }
+       
 
         private LookupMapperAdapterMock LookupMapper { get; }
 

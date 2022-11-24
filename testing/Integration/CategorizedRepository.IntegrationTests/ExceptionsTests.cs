@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Support.UnitOfWork.Api.Exceptions;
+using Jcg.Repositories.Api.Exceptions;
 
 namespace CategorizedRepository.IntegrationTests
 {

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using Support.UnitOfWork.Api;
-using Support.UnitOfWork.Api.Exceptions;
+using Jcg.Repositories.Api;
+using Jcg.Repositories.Api.Exceptions;
 using Support.UnitOfWork.Cache.Imp;
 using Support.UnitOfWork.UnitTests.TestCommon;
 using Testing.Common.Types;
@@ -241,7 +241,7 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
 
         [Fact]
-        public async Task GetUpsertedItem_NoUpsertedItemsInCache_ReturnsNull()
+        public void GetUpsertedItem_NoUpsertedItemsInCache_ReturnsNull()
         {
             // ************ ARRANGE ************
 
