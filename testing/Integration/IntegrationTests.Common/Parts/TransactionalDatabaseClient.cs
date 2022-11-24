@@ -7,7 +7,7 @@ namespace IntegrationTests.Common.Parts
     public class
         TransactionalDatabaseClient : ITransactionalDatabaseClient<
             CustomerDataModel,
-            LookupDataModel>
+            CustomerLookupDataModel>
     {
         public TransactionalDatabaseClient(IInMemoryDatabase database)
         {
@@ -56,8 +56,9 @@ namespace IntegrationTests.Common.Parts
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CategoryIndex<LookupDataModel>>?> GetCategoryIndex(
-            string categoryKey, CancellationToken cancellationToken)
+        public Task<IETagDto<CategoryIndex<CustomerLookupDataModel>>?>
+            GetCategoryIndex(
+                string categoryKey, CancellationToken cancellationToken)
         {
             lock (_lockObject)
             {
@@ -66,28 +67,32 @@ namespace IntegrationTests.Common.Parts
                 if (data is null)
                 {
                     return Task
-                        .FromResult<IETagDto<CategoryIndex<LookupDataModel>>?>(
+                        .FromResult<
+                            IETagDto<CategoryIndex<CustomerLookupDataModel>>?>(
                             null);
                 }
 
-                var payload = (CategoryIndex<LookupDataModel>)data.Payload;
+                var payload =
+                    (CategoryIndex<CustomerLookupDataModel>)data.Payload;
 
                 payload = Clone(payload);
 
                 var result =
-                    new ETagDtoImp<CategoryIndex<LookupDataModel>>(data.ETag,
+                    new ETagDtoImp<CategoryIndex<CustomerLookupDataModel>>(
+                        data.ETag,
                         payload);
 
 
                 return Task
-                    .FromResult<IETagDto<CategoryIndex<LookupDataModel>>>(
+                    .FromResult<
+                        IETagDto<CategoryIndex<CustomerLookupDataModel>>>(
                         result)!;
             }
         }
 
         /// <inheritdoc />
         public Task UpsertCategoryIndex(string categoryKey, string eTag,
-            CategoryIndex<LookupDataModel> categoryIndex,
+            CategoryIndex<CustomerLookupDataModel> categoryIndex,
             CancellationToken cancellationToken)
         {
             lock (_lockObject)
@@ -114,11 +119,11 @@ namespace IntegrationTests.Common.Parts
             }
         }
 
-        private CategoryIndex<LookupDataModel> Clone(
-            CategoryIndex<LookupDataModel> input)
+        private CategoryIndex<CustomerLookupDataModel> Clone(
+            CategoryIndex<CustomerLookupDataModel> input)
         {
             var lookups = input.Lookups.Select(l =>
-                new LookupDataModel
+                new CustomerLookupDataModel
                 {
                     CustomerName = l.CustomerName,
                     NumberOfOrders = l.NumberOfOrders,
@@ -127,7 +132,7 @@ namespace IntegrationTests.Common.Parts
                     DeletedTimeStamp = l.DeletedTimeStamp
                 }).ToList();
 
-            return new CategoryIndex<LookupDataModel>()
+            return new CategoryIndex<CustomerLookupDataModel>()
             {
                 Lookups = lookups
             };

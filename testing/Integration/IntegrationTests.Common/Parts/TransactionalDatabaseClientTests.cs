@@ -27,7 +27,7 @@ namespace IntegrationTests.Common.Parts
             // ************ ACT ****************
 
             var result =
-                await sut.GetAggregateAsync(RandomKey(),
+                await sut.GetAggregateAsync(RandomString(),
                     CancellationToken.None);
 
             // ************ ASSERT *************
@@ -46,7 +46,7 @@ namespace IntegrationTests.Common.Parts
             // ************ ACT ****************
 
             var result =
-                await sut.GetCategoryIndex(RandomKey(),
+                await sut.GetCategoryIndex(RandomString(),
                     CancellationToken.None);
 
             // ************ ASSERT *************
@@ -93,7 +93,7 @@ namespace IntegrationTests.Common.Parts
 
             var index = RandomCategoryIndex("juan");
 
-            var key = RandomKey();
+            var key = RandomString();
 
             await sut.UpsertCategoryIndex(key, "", index,
                 CancellationToken.None);

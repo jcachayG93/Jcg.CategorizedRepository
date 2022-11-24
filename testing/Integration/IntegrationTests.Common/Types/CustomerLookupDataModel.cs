@@ -2,7 +2,7 @@
 
 namespace IntegrationTests.Common.Types;
 
-public class LookupDataModel : ILookupDataModel
+public class CustomerLookupDataModel : ILookupDataModel
 {
     public string CustomerName { get; set; } = "";
 
