@@ -1,15 +1,23 @@
 
 # Nodes for Developers
 
-## Project Dependencies
-The main motivation for these projects structure is to hide types from the client while exposing the API. This would be easier using Dependency Injection but 
-I wanted to avoid this library depending on a specific DI Framework.
+## No Dependency Injection
 
-### Common.Api and Common 
-These two could have been merged into a single project, but, I sepparated because I wanted to set the Api namespace to match **Jcg.Repositories.Api** and
-keep it fixed. So, I set the project root namespace to avoid changing it by accident.
+Seemed a bad idea to use DI in a nuget package as it would depend on a DI framework. I am trying to keep dependencies on other libraries to a minimum.
 
-### Support projects
+## Api namespace Is set in the project files
+I am trying to avoid changing the Api namespace by accident.
+
+The Api is defined in the Common.Api project and the Jcg.Repositories projects. both projects have a fixed root namespace:
+
+> <RootNamespace>Jcg.Repositories.Api</RootNamespace>
+
+So, types defined in both projects (the public api) have the same namespace.
+
+**The motivation for having two sepparate projects** is because the support projects need to depend on the types defined in common.
+
+
+## Support projects
 There are 3, they implement the library features:
 - Support.UnitOfWork
 - Support.DataModelRepository
@@ -17,16 +25,12 @@ There are 3, they implement the library features:
 
 This projects depend on the Common projects only. They know about each other only thru abstractions that reside in Common. 
 
-### CategorizedRepository.Factories
-This project has a root namespace to match the Common.Api project namespace: **Jcg.Repositories.Api**
-
-But, the factory in this project could not be placed in common because it needs to access the support projects. 
-
 ### Jcg.Repositories
-There is nothing here, but:
+
+This is the main entry point for the library.
+
 1. Contains the package settings.
 2. Depends on everything else.
+3. Contains the CategorizedRepositoryFactory which has internal access from the support projects.
 
-This is the project that will be packed as the entry point into a nuget package
 
-***Thought about placing the CategorizedRepository Factory*** here, but, that would make hiding internal types from other projects impossible.

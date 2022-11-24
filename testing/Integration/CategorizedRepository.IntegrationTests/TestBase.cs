@@ -2,6 +2,7 @@
 using IntegrationTests.Common.Helpers;
 using IntegrationTests.Common.Parts;
 using IntegrationTests.Common.Types;
+using Jcg.Repositories;
 using Jcg.Repositories.Api;
 
 namespace CategorizedRepository.IntegrationTests
