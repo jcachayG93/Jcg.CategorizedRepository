@@ -1,4 +1,4 @@
-﻿using Jcg.Repositories.Api;
+﻿using Jcg.DataAccessRepositories;
 
 namespace IntegrationTests.Common.Database;
 

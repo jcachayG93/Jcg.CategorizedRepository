@@ -1,4 +1,4 @@
-﻿using Jcg.Repositories.Api;
+﻿using Jcg.DataAccessRepositories;
 using Moq;
 using Support.DataModelRepository.Support;
 using Testing.Common.Types;

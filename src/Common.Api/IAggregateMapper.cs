@@ -1,4 +1,4 @@
-﻿namespace Jcg.Repositories.Api
+﻿namespace Jcg.DataAccessRepositories
 {
     /// <summary>
     ///     Maps between the Aggregate (Which can be a well encapsulated class) and the database model (which should be compatible with the database). Both represents the same entity but for different purposes.

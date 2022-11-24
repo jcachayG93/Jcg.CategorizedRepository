@@ -1,6 +1,6 @@
-﻿using Jcg.Repositories.Api.Exceptions;
+﻿using Jcg.DataAccessRepositories.Exceptions;
 
-namespace Jcg.Repositories.Api
+namespace Jcg.DataAccessRepositories
 {
     /// <summary>
     /// A repository that sits between the database client and your application to automate several features. Works like a Unit of work, where changes are kept isolated in this instance until they are committed.

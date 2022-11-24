@@ -1,7 +1,7 @@
 ﻿using Common.InternalContracts;
 using Support.CategorizedRepository.Support;
 using System.Linq;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 
 namespace Support.CategorizedRepository
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.InternalContracts;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 using Support.DataModelRepository.Strategies;
 using Support.DataModelRepository.Strategies.imp;
 using Support.DataModelRepository.Support;

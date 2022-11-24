@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Jcg.Repositories.Api.Exceptions;
+using Jcg.DataAccessRepositories.Exceptions;
 using Support.UnitOfWork.UnitTests.TestCommon;
 using Testing.Common.Types;
 

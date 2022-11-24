@@ -1,5 +1,5 @@
 ﻿using Common.InternalContracts;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 
 namespace Support.DataModelRepository.Strategies.imp;
 

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using Jcg.Repositories.Api;
-using Jcg.Repositories.Api.Exceptions;
+using Jcg.DataAccessRepositories;
+using Jcg.DataAccessRepositories.Exceptions;
 using Support.UnitOfWork.Cache.Imp;
 using Support.UnitOfWork.UnitTests.TestCommon;
 using Testing.Common.Types;

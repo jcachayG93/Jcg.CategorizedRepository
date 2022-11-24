@@ -3,7 +3,7 @@ using Support.CategorizedRepository.Support;
 using Support.DataModelRepository;
 using Support.UnitOfWork;
 
-namespace Jcg.Repositories.Api
+namespace Jcg.DataAccessRepositories
 {
     public static class CategorizedRepositoryFactory
     {

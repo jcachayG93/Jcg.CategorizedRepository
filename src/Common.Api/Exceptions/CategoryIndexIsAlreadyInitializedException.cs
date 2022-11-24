@@ -1,4 +1,4 @@
-﻿namespace Jcg.Repositories.Api.Exceptions
+﻿namespace Jcg.DataAccessRepositories.Exceptions
 {
     public class CategoryIndexIsAlreadyInitializedException
         : RepositoryException

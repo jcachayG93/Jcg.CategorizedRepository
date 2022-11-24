@@ -1,4 +1,4 @@
-﻿namespace Jcg.Repositories.Api
+﻿namespace Jcg.DataAccessRepositories
 {
     /// <summary>
     ///     A Dto that wraps a Payload with an associated ETag value

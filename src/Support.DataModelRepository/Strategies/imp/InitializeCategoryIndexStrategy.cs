@@ -1,6 +1,6 @@
 ﻿using Common.InternalContracts;
-using Jcg.Repositories.Api;
-using Jcg.Repositories.Api.Exceptions;
+using Jcg.DataAccessRepositories;
+using Jcg.DataAccessRepositories.Exceptions;
 using Support.DataModelRepository.Support;
 
 namespace Support.DataModelRepository.Strategies.imp

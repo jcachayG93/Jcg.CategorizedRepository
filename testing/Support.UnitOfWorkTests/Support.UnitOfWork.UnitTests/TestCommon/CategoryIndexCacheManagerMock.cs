@@ -1,4 +1,4 @@
-﻿using Jcg.Repositories.Api;
+﻿using Jcg.DataAccessRepositories;
 using Moq;
 using Support.UnitOfWork.Cache;
 using Testing.Common.Types;
