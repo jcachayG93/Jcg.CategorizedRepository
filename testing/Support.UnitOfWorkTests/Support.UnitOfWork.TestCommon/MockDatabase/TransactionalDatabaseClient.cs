@@ -1,4 +1,4 @@
-﻿using Common.Api;
+﻿using Jcg.Repositories.Api;
 using Testing.Common.MemoryDatabase;
 using Testing.Common.Types;
 using AggregateETag = Testing.Common.MemoryDatabase.AggregateETag;

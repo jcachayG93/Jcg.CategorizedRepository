@@ -1,5 +1,5 @@
-﻿using Common.Api;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Jcg.Repositories.Api;
 using Moq;
 using Support.UnitOfWork.Cache.Imp;
 using Support.UnitOfWork.InternalExceptions;

@@ -1,5 +1,5 @@
-﻿using Common.Api;
-using Common.Api.Exceptions;
+﻿using Jcg.Repositories.Api;
+using Jcg.Repositories.Api.Exceptions;
 
 namespace Support.DataModelRepository.Strategies
 {

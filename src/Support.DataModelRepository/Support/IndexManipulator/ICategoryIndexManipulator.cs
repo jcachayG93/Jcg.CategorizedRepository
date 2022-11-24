@@ -1,4 +1,4 @@
-﻿using Common.Api;
+﻿using Jcg.Repositories.Api;
 
 namespace Support.DataModelRepository.Support.IndexManipulator
 {

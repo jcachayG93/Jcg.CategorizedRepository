@@ -1,4 +1,4 @@
-﻿namespace Common.Api.Exceptions
+﻿namespace Jcg.Repositories.Api.Exceptions
 {
     public class LookupNotFoundInCategoryIndexException : RepositoryException
     {

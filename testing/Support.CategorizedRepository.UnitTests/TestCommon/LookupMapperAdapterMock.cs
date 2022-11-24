@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Api;
+using Jcg.Repositories.Api;
 using Moq;
 using Support.CategorizedRepository.Support;
 using Testing.Common.Types;

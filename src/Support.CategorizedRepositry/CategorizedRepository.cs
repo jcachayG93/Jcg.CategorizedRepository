@@ -1,7 +1,7 @@
-﻿using Common.Api;
-using Common.InternalContracts;
+﻿using Common.InternalContracts;
 using Support.CategorizedRepository.Support;
 using System.Linq;
+using Jcg.Repositories.Api;
 
 namespace Support.CategorizedRepository
 {

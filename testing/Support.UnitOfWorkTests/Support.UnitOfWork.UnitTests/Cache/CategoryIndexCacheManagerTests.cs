@@ -1,6 +1,6 @@
-﻿using Common.Api;
-using Common.Api.Exceptions;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Jcg.Repositories.Api;
+using Jcg.Repositories.Api.Exceptions;
 using Support.UnitOfWork.Cache.Imp;
 using Support.UnitOfWork.UnitTests.TestCommon;
 using Testing.Common.Types;

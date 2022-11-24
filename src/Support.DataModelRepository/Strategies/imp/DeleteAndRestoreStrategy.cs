@@ -1,5 +1,5 @@
-﻿using Common.Api;
-using Common.InternalContracts;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
 using Support.DataModelRepository.Support.IndexManipulator;
 
 namespace Support.DataModelRepository.Strategies.imp;

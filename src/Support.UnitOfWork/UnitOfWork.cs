@@ -1,6 +1,6 @@
-﻿using Common.Api;
-using Common.Api.Exceptions;
-using Common.InternalContracts;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
+using Jcg.Repositories.Api.Exceptions;
 using Support.UnitOfWork.Cache;
 
 namespace Support.UnitOfWork

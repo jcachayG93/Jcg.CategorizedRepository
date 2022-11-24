@@ -1,5 +1,5 @@
-﻿using Common.Api;
-using Common.InternalContracts;
+﻿using Common.InternalContracts;
+using Jcg.Repositories.Api;
 using Support.DataModelRepository.Strategies;
 
 namespace Support.DataModelRepository

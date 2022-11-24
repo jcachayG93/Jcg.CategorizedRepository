@@ -1,4 +1,4 @@
-﻿namespace Common.Api
+﻿namespace Jcg.Repositories.Api
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database

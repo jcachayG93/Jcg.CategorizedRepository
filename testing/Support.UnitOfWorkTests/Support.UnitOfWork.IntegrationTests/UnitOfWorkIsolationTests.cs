@@ -1,5 +1,5 @@
-﻿using Common.Api.Exceptions;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Jcg.Repositories.Api.Exceptions;
 using Testing.Common.MemoryDatabase;
 using Testing.Common.Support.Assertions;
 

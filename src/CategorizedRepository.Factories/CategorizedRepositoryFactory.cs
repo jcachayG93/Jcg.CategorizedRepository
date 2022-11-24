@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Api;
-using Support.CategorizedRepository;
+﻿using Support.CategorizedRepository;
 using Support.CategorizedRepository.Support;
 using Support.DataModelRepository;
 using Support.UnitOfWork;
 
-namespace CategorizedRepository.Factories
+namespace Jcg.Repositories.Api
 {
     public static class CategorizedRepositoryFactory
     {

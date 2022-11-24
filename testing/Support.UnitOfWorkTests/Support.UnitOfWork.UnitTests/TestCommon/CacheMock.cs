@@ -1,4 +1,4 @@
-﻿using Common.Api;
+﻿using Jcg.Repositories.Api;
 using Moq;
 using Support.UnitOfWork.Cache;
 using Support.UnitOfWork.Cache.Imp;

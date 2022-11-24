@@ -1,4 +1,4 @@
-﻿using Common.Api;
+﻿using Jcg.Repositories.Api;
 using Moq;
 using Testing.Common.Support.Extensions;
 using Testing.Common.Types;
