@@ -100,7 +100,7 @@ namespace IntegrationTests.Common.Parts
 
             await sut.CommitTransactionAsync(CancellationToken.None);
 
-            var otherSut = CreateSut();
+           
 
             // ************ ACT ****************
 

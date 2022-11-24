@@ -13,14 +13,14 @@ namespace Testing.Common.Doubles
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<AggregateDatabaseModel>?> GetAggregateAsync(
+        public Task<IETagDto<AggregateDatabaseModel>> GetAggregateAsync(
             string key, CancellationToken cancellationToken)
         {
             lock (_lockObject)
             {
                 var result = _ds.GetAggregate(key);
 
-                return Task.FromResult<IETagDto<AggregateDatabaseModel>?>(
+                return Task.FromResult<IETagDto<AggregateDatabaseModel>>(
                     result);
             }
         }
@@ -49,7 +49,7 @@ namespace Testing.Common.Doubles
         }
 
         /// <inheritdoc />
-        public Task<IETagDto<CategoryIndex<LookupDatabaseModel>>?>
+        public Task<IETagDto<CategoryIndex<LookupDatabaseModel>>>
             GetCategoryIndex(string categoryKey,
                 CancellationToken cancellationToken)
         {
@@ -58,7 +58,7 @@ namespace Testing.Common.Doubles
                 var result = _ds.GetCategoryIndex(categoryKey);
 
                 return Task
-                    .FromResult<IETagDto<CategoryIndex<LookupDatabaseModel>>?>(
+                    .FromResult<IETagDto<CategoryIndex<LookupDatabaseModel>>>(
                         result);
             }
         }

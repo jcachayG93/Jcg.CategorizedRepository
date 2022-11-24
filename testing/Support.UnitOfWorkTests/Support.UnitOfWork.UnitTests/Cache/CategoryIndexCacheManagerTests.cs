@@ -241,7 +241,7 @@ namespace Support.UnitOfWork.UnitTests.Cache
 
 
         [Fact]
-        public async Task GetUpsertedItem_NoUpsertedItemsInCache_ReturnsNull()
+        public void GetUpsertedItem_NoUpsertedItemsInCache_ReturnsNull()
         {
             // ************ ARRANGE ************
 

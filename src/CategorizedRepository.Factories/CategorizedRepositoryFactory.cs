@@ -36,7 +36,6 @@ namespace CategorizedRepository.Factories
             return
                 new CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup, TLookupDatabaseModel>(
                     aggregateMapper,
-                    aggregateToLookupMapper,
                     lookupMapperAdapter,
                     dataModelRepo
                 );
@@ -44,7 +43,7 @@ namespace CategorizedRepository.Factories
 
         private static string ToDeletedCategoryIndexKey(this RepositoryIdentity categoryKey)
         {
-            return $"{categoryKey.Value.ToString()}-D";
+            return $"{categoryKey.Value}-D";
         }
     }
 

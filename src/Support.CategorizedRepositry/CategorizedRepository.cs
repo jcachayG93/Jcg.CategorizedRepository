@@ -12,18 +12,15 @@ namespace Support.CategorizedRepository
         where TLookupDatabaseModel : ILookupDataModel
     {
         private readonly IAggregateMapper<TAggregate, TAggregateDatabaseModel> _aggregateMapper;
-        private readonly IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> _aggregateToLookupMapper;
         private readonly ILookupMapperAdapter<TLookupDatabaseModel, TLookup> _lookupMapper;
         private readonly IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel> _dataModelRepository;
 
         public CategorizedRepository(
             IAggregateMapper<TAggregate, TAggregateDatabaseModel> aggregateMapper,
-            IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> aggregateToLookupMapper,
             ILookupMapperAdapter<TLookupDatabaseModel, TLookup> lookupMapper,
             IDataModelRepository<TAggregateDatabaseModel,TLookupDatabaseModel> dataModelRepository)
         {
             _aggregateMapper = aggregateMapper;
-            _aggregateToLookupMapper = aggregateToLookupMapper;
             _lookupMapper = lookupMapper;
             _dataModelRepository = dataModelRepository;
         }
@@ -36,14 +33,7 @@ namespace Support.CategorizedRepository
         {
             var data = await _dataModelRepository.GetAggregateAsync(key.Value, CancellationToken.None);
 
-            if (data is null)
-            {
-                return default(TAggregate);
-            }
-
-           
-
-            return _aggregateMapper.ToAggregate(data);
+            return data is null ? default(TAggregate) : _aggregateMapper.ToAggregate(data);
         }
 
         public async Task UpsertAsync(RepositoryIdentity key, 

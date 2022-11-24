@@ -26,7 +26,7 @@ namespace Support.CategorizedRepository.UnitTests.Support
 
 
         [Fact]
-        public async Task Adapts()
+        public void Adapts()
         {
             // ************ ARRANGE ************
 

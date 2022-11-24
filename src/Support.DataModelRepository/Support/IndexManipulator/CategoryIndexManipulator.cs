@@ -72,26 +72,26 @@ namespace Support.DataModelRepository.IndexManipulator
             AppendItem(nonDeletedCategoryIndex, item);
         }
 
-        private TLookupDatabaseModel GetItem(
+        private static TLookupDatabaseModel GetItem(
             CategoryIndex<TLookupDatabaseModel> index, string key)
         {
             return index.Lookups.First(l => l.Key == key);
         }
 
-        private void RemoveItemIfFound(
+        private static void RemoveItemIfFound(
             CategoryIndex<TLookupDatabaseModel> index,
             string key)
         {
             index.Lookups = index.Lookups.Where(l => l.Key != key).ToList();
         }
 
-        private void AppendItem(CategoryIndex<TLookupDatabaseModel> index,
+        private static void AppendItem(CategoryIndex<TLookupDatabaseModel> index,
             TLookupDatabaseModel item)
         {
             index.Lookups = index.Lookups.Append(item);
         }
 
-        private void AssertContainsKey(
+        private static void AssertContainsKey(
             CategoryIndex<TLookupDatabaseModel> index, string key,
             bool isDeletedIndex)
         {

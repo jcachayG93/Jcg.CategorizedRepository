@@ -22,7 +22,7 @@ public class InMemoryDatabase : IInMemoryDatabase
     }
 
     /// <inheritdoc />
-    public DataRecord? Get(string key)
+    public DataRecord Get(string key)
 
     {
         if (_data.TryGetValue(key, out var data))
