@@ -30,6 +30,8 @@ namespace Common.Api
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
+        /// <remarks>If the aggregate is DELETED, this method will RETURN IT ANYWAYS. This is a design choice. 
+        /// To see which ones are deleted, use the Lookup methods below.</remarks>
         /// <param name="key">The key</param>
         /// <returns>The aggregate</returns>
         Task<TAggregate?> GetAggregateAsync(RepositoryIdentity key,
