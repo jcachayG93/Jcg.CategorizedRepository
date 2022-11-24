@@ -2,7 +2,7 @@
 
 ***Data access repositories that plug between the database and the client app, seamlessly providing advanced features.***
 
-**features:**
+**Features:**
 - Soft delete and restore.
 - Mapping between segregated models for the database and the client so they can evolve independently.
 - Integrated index table model for deleted and non-deleted entities for efficient queries.
