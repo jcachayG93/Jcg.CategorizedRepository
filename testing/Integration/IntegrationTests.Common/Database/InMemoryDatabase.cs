@@ -9,9 +9,13 @@ public class InMemoryDatabase : IInMemoryDatabase
         {
             operations = operations.ToList();
 
+            var etag = operations.First().ETag;
+
             AssertItemsWithBlankETagDoNotExistInDatabase(operations);
 
             AssertNonBlankETagsMatchDataETags(operations);
+
+            operations = EvolveETags(operations);
 
             ApplyChanges(EvolveETags(operations));
         }
