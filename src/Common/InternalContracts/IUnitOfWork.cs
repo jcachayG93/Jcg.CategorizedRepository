@@ -1,8 +1,7 @@
 ﻿using Common.Api;
-using Support.UnitOfWork.Api;
-using Support.UnitOfWork.Api.Exceptions;
+using Common.Api.Exceptions;
 
-namespace Support.UnitOfWork;
+namespace Common.InternalContracts;
 
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel>

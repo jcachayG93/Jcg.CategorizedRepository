@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+﻿using Common.Api;
+using FluentAssertions;
 using Moq;
-using Support.UnitOfWork.Api;
 using Support.UnitOfWork.Cache.Imp;
 using Support.UnitOfWork.InternalExceptions;
-using Testing.Common.Assertions;
+using Testing.Common.Support.Assertions;
 
 namespace Support.UnitOfWork.UnitTests.Cache
 {

@@ -1,6 +1,5 @@
 ﻿using Common.Api;
-using Support.UnitOfWork.Api;
-using Support.UnitOfWork.Api.Exceptions;
+using Common.Api.Exceptions;
 
 namespace Common.InternalContracts
 {

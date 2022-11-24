@@ -1,7 +1,6 @@
 ﻿using Common.Api;
 using IntegrationTests.Common.Types;
-using Support.UnitOfWork.Api;
-using Testing.Common.Extensions;
+using Testing.Common.Support.Extensions;
 
 namespace IntegrationTests.Common
 {

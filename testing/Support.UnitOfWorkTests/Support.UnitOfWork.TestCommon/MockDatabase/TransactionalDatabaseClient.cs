@@ -1,7 +1,10 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Testing.Common.MemoryDatabase;
 using Testing.Common.Types;
+using AggregateETag = Testing.Common.MemoryDatabase.AggregateETag;
+using CategoryIndexETag = Testing.Common.MemoryDatabase.CategoryIndexETag;
 
-namespace Testing.Common.Doubles
+namespace Support.UnitOfWork.TestCommon.MockDatabase
 {
     public class TransactionalDatabaseClient
         : ITransactionalDatabaseClient<AggregateDatabaseModel,

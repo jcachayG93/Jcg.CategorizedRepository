@@ -1,4 +1,4 @@
-﻿namespace Testing.Common.Extensions
+﻿namespace Testing.Common.Support.Extensions
 {
     public static class ToCollectionExtension
     {

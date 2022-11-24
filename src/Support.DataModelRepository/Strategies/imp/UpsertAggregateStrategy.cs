@@ -1,8 +1,8 @@
 ﻿using Common.Api;
-using Support.DataModelRepository.IndexManipulator;
-using Support.UnitOfWork;
+using Common.InternalContracts;
+using Support.DataModelRepository.Support.IndexManipulator;
 
-namespace Support.DataModelRepository.Strategies;
+namespace Support.DataModelRepository.Strategies.imp;
 
 internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>

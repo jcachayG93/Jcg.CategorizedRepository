@@ -1,9 +1,9 @@
 ﻿using Common.Api;
 using Common.Api.Exceptions;
+using Common.InternalContracts;
 using Support.DataModelRepository.Support;
-using Support.UnitOfWork;
 
-namespace Support.DataModelRepository.Strategies
+namespace Support.DataModelRepository.Strategies.imp
 {
     internal class InitializeCategoryIndexStrategy<TAggregateDatabaseModel,
             TLookupDatabaseModel>

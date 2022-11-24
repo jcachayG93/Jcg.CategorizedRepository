@@ -1,5 +1,4 @@
 ﻿using Common.Api.Exceptions;
-using Support.UnitOfWork.Api.Exceptions;
 
 namespace Common.Api
 {

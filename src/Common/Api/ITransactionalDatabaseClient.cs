@@ -1,6 +1,4 @@
-﻿using Common.Api;
-
-namespace Support.UnitOfWork.Api
+﻿namespace Common.Api
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database

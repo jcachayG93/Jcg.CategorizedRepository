@@ -1,6 +1,5 @@
 ﻿using Common.Api;
-using Support.UnitOfWork;
-using Support.UnitOfWork.Api;
+using Common.InternalContracts;
 
 namespace Support.DataModelRepository.Strategies.imp;
 

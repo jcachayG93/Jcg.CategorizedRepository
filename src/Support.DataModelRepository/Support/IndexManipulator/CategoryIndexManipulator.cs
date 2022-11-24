@@ -1,9 +1,7 @@
 ﻿using Common.Api;
-using Common.Api.Api;
 using Common.Api.Exceptions;
-using Support.UnitOfWork.Api;
 
-namespace Support.DataModelRepository.IndexManipulator
+namespace Support.DataModelRepository.Support.IndexManipulator
 {
     internal class CategoryIndexManipulator<TAggregateDatabaseModel,
             TLookupDatabaseModel>

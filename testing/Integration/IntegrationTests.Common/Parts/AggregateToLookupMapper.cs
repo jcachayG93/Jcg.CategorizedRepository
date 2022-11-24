@@ -1,4 +1,4 @@
-﻿using Common.Api.Api;
+﻿using Common.Api;
 using IntegrationTests.Common.Types;
 
 namespace IntegrationTests.Common.Parts;

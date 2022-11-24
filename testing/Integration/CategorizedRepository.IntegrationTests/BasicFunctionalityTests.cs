@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using IntegrationTests.Common.Helpers;
 using IntegrationTests.Common.Verifications;
-using Testing.Common.Assertions;
+using Testing.Common.Support.Assertions;
 
 namespace CategorizedRepository.IntegrationTests
 {

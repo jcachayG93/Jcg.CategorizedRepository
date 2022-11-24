@@ -1,4 +1,4 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
 
 namespace IntegrationTests.Common.Database;
 

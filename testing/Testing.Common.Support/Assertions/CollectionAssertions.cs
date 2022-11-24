@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Testing.Common.Assertions
+namespace Testing.Common.Support.Assertions
 {
     public static class CollectionAssertions
     {

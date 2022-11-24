@@ -1,6 +1,6 @@
 ﻿using Common.Api.Exceptions;
 using FluentAssertions;
-using Support.DataModelRepository.IndexManipulator;
+using Support.DataModelRepository.Support.IndexManipulator;
 using Testing.Common.Mocks;
 using Testing.Common.Types;
 

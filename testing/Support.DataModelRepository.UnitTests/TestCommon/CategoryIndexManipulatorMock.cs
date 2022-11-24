@@ -1,6 +1,6 @@
-﻿using Moq;
-using Support.DataModelRepository.IndexManipulator;
-using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Moq;
+using Support.DataModelRepository.Support.IndexManipulator;
 using Testing.Common.Types;
 
 namespace Support.DataModelRepository.UnitTests.TestCommon

@@ -1,5 +1,5 @@
-﻿using Moq;
-using Support.UnitOfWork.Api;
+﻿using Common.Api;
+using Moq;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.UnitTests.TestCommon

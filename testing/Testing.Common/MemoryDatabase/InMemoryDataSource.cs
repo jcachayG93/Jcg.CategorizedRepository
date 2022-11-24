@@ -1,4 +1,4 @@
-﻿namespace Testing.Common.Doubles;
+﻿namespace Testing.Common.MemoryDatabase;
 
 public class InMemoryDataSource
 {

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Api;
-using Common.Api.Api;
-using Support.UnitOfWork.Api;
 
 namespace Support.CategorizedRepository.Support
 {

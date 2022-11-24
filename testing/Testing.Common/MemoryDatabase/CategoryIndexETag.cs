@@ -1,7 +1,7 @@
-﻿using Support.UnitOfWork.Api;
+﻿using Common.Api;
 using Testing.Common.Types;
 
-namespace Testing.Common.Doubles;
+namespace Testing.Common.MemoryDatabase;
 
 public class
     CategoryIndexETag : IETagDto<CategoryIndex<LookupDatabaseModel>>

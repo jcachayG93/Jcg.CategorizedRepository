@@ -1,4 +1,4 @@
-﻿namespace Support.UnitOfWork.Api
+﻿namespace Common.Api
 {
     /// <summary>
     ///     A Dto that wraps a Payload with an associated ETag value

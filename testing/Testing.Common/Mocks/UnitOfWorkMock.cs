@@ -1,6 +1,7 @@
-﻿using Moq;
+﻿using Common.Api;
+using Common.InternalContracts;
+using Moq;
 using Support.UnitOfWork;
-using Support.UnitOfWork.Api;
 using Testing.Common.Types;
 
 namespace Testing.Common.Mocks

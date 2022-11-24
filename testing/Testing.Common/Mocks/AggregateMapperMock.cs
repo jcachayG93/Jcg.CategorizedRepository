@@ -1,4 +1,4 @@
-﻿using Common.Api.Api;
+﻿using Common.Api;
 using Moq;
 using Testing.Common.Types;
 

@@ -1,4 +1,6 @@
-﻿using Testing.Common.Doubles;
+﻿using Common.InternalContracts;
+using Support.UnitOfWork.TestCommon.MockDatabase;
+using Testing.Common.MemoryDatabase;
 using Testing.Common.Types;
 
 namespace Support.UnitOfWork.IntegrationTests

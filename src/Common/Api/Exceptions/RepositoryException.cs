@@ -1,4 +1,4 @@
-﻿namespace Support.UnitOfWork.Api.Exceptions;
+﻿namespace Common.Api.Exceptions;
 
 public abstract class RepositoryException : Exception
 {

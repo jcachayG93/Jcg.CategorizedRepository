@@ -1,7 +1,6 @@
 ﻿using Common.Api;
 using Common.Api.Exceptions;
-using Support.UnitOfWork.Api;
-using Support.UnitOfWork.Api.Exceptions;
+using Common.InternalContracts;
 using Support.UnitOfWork.Cache;
 
 namespace Support.UnitOfWork

@@ -1,6 +1,6 @@
-﻿using IntegrationTests.Common.Database;
+﻿using Common.Api;
+using IntegrationTests.Common.Database;
 using IntegrationTests.Common.Types;
-using Support.UnitOfWork.Api;
 
 namespace IntegrationTests.Common.Parts
 {

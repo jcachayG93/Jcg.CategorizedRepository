@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 using Support.CategorizedRepository.Support;
-using Testing.Common.Assertions;
-using Testing.Common.Extensions;
 using Testing.Common.Mocks;
+using Testing.Common.Support.Assertions;
+using Testing.Common.Support.Extensions;
 using Testing.Common.Types;
 
 namespace Support.CategorizedRepository.UnitTests.Support

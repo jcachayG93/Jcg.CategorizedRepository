@@ -1,5 +1,5 @@
 ﻿using Common.Api;
-using Support.UnitOfWork.Api;
+using Common.InternalContracts;
 using Support.UnitOfWork.Cache;
 using Support.UnitOfWork.Cache.Imp;
 
