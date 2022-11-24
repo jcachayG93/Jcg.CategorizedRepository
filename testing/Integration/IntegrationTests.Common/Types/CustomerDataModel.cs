@@ -8,8 +8,7 @@ namespace IntegrationTests.Common.Types
     ///     Note also that we have different, independent models for the database and the aggregate. So, the aggregate can
     ///     change more frequently.
     /// </summary>
-    public class CustomerDataModel : IAggregateDataModel,
-        IClone
+    public class CustomerDataModel : IAggregateDataModel
     {
         public string Name { get; set; } = "";
 
@@ -19,25 +18,6 @@ namespace IntegrationTests.Common.Types
         //The key is just the Id as string
         public string Key { get; set; } = "";
 
-        /// <inheritdoc />
-        public object Clone()
-        {
-            var orders = Orders.Select(o =>
-                new OrderDataModel
-                {
-                    Id = o.Id
-                }).ToList();
-
-
-            var result = new CustomerDataModel
-            {
-                Key = Key,
-                Name = Name,
-                Orders = orders
-            };
-
-            return result;
-        }
 
         public class OrderDataModel
         {

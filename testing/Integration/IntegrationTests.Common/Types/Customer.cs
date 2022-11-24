@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IntegrationTests.Common.Types
+﻿namespace IntegrationTests.Common.Types
 {
     /// <summary>
-    /// This is the aggregate, a customer that have zero to many orders. This aggregate is encapsulated with a constuctor,
-    /// and the only way to add orders is to use the AddOrder method.
+    ///     This is the aggregate, a customer that have zero to many orders. This aggregate is encapsulated with a constuctor,
+    ///     and the only way to add orders is to use the AddOrder method.
     /// </summary>
     public class Customer
     {
@@ -18,6 +12,12 @@ namespace IntegrationTests.Common.Types
             Name = name;
         }
 
+        public IReadOnlyCollection<Order> Orders => _orders;
+
+        public Guid Id { get; }
+
+        public string Name { get; }
+
         public void AddOrder(Guid orderId)
         {
             var order = new Order(orderId);
@@ -25,15 +25,10 @@ namespace IntegrationTests.Common.Types
             _orders.Add(order);
         }
 
-        private List<Order> _orders = new();
-        public IReadOnlyCollection<Order> Orders => _orders;
-
-        public Guid Id { get; }
-
-        public string Name { get; }
+        private readonly List<Order> _orders = new();
 
         /// <summary>
-        /// The customer Order
+        ///     The customer Order
         /// </summary>
         public class Order
         {
@@ -43,7 +38,6 @@ namespace IntegrationTests.Common.Types
             }
 
             public Guid Id { get; }
-
         }
     }
 }

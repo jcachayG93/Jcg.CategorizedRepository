@@ -1,24 +1,7 @@
-﻿using IntegrationTests.Common.Types;
-using Support.UnitOfWork.Api;
-
-namespace IntegrationTests.Common.Database;
+﻿namespace IntegrationTests.Common.Database;
 
 public class InMemoryDatabase : IInMemoryDatabase
 {
-    /// <inheritdoc />
-    public IETagDto<T>? GetAggregate<T>(string key)
-        where T : IClone
-    {
-        if (_data.TryGetValue(key, out var data))
-        {
-            var payload = (T)data.Payload;
-
-            return new ETagDtoImp<T>(data.ETag, (T)payload.Clone());
-        }
-
-        return null;
-    }
-
     /// <inheritdoc />
     public void UpsertAndCommit(IEnumerable<UpsertOperation> operations)
     {
@@ -32,6 +15,18 @@ public class InMemoryDatabase : IInMemoryDatabase
 
             ApplyChanges(EvolveETags(operations));
         }
+    }
+
+    /// <inheritdoc />
+    public DataRecord? Get(string key)
+
+    {
+        if (_data.TryGetValue(key, out var data))
+        {
+            return data;
+        }
+
+        return null;
     }
 
     private void AssertItemsWithBlankETagDoNotExistInDatabase(
@@ -79,7 +74,7 @@ public class InMemoryDatabase : IInMemoryDatabase
     {
         foreach (var op in operations.ToList())
         {
-            var dr = new DataRecord(op.ETag, (IClone)op.Payload.Clone());
+            var dr = new DataRecord(op.ETag, op.Payload);
 
             if (_data.ContainsKey(op.Key))
             {
@@ -95,22 +90,4 @@ public class InMemoryDatabase : IInMemoryDatabase
     private static readonly object _lockObject = new();
 
     private readonly Dictionary<string, DataRecord> _data = new();
-
-
-    private record DataRecord(string ETag, IClone Payload);
-}
-
-internal class ETagDtoImp<T> : IETagDto<T>
-{
-    public ETagDtoImp(string etag, T payload)
-    {
-        Etag = etag;
-        Payload = payload;
-    }
-
-    /// <inheritdoc />
-    public string Etag { get; }
-
-    /// <inheritdoc />
-    public T Payload { get; }
 }

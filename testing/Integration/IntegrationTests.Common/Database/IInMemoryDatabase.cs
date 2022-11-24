@@ -1,12 +1,9 @@
-﻿using IntegrationTests.Common.Types;
-using Support.UnitOfWork.Api;
-
-namespace IntegrationTests.Common.Database
+﻿namespace IntegrationTests.Common.Database
 {
     public interface IInMemoryDatabase
     {
-        IETagDto<T>? GetAggregate<T>(string key)
-            where T : IClone;
+        DataRecord? Get(string key);
+
 
         void UpsertAndCommit(IEnumerable<UpsertOperation> operations);
     }

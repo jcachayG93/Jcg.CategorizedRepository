@@ -20,8 +20,22 @@ namespace IntegrationTests.Common.Parts
         {
             lock (_lockObject)
             {
-                return Task.FromResult(
-                    _database.GetAggregate<CustomerDataModel>(key));
+                var data = _database.Get(key);
+
+                if (data is null)
+                {
+                    return Task.FromResult<IETagDto<CustomerDataModel>?>(null);
+                }
+
+                var payload = (CustomerDataModel)data.Payload;
+
+                payload = Clone(payload);
+
+                var result =
+                    new ETagDtoImp<CustomerDataModel>(data.ETag, payload);
+
+
+                return Task.FromResult<IETagDto<CustomerDataModel>>(result)!;
             }
         }
 
@@ -30,38 +44,44 @@ namespace IntegrationTests.Common.Parts
             CustomerDataModel aggregate,
             CancellationToken cancellationToken)
         {
-            return Task.Run(() =>
+            lock (_lockObject)
             {
-                lock (_lockObject)
-                {
-                    var op =
-                        new UpsertOperation(aggregate.Key, eTag, aggregate);
+                var op = new UpsertOperation(aggregate.Key, eTag,
+                    Clone(aggregate));
 
-                    if (_operations.ContainsKey(aggregate.Key))
-                    {
-                        _operations[aggregate.Key] = op;
-                    }
-                    else
-                    {
-                        _operations.Add(aggregate.Key, op);
-                    }
-                }
-            });
+                _operations.Add(op);
+
+                return Task.CompletedTask;
+            }
         }
 
         /// <inheritdoc />
-        public async Task<IETagDto<CategoryIndex<LookupDataModel>>?>
-            GetCategoryIndex(
-                string categoryKey, CancellationToken cancellationToken)
+        public Task<IETagDto<CategoryIndex<LookupDataModel>>?> GetCategoryIndex(
+            string categoryKey, CancellationToken cancellationToken)
         {
             lock (_lockObject)
             {
-                var data =
-                    _database.GetAggregate<CustomCategoryIndex>(categoryKey);
+                var data = _database.Get(categoryKey);
+
+                if (data is null)
+                {
+                    return Task
+                        .FromResult<IETagDto<CategoryIndex<LookupDataModel>>?>(
+                            null);
+                }
+
+                var payload = (CategoryIndex<LookupDataModel>)data.Payload;
+
+                payload = Clone(payload);
 
                 var result =
-                    new ETagDtoImp<CategoryIndex<LookupDataModel>>(data.Etag,
-                        data.Payload);
+                    new ETagDtoImp<CategoryIndex<LookupDataModel>>(data.ETag,
+                        payload);
+
+
+                return Task
+                    .FromResult<IETagDto<CategoryIndex<LookupDataModel>>>(
+                        result)!;
             }
         }
 
@@ -70,20 +90,68 @@ namespace IntegrationTests.Common.Parts
             CategoryIndex<LookupDataModel> categoryIndex,
             CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            lock (_lockObject)
+            {
+                var op = new UpsertOperation(categoryKey, eTag,
+                    Clone(categoryIndex));
+
+                _operations.Add(op);
+
+                return Task.CompletedTask;
+            }
         }
 
         /// <inheritdoc />
         public Task CommitTransactionAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            lock (_lockObject)
+            {
+                _database.UpsertAndCommit(_operations.ToList());
+
+                _operations = new();
+
+                return Task.CompletedTask;
+            }
         }
 
-        private static readonly object _lockObject = new();
+        private CategoryIndex<LookupDataModel> Clone(
+            CategoryIndex<LookupDataModel> input)
+        {
+            var lookups = input.Lookups.Select(l =>
+                new LookupDataModel
+                {
+                    CustomerName = l.CustomerName,
+                    NumberOfOrders = l.NumberOfOrders,
+                    Key = l.Key,
+                    IsDeleted = l.IsDeleted,
+                    DeletedTimeStamp = l.DeletedTimeStamp
+                }).ToList();
 
+            return new CategoryIndex<LookupDataModel>()
+            {
+                Lookups = lookups
+            };
+        }
+
+        private CustomerDataModel Clone(CustomerDataModel input)
+        {
+            var orders = input.Orders.Select(o =>
+                new CustomerDataModel.OrderDataModel()
+                {
+                    Id = o.Id
+                }).ToList();
+
+            return new CustomerDataModel
+            {
+                Name = input.Name,
+                Orders = orders,
+                Key = input.Key
+            };
+        }
+
+        private static readonly object _lockObject = new object();
         private readonly IInMemoryDatabase _database;
 
-        private readonly Dictionary<string, UpsertOperation>
-            _operations = new();
+        private List<UpsertOperation> _operations = new();
     }
 }
