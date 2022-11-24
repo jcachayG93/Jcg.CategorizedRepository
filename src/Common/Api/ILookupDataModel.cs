@@ -1,6 +1,6 @@
 ﻿namespace Common.Api
 {
-    public interface IRepositoryLookup
+    public interface ILookupDataModel
     {
         string Key { get; set; }
 

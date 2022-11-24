@@ -20,7 +20,7 @@ namespace Support.DataModelRepository
             (IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> unitOfWork,
                 IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> aggregateToLookupMapper)
             where TAggregateDatabaseModel : class, IAggregateDataModel
-            where TLookupDatabaseModel : IRepositoryLookup
+            where TLookupDatabaseModel : ILookupDataModel
         {
             var indexFactory = new CategoryIndexFactory<TLookupDatabaseModel>();
 

@@ -4,7 +4,7 @@ using Support.UnitOfWork.Api;
 namespace Support.DataModelRepository.Support
 {
     internal class CategoryIndexFactory<TLookupDatabaseModel>
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         public virtual CategoryIndex<TLookupDatabaseModel> Create()
         {

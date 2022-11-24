@@ -1,4 +1,6 @@
-﻿namespace Testing.Common.Assertions
+﻿using Xunit;
+
+namespace Testing.Common.Assertions
 {
     public static class CollectionAssertions
     {

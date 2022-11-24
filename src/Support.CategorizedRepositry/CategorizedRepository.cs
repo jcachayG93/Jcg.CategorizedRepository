@@ -9,7 +9,7 @@ namespace Support.CategorizedRepository
     internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup, TLookupDatabaseModel>
     : ICategorizedRepository<TAggregate, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         private readonly IAggregateMapper<TAggregate, TAggregateDatabaseModel> _aggregateMapper;
         private readonly IAggregateToLookupMapper<TAggregateDatabaseModel, TLookupDatabaseModel> _aggregateToLookupMapper;

@@ -6,7 +6,7 @@ namespace Support.DataModelRepository.Strategies;
 internal class CommitStrategy<TAggregateDatabaseModel,
     TLookupDatabaseModel> : ICommitStrategy
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : IRepositoryLookup
+    where TLookupDatabaseModel : ILookupDataModel
 {
     public CommitStrategy(
         IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>

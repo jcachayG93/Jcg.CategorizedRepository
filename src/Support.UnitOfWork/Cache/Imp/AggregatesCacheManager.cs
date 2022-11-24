@@ -7,7 +7,7 @@ namespace Support.UnitOfWork.Cache.Imp
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TLookupDatabaseModel : ILookupDataModel
     {
         public AggregatesCacheManager(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
