@@ -1,6 +1,7 @@
 # Jcg.Repositories
 
 ***Data access repositories that plug between the database and the client app, seamlessly providing advanced features.***
+
 **features:**
 - Soft delete and restore.
 - Mapping between segregated models for the database and the client so they can evolve independently.
