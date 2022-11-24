@@ -13,7 +13,7 @@ public class InMemoryDatabase : IInMemoryDatabase
 
             AssertItemsWithBlankETagDoNotExistInDatabase(operations);
 
-            AssertNonBlankETagsMatchDataETags(operations);
+            AssertETagsMatchDataETags(operations);
 
             operations = EvolveETags(operations);
 
@@ -47,18 +47,17 @@ public class InMemoryDatabase : IInMemoryDatabase
         }
     }
 
-    private void AssertNonBlankETagsMatchDataETags(
+    private void AssertETagsMatchDataETags(
         IEnumerable<UpsertOperation> operations)
     {
-        foreach (var op in operations
-                     .Where(o => !string.IsNullOrWhiteSpace(o.ETag))
-                     .ToList())
+        foreach (var op in operations)
         {
-            var item = _data[op.Key];
-
-            if (item.ETag != op.ETag)
+            if (_data.ContainsKey(op.Key))
             {
-                throw new OptimisticConcurrencyException("ETag mismatch");
+                if (_data[op.Key].ETag != op.ETag)
+                {
+                    throw new OptimisticConcurrencyException("ETag mismatch");
+                }
             }
         }
     }

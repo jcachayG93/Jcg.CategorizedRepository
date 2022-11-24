@@ -12,9 +12,13 @@ namespace CategorizedRepository.IntegrationTests
         protected TestBase()
         {
             CategoryKey = new RepositoryIdentity(Guid.NewGuid());
+
+            Database = new InMemoryDatabase();
         }
 
-        public RepositoryIdentity CategoryKey { get; }
+        private RepositoryIdentity CategoryKey { get; }
+
+        private IInMemoryDatabase Database { get; }
 
         protected ICategorizedRepository<Customer, Lookup> CreateSut()
         {
@@ -22,9 +26,8 @@ namespace CategorizedRepository.IntegrationTests
             var aggregateToLookupMapper = new AggregateToLookupMapper();
             var lookupMapper = new LookupMapper();
 
-            var database = new InMemoryDatabase();
 
-            var client = new TransactionalDatabaseClient(database);
+            var client = new TransactionalDatabaseClient(Database);
 
 
             return CategorizedRepositoryFactory
@@ -48,12 +51,26 @@ namespace CategorizedRepository.IntegrationTests
         protected async Task<ICategorizedRepository<Customer, Lookup>>
             CreateSutWithCustomer(Customer customer)
         {
-            var sut = await CreateSutAndInitializeIndex();
+            var sut = CreateSut();
 
             await sut.UpsertAsync(customer.Id.ToKey(), customer,
                 CancellationToken.None);
 
             return sut;
+        }
+
+        protected async Task InitializeCategoryIndexAsync()
+        {
+            var sut = await CreateSutAndInitializeIndex();
+
+            await sut.CommitChangesAsync(CancellationToken.None);
+        }
+
+        protected async Task AddAgregateAsync(Customer aggregate)
+        {
+            var sut = await CreateSutWithCustomer(aggregate);
+
+            await sut.CommitChangesAsync(CancellationToken.None);
         }
     }
 }

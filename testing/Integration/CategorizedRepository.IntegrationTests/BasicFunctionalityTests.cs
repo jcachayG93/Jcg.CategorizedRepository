@@ -86,6 +86,8 @@ namespace CategorizedRepository.IntegrationTests
 
             var customer = RandomAggregate(out var key);
 
+            await InitializeCategoryIndexAsync();
+
             var sut = await CreateSutWithCustomer(customer);
 
             // ************ ACT ****************
@@ -116,6 +118,8 @@ namespace CategorizedRepository.IntegrationTests
             // ************ ARRANGE ************
 
             var customer = RandomAggregate(out var key);
+
+            await InitializeCategoryIndexAsync();
 
             var sut = await CreateSutWithCustomer(customer);
 

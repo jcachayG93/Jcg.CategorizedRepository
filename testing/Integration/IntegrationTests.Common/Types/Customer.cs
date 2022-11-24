@@ -16,13 +16,18 @@
 
         public Guid Id { get; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public void AddOrder(Guid orderId)
         {
             var order = new Order(orderId);
 
             _orders.Add(order);
+        }
+
+        public void UpdateName(string name)
+        {
+            Name = name;
         }
 
         private readonly List<Order> _orders = new();
