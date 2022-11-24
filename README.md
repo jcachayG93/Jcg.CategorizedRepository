@@ -1,4 +1,4 @@
-# Jcg.Repositories
+# Jcg.DataAccessRepositories
 
 ***Data access repositories that plug between the database and the client app, seamlessly providing advanced features.***
 

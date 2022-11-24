@@ -1,6 +1,6 @@
-﻿using Jcg.Repositories.Api.Exceptions;
+﻿using Jcg.DataAccessRepositories.Exceptions;
 
-namespace Jcg.Repositories.Api;
+namespace Jcg.DataAccessRepositories;
 
 /// <summary>
 ///     Represents a Key

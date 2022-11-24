@@ -1,5 +1,5 @@
 ﻿using Common.InternalContracts;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 using Support.UnitOfWork.Cache;
 using Support.UnitOfWork.Cache.Imp;
 

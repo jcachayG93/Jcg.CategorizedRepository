@@ -1,4 +1,4 @@
-﻿namespace Jcg.Repositories.Api
+﻿namespace Jcg.DataAccessRepositories
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database

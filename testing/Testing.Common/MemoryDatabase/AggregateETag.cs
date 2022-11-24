@@ -1,4 +1,4 @@
-﻿using Jcg.Repositories.Api;
+﻿using Jcg.DataAccessRepositories;
 using Testing.Common.Types;
 
 namespace Testing.Common.MemoryDatabase;

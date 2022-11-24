@@ -1,5 +1,5 @@
 ﻿using IntegrationTests.Common.Types;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 
 namespace IntegrationTests.Common.Parts
 {

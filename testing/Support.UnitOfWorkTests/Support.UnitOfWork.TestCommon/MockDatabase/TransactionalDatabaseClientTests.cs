@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 using Testing.Common.MemoryDatabase;
 using Testing.Common.Support.Assertions;
 using Testing.Common.Support.Extensions;

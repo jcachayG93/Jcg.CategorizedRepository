@@ -1,5 +1,5 @@
 ﻿using Common.InternalContracts;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 using Moq;
 using Support.UnitOfWork;
 using Testing.Common.Types;

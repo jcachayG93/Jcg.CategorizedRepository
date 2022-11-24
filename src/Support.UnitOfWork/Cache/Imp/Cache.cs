@@ -1,4 +1,4 @@
-﻿using Jcg.Repositories.Api;
+﻿using Jcg.DataAccessRepositories;
 using Support.UnitOfWork.InternalExceptions;
 
 namespace Support.UnitOfWork.Cache.Imp

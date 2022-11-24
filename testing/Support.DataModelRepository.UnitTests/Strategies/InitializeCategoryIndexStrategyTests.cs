@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Jcg.Repositories.Api.Exceptions;
+using Jcg.DataAccessRepositories.Exceptions;
 using Support.DataModelRepository.Strategies;
 using Support.DataModelRepository.Strategies.imp;
 using Support.DataModelRepository.UnitTests.TestCommon;

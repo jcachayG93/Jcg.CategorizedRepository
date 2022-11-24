@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Jcg.Repositories.Api;
+using Jcg.DataAccessRepositories;
 using Support.CategorizedRepository.UnitTests.TestCommon;
 using Testing.Common.Mocks;
 using Testing.Common.Types;

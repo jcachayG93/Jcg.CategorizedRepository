@@ -1,5 +1,5 @@
-﻿using Jcg.Repositories.Api;
-using Jcg.Repositories.Api.Exceptions;
+﻿using Jcg.DataAccessRepositories;
+using Jcg.DataAccessRepositories.Exceptions;
 
 namespace Support.DataModelRepository.Support.IndexManipulator
 {

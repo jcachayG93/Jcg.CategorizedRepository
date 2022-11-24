@@ -10,7 +10,7 @@ I am trying to avoid changing the Api namespace by accident.
 
 The Api is defined in the Common.Api project and the Jcg.Repositories projects. both projects have a fixed root namespace:
 
-> <RootNamespace>Jcg.Repositories.Api</RootNamespace>
+> <RootNamespace>Jcg.DataAccessRepositories</RootNamespace>
 
 So, types defined in both projects (the public api) have the same namespace.
 
