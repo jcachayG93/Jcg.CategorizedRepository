@@ -3,6 +3,12 @@ using Support.UnitOfWork.Api.Exceptions;
 
 namespace Common.Api
 {
+    /// <summary>
+    /// A repository that sits between the database client and your application to automate several features. Works like a Unit of work, where changes are kept isolated in this instance until they are committed.
+    /// It also acts as a cache. Data is read from the database up to one time per key, further queries will return data from the cache which reflect all local uncommited changes.
+    /// </summary>
+    /// <typeparam name="TAggregate">The detailed model of the aggregate, it can be a composition of more than one class</typeparam>
+    /// <typeparam name="TLookup">A short, lightweight representation of the aggregate. When querying items in the category, a collection of lookups will be returned</typeparam>
     public interface ICategorizedRepository
         <TAggregate, TLookup>
 
@@ -10,10 +16,7 @@ namespace Common.Api
         /// <summary>
         ///     Adds an operation that initializes a category so aggregates can be added to it.
         /// </summary>
-        /// <remarks>This operation is reflected inmediatelly but is not applied to the database until commit is called</remarks>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="CategoryIndexIsAlreadyInitializedException">Thrown if the category already exists</exception>
+        /// <exception cref="CategoryIndexIsAlreadyInitializedException">Thrown if the category is already initialized</exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed
@@ -36,12 +39,9 @@ namespace Common.Api
         ///     Upserts the aggregate. Inserts if no aggregate matches the key,
         ///     replaces otherwise
         /// </summary>
-        /// <remarks>This operation is reflected inmediatelly but is not applied to the database until commit is called</remarks>
         /// <param name="key">The key</param>
         /// <param name="aggregate">The aggregate to upsert</param>
-        /// <param name="cancellationToken"></param>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
-        /// <returns></returns>
+        /// <exception cref="CategoryIndexIsUninitializedException">You cant add an aggregate when the category is uninitialized</exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed
@@ -50,37 +50,35 @@ namespace Common.Api
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Returns all the lookups that belong to the category
+        ///     Returns all the lookups for non-deleted aggregates that belong to the category
         /// </summary>
         /// <remarks>
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
+        /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
         Task<IEnumerable<TLookup>> LookupNonDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Returns all the lookups that belong to the category and are deleted.
+        ///     Returns all the lookups for deleted aggregates that belong to the category
         /// </summary>
         /// <remarks>
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
-        /// <param name="cancellationToken"></param>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
+        /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
         Task<IEnumerable<TLookup>> LookupDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Soft delete. Moves the aggregate from the non-deleted to deleted
+        ///     Performs a Soft delete operation. Moves the aggregate from the non-deleted to deleted
         ///     category index.
         /// </summary>
-        /// <remarks>This operation is reflected inmediatelly but is not applied to the database until commit is called</remarks>
         /// <param name="key">The key</param>
         /// <param name="cancellationToken"></param>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
-        /// <exception cref="LookupNotFoundInCategoryIndexException">If no non-deleted lookup matches the key</exception>
+        /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
+        /// <exception cref="LookupNotFoundInCategoryIndexException">Thrown if a lookup that match the key was not found between the NON-DELETED ones</exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed
@@ -91,12 +89,9 @@ namespace Common.Api
         /// <summary>
         ///     Restores a deleted aggregate
         /// </summary>
-        /// <remarks>This operation is reflected inmediatelly but is not applied to the database until commit is called</remarks>
         /// <param name="key">The aggregate key</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not initialized (does not exist)</exception>
-        /// <exception cref="LookupNotFoundInCategoryIndexException">If no deleted lookup matches the key</exception>
+        /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
+        /// <exception cref="LookupNotFoundInCategoryIndexException">Thrown if a lookup that match the key was not found between the DELETED ones</exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed
@@ -107,8 +102,6 @@ namespace Common.Api
         /// <summary>
         ///     Commits all the changes to the database. This method can be called once for the lifetime of this unit of work
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">Thrown when this method is called more than once</exception>
         Task CommitChangesAsync(CancellationToken cancellationToken);
     }
