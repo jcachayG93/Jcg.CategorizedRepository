@@ -3,9 +3,9 @@
 namespace Support.UnitOfWork.Api
 {
     /// <summary>
-    ///     Represents an index table to lookup items items belonging to a category
+    ///     A model that contains the lookups for the aggregates in the category. These can be the deleted or the non-deleted ones depending on which method was used for the query
     /// </summary>
-    /// <typeparam name="TLookupDatabaseModel"></typeparam>
+    /// <typeparam name="TLookupDatabaseModel">A light-weight and database friendly model of the lookup</typeparam>
     public class CategoryIndex<TLookupDatabaseModel>
         where TLookupDatabaseModel : ILookupDataModel
     {
