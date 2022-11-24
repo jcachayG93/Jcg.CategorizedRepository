@@ -24,7 +24,7 @@ jobs:
       - name: build
         run: dotnet build
       - name: Run Unit Tests
-        run: dotnet test ../../**/Support.UnitOfWork.UnitTests
+        run: dotnet test ../../testing/**/Support.UnitOfWork.UnitTests/Support.UnitOfWork.UnitTests
      
       ###############  
       - name: Pack
