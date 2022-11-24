@@ -23,9 +23,14 @@ jobs:
           dotnet-version: 7.0.x
       - name: build
         run: dotnet build
-      - name: Run Unit Tests
+      - name: Run UnitOfWork Unit Tests
         run: dotnet test ../../testing/Support.UnitOfWorkTests/Support.UnitOfWork.UnitTests
-     
+      - name: Run DataModelRepository Unit Tests
+        run: dotnet test ../../testing/Support.DataModelRepository.UnitTests
+      - name: Run CategorizedRepository Unit Tests
+        run: dotnet test ../../testing/Support.CategorizedRepository.UnitTests
+      - name: Run Integration Tests
+        run: dotnet test ../../testing/Integration/CategorizedRepository.IntegrationTests
       ###############  
       - name: Pack
         run: dotnet pack
