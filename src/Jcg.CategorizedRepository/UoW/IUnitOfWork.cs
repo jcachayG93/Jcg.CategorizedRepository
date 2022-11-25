@@ -3,6 +3,7 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW;
 
+// TODO: Renmae TLookup
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel

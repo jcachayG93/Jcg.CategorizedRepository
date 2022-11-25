@@ -3,6 +3,7 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW.Cache;
 
+// TODO: Rename to TLookup
 internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
     where TLookupDatabaseModel : ILookupDataModel
 {
