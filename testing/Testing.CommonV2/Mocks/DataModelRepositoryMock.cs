@@ -62,9 +62,9 @@ namespace Testing.CommonV2.Mocks
                 AnyCt()));
         }
 
-        public void VerifyUpsert(AggregateDatabaseModel aggregate)
+        public void VerifyUpsert(string key, AggregateDatabaseModel aggregate)
         {
-            _moq.Verify(s => s.UpsertOLD(aggregate, AnyCt()));
+            _moq.Verify(s => s.UpsertAsync(key, aggregate, AnyCt()));
         }
 
         public void VerifyDelete(Guid key)

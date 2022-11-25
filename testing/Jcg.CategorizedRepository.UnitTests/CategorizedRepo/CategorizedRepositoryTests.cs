@@ -88,8 +88,9 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             AggregateMapper.VerifyToDatabaseModel(Aggregate);
 
-            DataModelRepository.VerifyUpsert(AggregateMapper
-                .ToDatabaseModelReturns);
+            DataModelRepository.VerifyUpsert(Key.Value.ToString(),
+                AggregateMapper
+                    .ToDatabaseModelReturns);
         }
 
         [Fact]
