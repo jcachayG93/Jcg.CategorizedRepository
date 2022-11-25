@@ -22,6 +22,6 @@ I needed to abstract the features above into a library, so I could use it for mi
 Net 7.0
 
 ## Getting started
-1. Read the [integration tests](https://github.com/jcachayG93/Jcg.DataAccessRepositories/tree/main/testing/Integration)
-2. Read the [Wiki](https://github.com/jcachayG93/Jcg.DataAccessRepositories/wiki)
+1. Read the [integration tests](https://github.com/jcachayG93/Jcg.CategorizedRepository/tree/main/testing/Integration/CategorizedRepository.IntegrationTests), they show all the library functionalities.
+2. Read the [Wiki](https://github.com/jcachayG93/Jcg.CategorizedRepository/wiki)
 
