@@ -22,9 +22,9 @@ namespace Testing.CommonV2.Mocks
 
 
         public IAggregateToLookupMapper<AggregateDatabaseModel,
-            LookupDatabaseModel> Object => _moq.Object;
+            Lookup> Object => _moq.Object;
 
-        public LookupDatabaseModel Returns { get; }
+        public Lookup Returns { get; }
 
         public void VerifyToLookup(AggregateDatabaseModel aggregate)
         {
@@ -33,6 +33,6 @@ namespace Testing.CommonV2.Mocks
         }
 
         private readonly Mock<IAggregateToLookupMapper<AggregateDatabaseModel,
-            LookupDatabaseModel>> _moq;
+            Lookup>> _moq;
     }
 }

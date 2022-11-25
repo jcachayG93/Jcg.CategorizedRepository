@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Jcg.CategorizedRepository.Api;
 using Jcg.CategorizedRepository.CategorizedRepo;
-using Jcg.CategorizedRepository.UnitTests.CategorizedRepo.TestCommon;
 using Testing.CommonV2.Mocks;
 using Testing.CommonV2.Types;
 
@@ -14,8 +13,6 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
             AggregateMapper = new();
 
           
-
-            LookupMapper = new();
 
             DataModelRepository = new();
 
@@ -32,13 +29,11 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         }
         private AggregateMapperMock AggregateMapper { get; }
 
-       
-
-        private LookupMapperAdapterMock LookupMapper { get; }
+        
 
         private DataModelRepositoryMock DataModelRepository { get; }
 
-        private CategorizedRepository<Aggregate, AggregateDatabaseModel, LookupDatabaseModel, LookupDatabaseModel> Sut { get; }
+        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup> Sut { get; }
 
         public RepositoryIdentity Key { get; }
 

@@ -19,7 +19,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
         private UnitOfWorkMock UnitOfWork { get; }
 
         private DeleteAndRestoreStrategy<AggregateDatabaseModel,
-            LookupDatabaseModel> Sut { get; }
+            Lookup> Sut { get; }
 
 
         [Fact]

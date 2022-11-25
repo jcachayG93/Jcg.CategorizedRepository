@@ -12,7 +12,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         public IDeleteAndRestoreStrategy<AggregateDatabaseModel,
-            LookupDatabaseModel> Object => _moq.Object;
+            Lookup> Object => _moq.Object;
 
         public void VerifyDelete(Guid key)
         {
@@ -27,6 +27,6 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         private readonly Mock<IDeleteAndRestoreStrategy<AggregateDatabaseModel,
-            LookupDatabaseModel>> _moq;
+            Lookup>> _moq;
     }
 }

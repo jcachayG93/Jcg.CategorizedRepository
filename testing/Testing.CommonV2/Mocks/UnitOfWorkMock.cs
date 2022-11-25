@@ -30,15 +30,15 @@ namespace Testing.CommonV2.Mocks
         }
 
 
-        public IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>
+        public IUnitOfWork<AggregateDatabaseModel, Lookup>
             Object => _moq.Object;
 
 
-        public CategoryIndex<LookupDatabaseModel>
+        public CategoryIndex<Lookup>
             GetNonDeletedItemsCategoryIndexReturns { get; }
 
 
-        public CategoryIndex<LookupDatabaseModel>
+        public CategoryIndex<Lookup>
             GetDeletedItemsCategoryIndexReturns { get; }
 
         public AggregateDatabaseModel GetAggregateReturns { get; }
@@ -56,7 +56,7 @@ namespace Testing.CommonV2.Mocks
         }
 
         public void VerifyUpsertDeletedItemsCategoryIndex(
-            CategoryIndex<LookupDatabaseModel> deletedItemsCategoryIndex)
+            CategoryIndex<Lookup> deletedItemsCategoryIndex)
         {
             _moq.Verify(s =>
                 s.UpsertDeletedItemsCategoryIndex(deletedItemsCategoryIndex,
@@ -69,7 +69,7 @@ namespace Testing.CommonV2.Mocks
         }
 
         public void VerifyUpsertNonDeletedItemsCategoryIndex(
-            CategoryIndex<LookupDatabaseModel> nonDeletedItemsCategoryIndex)
+            CategoryIndex<Lookup> nonDeletedItemsCategoryIndex)
         {
             _moq.Verify(s =>
                 s.UpsertNonDeletedItemsCategoryIndex(
@@ -94,6 +94,6 @@ namespace Testing.CommonV2.Mocks
         }
 
         private readonly
-            Mock<IUnitOfWork<AggregateDatabaseModel, LookupDatabaseModel>> _moq;
+            Mock<IUnitOfWork<AggregateDatabaseModel, Lookup>> _moq;
     }
 }

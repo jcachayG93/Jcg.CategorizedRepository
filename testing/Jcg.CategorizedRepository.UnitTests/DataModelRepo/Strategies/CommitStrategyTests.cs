@@ -15,7 +15,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
         private UnitOfWorkMock UnitOfWork { get; }
 
-        private CommitStrategy<AggregateDatabaseModel, LookupDatabaseModel> Sut
+        private CommitStrategy<AggregateDatabaseModel, Lookup> Sut
         {
             get;
         }

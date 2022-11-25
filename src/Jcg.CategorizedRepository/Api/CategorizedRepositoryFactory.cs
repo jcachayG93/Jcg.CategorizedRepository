@@ -30,7 +30,7 @@ namespace Jcg.CategorizedRepository.Api
 
             return
                 new CategorizedRepository<TAggregate, TAggregateDatabaseModel,
-                    TLookup, TLookup>(
+                    TLookup>(
                     aggregateMapper,
                     dataModelRepo
                 );

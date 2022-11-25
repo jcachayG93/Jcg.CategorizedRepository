@@ -30,14 +30,14 @@ internal class QueryStategyMock
             .Returns(LookupDeletedReturns);
     }
 
-    public IQueryStrategy<AggregateDatabaseModel, LookupDatabaseModel>
+    public IQueryStrategy<AggregateDatabaseModel, Lookup>
         Object => _moq.Object;
 
     public AggregateDatabaseModel GetAggregateReturns { get; }
 
-    public CategoryIndex<LookupDatabaseModel> LookupNonDeletedReturns { get; }
+    public CategoryIndex<Lookup> LookupNonDeletedReturns { get; }
 
-    public CategoryIndex<LookupDatabaseModel> LookupDeletedReturns { get; }
+    public CategoryIndex<Lookup> LookupDeletedReturns { get; }
 
     public void VerifyGetAggregate(Guid key)
     {
@@ -45,6 +45,6 @@ internal class QueryStategyMock
     }
 
     private readonly
-        Mock<IQueryStrategy<AggregateDatabaseModel, LookupDatabaseModel>>
+        Mock<IQueryStrategy<AggregateDatabaseModel, Lookup>>
         _moq;
 }

@@ -10,7 +10,7 @@ namespace Testing.CommonV2.Mocks
     {
         public DataModelRepositoryMock()
         {
-            _moq = new Mock<IDataModelRepository<AggregateDatabaseModel, LookupDatabaseModel>>();
+            _moq = new Mock<IDataModelRepository<AggregateDatabaseModel, Lookup>>();
 
             GetAggregateReturns = RandomAggregateDatabaseModel();
 
@@ -31,15 +31,15 @@ namespace Testing.CommonV2.Mocks
                 .Returns(LookupNonDeletedReturns);
         }
 
-        private readonly Mock<IDataModelRepository<AggregateDatabaseModel, LookupDatabaseModel>> _moq;
+        private readonly Mock<IDataModelRepository<AggregateDatabaseModel, Lookup>> _moq;
 
-        public IDataModelRepository<AggregateDatabaseModel, LookupDatabaseModel> Object => _moq.Object;
+        public IDataModelRepository<AggregateDatabaseModel, Lookup> Object => _moq.Object;
 
         public AggregateDatabaseModel GetAggregateReturns { get; }
 
-        public CategoryIndex<LookupDatabaseModel> LookupNonDeletedReturns { get; }
+        public CategoryIndex<Lookup> LookupNonDeletedReturns { get; }
 
-        public CategoryIndex<LookupDatabaseModel> LookupDeletedReturns { get; }
+        public CategoryIndex<Lookup> LookupDeletedReturns { get; }
 
         public void VerifyInitializeCategory()
         {

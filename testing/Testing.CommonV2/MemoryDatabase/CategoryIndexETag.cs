@@ -4,10 +4,10 @@ using Testing.CommonV2.Types;
 namespace Testing.CommonV2.MemoryDatabase;
 
 public class
-    CategoryIndexETag : IETagDto<CategoryIndex<LookupDatabaseModel>>
+    CategoryIndexETag : IETagDto<CategoryIndex<Lookup>>
 {
     public CategoryIndexETag(string etag,
-        CategoryIndex<LookupDatabaseModel> payload)
+        CategoryIndex<Lookup> payload)
     {
         Etag = etag;
         Payload = payload;
@@ -17,7 +17,7 @@ public class
     public string Etag { get; }
 
     /// <inheritdoc />
-    public CategoryIndex<LookupDatabaseModel> Payload { get; }
+    public CategoryIndex<Lookup> Payload { get; }
 
     public CategoryIndexETag Clone()
     {
