@@ -26,7 +26,7 @@ jobs:
       - name: Run Unit Tests
         run: dotnet test ../../testing/Jcg.CategorizedRepository.UnitTests
       - name: Run Integration Tests
-        run: dotnet test ../../testing/integration/CategorizedRepository.IntegrationTests
+        run: dotnet test ../../testing/Integration/CategorizedRepository.IntegrationTests
       - name: Pack
         run: dotnet pack
       - name: Push nuget
