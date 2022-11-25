@@ -1,6 +1,7 @@
 ﻿using IntegrationTests.Common.Database;
 using IntegrationTests.Common.Types;
 using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 
 namespace IntegrationTests.Common.Parts
 {
@@ -39,14 +40,15 @@ namespace IntegrationTests.Common.Parts
             }
         }
 
+
         /// <inheritdoc />
-        public Task UpsertAggregateAsync(string eTag,
+        public Task UpsertAggregateAsync(string key, string eTag,
             CustomerDataModel aggregate,
             CancellationToken cancellationToken)
         {
             lock (LockObject)
             {
-                var op = new UpsertOperation(aggregate.Key, eTag,
+                var op = new UpsertOperation(key, eTag,
                     Clone(aggregate));
 
                 _operations.Add(op);
@@ -122,19 +124,23 @@ namespace IntegrationTests.Common.Parts
         private static CategoryIndex<CustomerLookupDataModel> Clone(
             CategoryIndex<CustomerLookupDataModel> input)
         {
-            var lookups = input.Lookups.Select(l =>
-                new CustomerLookupDataModel
+            var lookupDtos = input.Lookups.Select(l =>
+                new LookupDto<CustomerLookupDataModel>
                 {
-                    CustomerName = l.CustomerName,
-                    NumberOfOrders = l.NumberOfOrders,
                     Key = l.Key,
                     IsDeleted = l.IsDeleted,
-                    DeletedTimeStamp = l.DeletedTimeStamp
-                }).ToList();
+                    DeletedTimeStamp = l.DeletedTimeStamp,
+                    PayLoad = new CustomerLookupDataModel
+                    {
+                        CustomerName = l.PayLoad.CustomerName,
+                        NumberOfOrders = l.PayLoad.NumberOfOrders
+                    }
+                }).ToArray();
+
 
             return new CategoryIndex<CustomerLookupDataModel>()
             {
-                Lookups = lookups
+                Lookups = lookupDtos
             };
         }
 
@@ -149,8 +155,7 @@ namespace IntegrationTests.Common.Parts
             return new CustomerDataModel
             {
                 Name = input.Name,
-                Orders = orders,
-                Key = input.Key
+                Orders = orders
             };
         }
 

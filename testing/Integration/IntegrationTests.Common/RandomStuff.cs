@@ -49,10 +49,7 @@ namespace IntegrationTests.Common
         {
             key = RandomString();
 
-            return new()
-            {
-                Key = key
-            };
+            return new();
         }
 
         public static CategoryIndex<CustomerLookupDataModel>
@@ -64,9 +61,17 @@ namespace IntegrationTests.Common
                 CustomerName = oneItemName
             };
 
+            var dto = new LookupDto<CustomerLookupDataModel>
+            {
+                Key = RandomString(),
+                IsDeleted = false,
+                DeletedTimeStamp = "",
+                PayLoad = lookup
+            };
+
             return new()
             {
-                Lookups = lookup.ToCollection()
+                Lookups = dto.ToCollection().ToArray()
             };
         }
     }

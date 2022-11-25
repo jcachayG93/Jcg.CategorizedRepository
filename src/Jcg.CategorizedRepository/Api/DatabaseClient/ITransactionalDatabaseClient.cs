@@ -1,4 +1,4 @@
-﻿namespace Jcg.CategorizedRepository.Api
+﻿namespace Jcg.CategorizedRepository.Api.DatabaseClient
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database
@@ -7,8 +7,7 @@
     /// <typeparam name="TLookupDatabaseModel">The type representing the aggregate lookup to be stored in the database</typeparam>
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Gets the aggregate
@@ -20,8 +19,11 @@
 
 
         /// <summary>
-        ///     Adds an Upsert operation to the list of transactions to be commited.
+        ///     Adds an UpsertOLD operation to the list of transactions to be commited.
         /// </summary>
+        /// <param name="key">
+        ///     The primary key
+        /// </param>
         /// <param name="eTag">
         ///     The ETag value for the payload. Blank if this is an insert operation. Value returned by GetAggregate
         ///     if this is a replace operation.
@@ -31,7 +33,7 @@
         ///     This method is responsible for checking that the eTag matches the expected value for the key, but that
         ///     exception will be thrown after commit
         /// </remarks>
-        Task UpsertAggregateAsync(string eTag,
+        Task UpsertAggregateAsync(string key, string eTag,
             TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken);
 
@@ -45,7 +47,7 @@
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Adds an Upsert operation to the list of transactions to be commited.
+        ///     Adds an UpsertOLD operation to the list of transactions to be commited.
         /// </summary>
         /// <param name="categoryKey">The key</param>
         /// <param name="eTag">
@@ -63,7 +65,7 @@
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Commits all Upsert operations added in previous steps in a single transaction. If any ETag do not match the
+        ///     Commits all UpsertOLD operations added in previous steps in a single transaction. If any ETag do not match the
         ///     expected vaue for the key,
         ///     discard this operation and throw an exception.
         /// </summary>

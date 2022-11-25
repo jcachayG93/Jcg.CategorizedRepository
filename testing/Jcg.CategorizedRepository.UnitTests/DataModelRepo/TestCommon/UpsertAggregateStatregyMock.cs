@@ -14,10 +14,10 @@ internal class UpsertAggregateStatregyMock
     public IUpsertAggregateStrategy<AggregateDatabaseModel,
         Lookup> Object => _moq.Object;
 
-    public void VerifyUpsert(AggregateDatabaseModel aggregate)
+    public void VerifyUpsert(string key, AggregateDatabaseModel aggregate)
     {
         _moq.Verify(s =>
-            s.UpsertAsync(aggregate, AnyCt()));
+            s.UpsertAsync(key, aggregate, AnyCt()));
     }
 
     private readonly Mock<IUpsertAggregateStrategy<AggregateDatabaseModel,

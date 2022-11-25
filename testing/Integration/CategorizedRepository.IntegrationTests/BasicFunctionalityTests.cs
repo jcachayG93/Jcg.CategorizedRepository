@@ -72,9 +72,9 @@ namespace CategorizedRepository.IntegrationTests
             // ************ ASSERT *************
 
             lookups.ShouldBeEquivalent(aggregates, (x, y) =>
-                x.CustomerName == y.Name &&
+                x.PayLoad.CustomerName == y.Name &&
+                x.PayLoad.NumberOfOrders == y.Orders.Count() &&
                 x.Key == y.Id.ToString() &&
-                x.NumberOfOrders == y.Orders.Count() &&
                 x.IsDeleted == false);
         }
 
@@ -101,9 +101,10 @@ namespace CategorizedRepository.IntegrationTests
             var result = deleted.First();
 
             result.Key.Should().Be(customer.Id.ToString());
-            result.CustomerName.Should().Be(customer.Name);
-            result.NumberOfOrders.Should().Be(customer.Orders.Count());
             result.IsDeleted.Should().BeTrue();
+            result.PayLoad.CustomerName.Should().Be(customer.Name);
+            result.PayLoad.NumberOfOrders.Should().Be(customer.Orders.Count());
+
 
             var nonDeleted =
                 await sut.LookupNonDeletedAsync(CancellationToken.None);
@@ -137,9 +138,10 @@ namespace CategorizedRepository.IntegrationTests
             var result = nonDeleted.First();
 
             result.Key.Should().Be(customer.Id.ToString());
-            result.CustomerName.Should().Be(customer.Name);
-            result.NumberOfOrders.Should().Be(customer.Orders.Count());
             result.IsDeleted.Should().BeFalse();
+            result.PayLoad.CustomerName.Should().Be(customer.Name);
+            result.PayLoad.NumberOfOrders.Should().Be(customer.Orders.Count());
+
 
             var deleted = await sut.LookupDeletedAsync(CancellationToken.None);
 

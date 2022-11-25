@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW.Cache.Imp
@@ -6,8 +7,7 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
     internal class CategoryIndexCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : ICategoryIndexCacheManager<TLookupDatabaseModel>
-        where TLookupDatabaseModel : IRepositoryLookup
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Constructor

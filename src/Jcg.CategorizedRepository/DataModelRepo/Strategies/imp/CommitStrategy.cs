@@ -1,12 +1,10 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.UoW;
+﻿using Jcg.CategorizedRepository.UoW;
 
 namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
 
 internal class CommitStrategy<TAggregateDatabaseModel,
     TLookupDatabaseModel> : ICommitStrategy
-    where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : IRepositoryLookup
+    where TAggregateDatabaseModel : class
 {
     public CommitStrategy(
         IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>

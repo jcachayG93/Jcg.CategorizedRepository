@@ -10,10 +10,7 @@ namespace Testing.CommonV2.Mocks
         {
             _moq = new();
 
-            Returns = new()
-            {
-                Key = RandomString()
-            };
+            Returns = new();
 
             _moq.Setup(s =>
                     s.ToLookup(It.IsAny<AggregateDatabaseModel>()))

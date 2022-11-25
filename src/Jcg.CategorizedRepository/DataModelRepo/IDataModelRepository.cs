@@ -3,11 +3,9 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.DataModelRepo
 {
-  
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookup>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookup : IRepositoryLookup
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Initializes the category indexes for the category
@@ -42,16 +40,18 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         Task<CategoryIndex<TLookup>> LookupDeletedAsync(
             CancellationToken cancellationToken);
 
+
         /// <summary>
         ///     Upsers the aggregate.
         /// </summary>
+        /// <param name="key">The key</param>
         /// <param name="aggregate">The aggregate</param>
         /// <param name="cancellationToken"></param>
         /// <exception cref="CategoryIndexIsUninitializedException">
         ///     When the CategoryIndex
         ///     is not found
         /// </exception>
-        Task UpsertAsync(TAggregateDatabaseModel aggregate,
+        Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken);
 
         /// <summary>

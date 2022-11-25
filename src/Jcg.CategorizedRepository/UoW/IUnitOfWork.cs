@@ -3,11 +3,9 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW;
 
-
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookup>
-    where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookup : IRepositoryLookup
+    where TAggregateDatabaseModel : class
 {
     /// <summary>
     ///     Gets the non deleted items category index
@@ -36,14 +34,14 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
         CancellationToken cancellationToken);
 
     /// <summary>
-    ///     Upsert the deleted items category index
+    ///     UpsertOLD the deleted items category index
     /// </summary>
     Task UpsertDeletedItemsCategoryIndex(
         CategoryIndex<TLookup> deletedItemsCategoryIndex,
         CancellationToken cancellationToken);
 
     /// <summary>
-    ///     Upsert the non-deleted items category index
+    ///     UpsertOLD the non-deleted items category index
     /// </summary>
     Task UpsertNonDeletedItemsCategoryIndex(
         CategoryIndex<TLookup> nonDeletedItemsCategoryIndex,
@@ -61,12 +59,15 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
     /// <summary>
     ///     Upserts the aggregate
     /// </summary>
+    /// <param name="key"></param>
     /// <param name="aggregate"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task UpsertAggregateAsync(
+        string key,
         TAggregateDatabaseModel aggregate,
         CancellationToken cancellationToken);
+
 
     /// <summary>
     ///     Commits all the changes. This operation can be called only once for the lifetime of this UnitOfWork

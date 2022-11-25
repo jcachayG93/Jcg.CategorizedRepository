@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 using Jcg.CategorizedRepository.Api.Exceptions;
 using Jcg.CategorizedRepository.UoW.Cache;
 
@@ -7,8 +8,7 @@ namespace Jcg.CategorizedRepository.UoW
     internal class
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TAggregateDatabaseModel : class
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
@@ -96,11 +96,12 @@ namespace Jcg.CategorizedRepository.UoW
 
 
         /// <inheritdoc />
-        public Task UpsertAggregateAsync(TAggregateDatabaseModel aggregate,
+        public Task UpsertAggregateAsync(string key,
+            TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
             AssertCommitWasNotCalled();
-            return _aggregatesCache.UpsertAsync(aggregate);
+            return _aggregatesCache.UpsertAsync(key, aggregate);
         }
 
         /// <inheritdoc />
@@ -178,7 +179,7 @@ namespace Jcg.CategorizedRepository.UoW
 
             var taskList = _aggregatesCache
                 .UpsertedItems.Select(i =>
-                    _dbClient.UpsertAggregateAsync(i.ETag, i.PayLoad!,
+                    _dbClient.UpsertAggregateAsync(i.Key, i.ETag, i.PayLoad!,
                         CancellationToken.None))
                 .ToList();
 

@@ -16,7 +16,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.UpsertAsync(key, aggregate,
                     CancellationToken.None);
@@ -42,7 +42,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 if (lookupNonDeleted)
                 {
@@ -74,7 +74,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.UpsertAsync(key, aggregate,
                     CancellationToken.None);
@@ -99,7 +99,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 if (lookupNonDeleted)
                 {
@@ -129,7 +129,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.CommitChangesAsync(CancellationToken.None);
             };

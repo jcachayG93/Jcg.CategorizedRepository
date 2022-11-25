@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 using Jcg.CategorizedRepository.UoW.Cache;
 using Jcg.CategorizedRepository.UoW.Cache.Imp;
 
@@ -12,8 +13,7 @@ namespace Jcg.CategorizedRepository.UoW
                 string deletedCategoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
-            where TAggregateDatabaseModel : class, IAggregateDataModel
+            where TAggregateDatabaseModel : class
 
         {
             var aggregatesCache =
@@ -42,8 +42,7 @@ namespace Jcg.CategorizedRepository.UoW
                 string categoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
-            where TAggregateDatabaseModel : class, IAggregateDataModel
+            where TAggregateDatabaseModel : class
         {
             return new CategoryIndexCacheManager<TAggregateDatabaseModel,
                 TLookupDatabaseModel>(

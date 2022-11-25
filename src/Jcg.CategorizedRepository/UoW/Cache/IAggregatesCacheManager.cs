@@ -1,9 +1,7 @@
-﻿using Jcg.CategorizedRepository.Api;
-
-namespace Jcg.CategorizedRepository.UoW.Cache
+﻿namespace Jcg.CategorizedRepository.UoW.Cache
 {
     internal interface IAggregatesCacheManager<TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     All the aggregates that were upserted in the local cache. The data includes the ETag
@@ -31,6 +29,6 @@ namespace Jcg.CategorizedRepository.UoW.Cache
         /// </summary>
         /// <param name="key">The aggregate key</param>
         /// <param name="aggregate">The aggregate</param>
-        Task UpsertAsync(TAggregateDatabaseModel aggregate);
+        Task UpsertAsync(string key, TAggregateDatabaseModel aggregate);
     }
 }

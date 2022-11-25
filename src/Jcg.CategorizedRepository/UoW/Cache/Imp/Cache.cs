@@ -8,7 +8,7 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 
     {
         /// <summary>
-        ///     The items that were passed to the Upsert method. If that was an insert operation,
+        ///     The items that were passed to the UpsertOLD method. If that was an insert operation,
         ///     the ETag will be null, if it was that was added and then updated, the ETag will
         ///     be the the value originally passed to the Add method
         /// </summary>

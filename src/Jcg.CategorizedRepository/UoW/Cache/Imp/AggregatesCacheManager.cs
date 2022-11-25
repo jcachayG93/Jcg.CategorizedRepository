@@ -1,12 +1,11 @@
-﻿using Jcg.CategorizedRepository.Api;
+﻿using Jcg.CategorizedRepository.Api.DatabaseClient;
 
 namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {
     internal class AggregatesCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TAggregateDatabaseModel : class
     {
         public AggregatesCacheManager(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
@@ -26,11 +25,12 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 
 
         /// <inheritdoc />
-        public async Task UpsertAsync(TAggregateDatabaseModel aggregate)
+        public async Task UpsertAsync(string key,
+            TAggregateDatabaseModel aggregate)
         {
-            await ReadAndAddToCacheIfNeededAsync(aggregate.Key);
+            await ReadAndAddToCacheIfNeededAsync(key);
 
-            _aggregatesCache.Upsert(aggregate.Key, aggregate);
+            _aggregatesCache.Upsert(key, aggregate);
         }
 
         public IEnumerable<UpsertedItem<TAggregateDatabaseModel>>

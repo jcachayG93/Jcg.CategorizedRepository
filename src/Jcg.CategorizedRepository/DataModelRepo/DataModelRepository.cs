@@ -6,8 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
     internal class DataModelRepository<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
+        where TAggregateDatabaseModel : class
     {
         public DataModelRepository(
             IInitializeCategoryIndexStrategy initializeCategoryStrategy,
@@ -58,11 +57,12 @@ namespace Jcg.CategorizedRepository.DataModelRepo
             return _queryStrategy.LookupDeletedAsync(cancellationToken);
         }
 
+
         /// <inheritdoc />
-        public Task UpsertAsync(TAggregateDatabaseModel aggregate,
+        public Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
-            return _upsertAggregateStrategy.UpsertAsync(aggregate,
+            return _upsertAggregateStrategy.UpsertAsync(key, aggregate,
                 cancellationToken);
         }
 
