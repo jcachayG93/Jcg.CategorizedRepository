@@ -12,7 +12,6 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         {
             AggregateMapper = new();
 
-          
 
             DataModelRepository = new();
 
@@ -20,27 +19,28 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
                 AggregateMapper.Object,
                 DataModelRepository.Object);
 
-          
 
             Key = new RepositoryIdentity(Guid.NewGuid());
 
 
             Aggregate = new();
         }
+
         private AggregateMapperMock AggregateMapper { get; }
 
-        
 
         private DataModelRepositoryMock DataModelRepository { get; }
 
-        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup> Sut { get; }
+        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup>
+            Sut { get; }
 
         public RepositoryIdentity Key { get; }
 
         public Aggregate Aggregate { get; }
 
         [Fact]
-        public async Task InitializeCategoryIndex_DelegatesToDataModelRepository()
+        public async Task
+            InitializeCategoryIndex_DelegatesToDataModelRepository()
         {
             // ************ ARRANGE ************
 
@@ -54,25 +54,29 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         }
 
         [Fact]
-        public async Task GetAggregate_GetsAggregateFromDataModelRepository_MapsToAggregate_ReturnsMapperResult()
+        public async Task
+            GetAggregate_GetsAggregateFromDataModelRepository_MapsToAggregate_ReturnsMapperResult()
         {
             // ************ ARRANGE ************
 
             // ************ ACT ****************
 
-            var result = await Sut.GetAggregateAsync(Key, CancellationToken.None);
+            var result =
+                await Sut.GetAggregateAsync(Key, CancellationToken.None);
 
             // ************ ASSERT *************
 
             DataModelRepository.VerifyGetAggregate(Key.Value);
 
-            AggregateMapper.VerifyToAggregate(DataModelRepository.GetAggregateReturns);
+            AggregateMapper.VerifyToAggregate(DataModelRepository
+                .GetAggregateReturns);
 
             result.Should().BeSameAs(AggregateMapper.ToAggregateReturns);
         }
 
         [Fact]
-        public async Task Upsert_MapsAggregateToAggregateDataModel_UpsertsResultToDataModelRepository()
+        public async Task
+            Upsert_MapsAggregateToAggregateDataModel_UpsertsResultToDataModelRepository()
         {
             // ************ ARRANGE ************
 
@@ -84,28 +88,33 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             AggregateMapper.VerifyToDatabaseModel(Aggregate);
 
-            DataModelRepository.VerifyUpsert(AggregateMapper.ToDatabaseModelReturns);
+            DataModelRepository.VerifyUpsert(AggregateMapper
+                .ToDatabaseModelReturns);
         }
 
         [Fact]
-        public async Task LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
+        public async Task
+            LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
             // ************ ACT ****************
 
-            var result = await Sut.LookupNonDeletedAsync(CancellationToken.None);
+            var result =
+                await Sut.LookupNonDeletedAsync(CancellationToken.None);
 
             // ************ ASSERT *************
 
             DataModelRepository.VerifyLookupNonDeleted();
 
 
-            result.Should().BeSameAs(DataModelRepository.LookupNonDeletedReturns.Lookups);
+            result.Should().BeSameAs(DataModelRepository.LookupNonDeletedReturns
+                .LookupsOLD);
         }
 
         [Fact]
-        public async Task LookupDeleted_GetsDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
+        public async Task
+            LookupDeleted_GetsDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
@@ -117,7 +126,8 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             DataModelRepository.VerifyLookupDeleted();
 
-            result.Should().BeSameAs(DataModelRepository.LookupDeletedReturns.Lookups);
+            result.Should()
+                .BeSameAs(DataModelRepository.LookupDeletedReturns.LookupsOLD);
         }
 
         [Fact]

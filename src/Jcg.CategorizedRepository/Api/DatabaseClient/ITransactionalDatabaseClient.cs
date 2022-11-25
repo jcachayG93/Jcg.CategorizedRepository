@@ -1,4 +1,4 @@
-﻿namespace Jcg.CategorizedRepository.Api
+﻿namespace Jcg.CategorizedRepository.Api.DatabaseClient
 {
     /// <summary>
     ///     A database client that  this library uses to talk to the client database

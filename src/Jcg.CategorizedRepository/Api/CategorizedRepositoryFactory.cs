@@ -1,5 +1,5 @@
-﻿using Jcg.CategorizedRepository.CategorizedRepo;
-using Jcg.CategorizedRepository.CategorizedRepo.Support;
+﻿using Jcg.CategorizedRepository.Api.DatabaseClient;
+using Jcg.CategorizedRepository.CategorizedRepo;
 using Jcg.CategorizedRepository.DataModelRepo;
 using Jcg.CategorizedRepository.UoW;
 
@@ -17,8 +17,7 @@ namespace Jcg.CategorizedRepository.Api
             IAggregateToLookupMapper<TAggregateDatabaseModel,
                 TLookup> aggregateToLookupMapper)
             where TAggregateDatabaseModel : class, IAggregateDataModel
-
-        where TLookup : IRepositoryLookup
+            where TLookup : IRepositoryLookup
         {
             var unitOfWork = UnitOfWorkFactory.Create(
                 categoryKey.Value.ToString(),

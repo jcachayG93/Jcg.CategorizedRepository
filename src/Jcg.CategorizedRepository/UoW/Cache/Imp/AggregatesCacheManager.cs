@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 
 namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {

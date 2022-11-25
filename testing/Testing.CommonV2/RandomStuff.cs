@@ -1,6 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
 using Moq;
-using Testing.Common.Support.Extensions;
 using Testing.CommonV2.Types;
 
 namespace Testing.CommonV2
@@ -46,51 +45,38 @@ namespace Testing.CommonV2
                     SomeValue = RandomString()
                 }).ToList();
 
-            return new CategoryIndex<Lookup>()
-            {
-                Lookups = lookups
-            };
-        }
-
-        public static CategoryIndex<Lookup> CreateCategoryIndex(out Lookup item1,
-            out Lookup item2)
-        {
-            item1 = new();
-            item2 = new();
-
-            var lookups = item1.ToCollection(item2);
+            var lookupDtos = lookups.Select(l =>
+                new LookupDto<Lookup>
+                {
+                    PayLoad = l
+                }).ToArray();
 
             return new CategoryIndex<Lookup>()
             {
-                Lookups = lookups
+                Lookups = lookupDtos
             };
         }
+
 
         public static CategoryIndex<Lookup> CreateCategoryIndex(
             params string[] keys)
         {
-            var lookups = keys.Select(k => new Lookup()
-            {
-                Key = k
-            }).ToList();
+            var dtos = keys.Select(k =>
+                new LookupDto<Lookup>
+                {
+                    Key = k,
+                    IsDeleted = false,
+                    DeletedTimeStamp = "",
+                    PayLoad = new Lookup()
+                }).ToArray();
+
 
             return new()
             {
-                Lookups = lookups
+                Lookups = dtos
             };
         }
 
-        public static AggregateDatabaseModel CreateAggregateDatabaseModel(
-            out string value)
-        {
-            value = RandomString();
-
-            return new()
-            {
-                SomeValue = value,
-                Key = RandomString()
-            };
-        }
 
         public static AggregateDatabaseModel CreateAggregateDatabaseModel(
             string key)

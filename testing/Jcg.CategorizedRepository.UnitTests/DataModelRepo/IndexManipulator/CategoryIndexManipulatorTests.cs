@@ -22,7 +22,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
 
 
         [Fact]
-        public void Upsert_MapsAggregate()
+        public void Upsert_MapsAggregateToLookupModel()
         {
             // ************ ARRANGE ************
 
@@ -40,7 +40,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
 
         [Fact]
         public void
-            Upsert_LookupForKeyExists_ReplacesPayload_KeySetToAggregateKey()
+            Upsert_LookupDtoForKeyExists_ReplacesPayloadForMapperResult_SetsKeyToAggregateKey()
         {
             // ************ ARRANGE ************
 
@@ -58,7 +58,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
 
             var lookup = index.Lookups.First();
 
-            lookup.Should().BeSameAs(Mapper.Returns);
+            lookup.PayLoad.Should().BeSameAs(Mapper.Returns);
 
             lookup.Key.Should().Be("k1");
 
@@ -72,7 +72,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
         {
             // ************ ARRANGE ************
 
-            var index = CreateCategoryIndex();
+            var index = CreateCategoryIndex(); // Index is empty, no elements
 
             var aggregate = CreateAggregateDatabaseModel("k1");
 
@@ -86,7 +86,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
 
             var lookup = index.Lookups.First();
 
-            lookup.Should().BeSameAs(Mapper.Returns);
+            lookup.PayLoad.Should().BeSameAs(Mapper.Returns);
 
             lookup.Key.Should().Be("k1");
 
@@ -126,6 +126,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
             var timeStamp = DateTime.Now;
 
             var itemToDelete = nonDeleted.Lookups.First();
+
 
             // ************ ACT ****************
 

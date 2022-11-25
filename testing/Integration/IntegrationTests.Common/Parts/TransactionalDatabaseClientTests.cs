@@ -100,7 +100,6 @@ namespace IntegrationTests.Common.Parts
 
             await sut.CommitTransactionAsync(CancellationToken.None);
 
-           
 
             // ************ ACT ****************
 
@@ -108,7 +107,7 @@ namespace IntegrationTests.Common.Parts
 
             // ************ ASSERT *************
 
-            resut.Payload.Lookups.First().CustomerName.Should().Be("juan");
+            resut.Payload.LookupsOLD.First().CustomerName.Should().Be("juan");
         }
 
 
@@ -135,7 +134,7 @@ namespace IntegrationTests.Common.Parts
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut1.UpsertAggregateAsync(aggregate.Etag,
                     aggregate.Payload,

@@ -22,15 +22,22 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
             CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
             TAggregateDatabaseModel aggregate)
         {
-            var lookup = _mapper.ToLookup(aggregate);
+            var payload = _mapper.ToLookup(aggregate);
 
-            lookup.Key = aggregate.Key;
+            var dto = new LookupDto<TLookupDatabaseModel>
+            {
+                Key = aggregate.Key,
+                IsDeleted = false,
+                DeletedTimeStamp = "",
+                PayLoad = payload
+            };
+
 
             nonDeletedCategoryIndex.Lookups =
                 nonDeletedCategoryIndex.Lookups
                     .Where(l => l.Key != aggregate.Key)
-                    .Append(lookup)
-                    .ToList();
+                    .Append(dto)
+                    .ToArray();
         }
 
         /// <inheritdoc />
@@ -70,7 +77,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
             AppendItem(nonDeletedCategoryIndex, item);
         }
 
-        private static TLookupDatabaseModel GetItem(
+        private static LookupDto<TLookupDatabaseModel> GetItem(
             CategoryIndex<TLookupDatabaseModel> index, string key)
         {
             return index.Lookups.First(l => l.Key == key);
@@ -80,13 +87,15 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
             CategoryIndex<TLookupDatabaseModel> index,
             string key)
         {
-            index.Lookups = index.Lookups.Where(l => l.Key != key).ToList();
+            index.Lookups =
+                index.Lookups.Where(l => l.Key != key).ToArray();
         }
 
-        private static void AppendItem(CategoryIndex<TLookupDatabaseModel> index,
-            TLookupDatabaseModel item)
+        private static void AppendItem(
+            CategoryIndex<TLookupDatabaseModel> index,
+            LookupDto<TLookupDatabaseModel> item)
         {
-            index.Lookups = index.Lookups.Append(item);
+            index.Lookups = index.Lookups.Append(item).ToArray();
         }
 
         private static void AssertContainsKey(

@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 using Jcg.CategorizedRepository.Api.Exceptions;
 using Jcg.CategorizedRepository.UoW.Cache;
 

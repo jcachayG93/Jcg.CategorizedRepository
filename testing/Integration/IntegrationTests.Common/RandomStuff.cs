@@ -66,7 +66,7 @@ namespace IntegrationTests.Common
 
             return new()
             {
-                Lookups = lookup.ToCollection()
+                LookupsOLD = lookup.ToCollection()
             };
         }
     }

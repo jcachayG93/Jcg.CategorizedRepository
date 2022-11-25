@@ -6,10 +6,16 @@
     /// </summary>
     public interface IRepositoryLookup
     {
+        [Obsolete]
+// TODO: R200 Remove
         string Key { get; set; }
 
+        [Obsolete]
+// TODO: R200 Remove
         bool IsDeleted { get; set; }
 
+        [Obsolete]
+// TODO: R200 Remove
         string DeletedTimeStamp { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 using Moq;
 using Testing.CommonV2.Types;
 

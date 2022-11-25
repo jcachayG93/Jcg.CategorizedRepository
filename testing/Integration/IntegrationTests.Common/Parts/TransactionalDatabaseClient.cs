@@ -1,6 +1,7 @@
 ﻿using IntegrationTests.Common.Database;
 using IntegrationTests.Common.Types;
 using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.DatabaseClient;
 
 namespace IntegrationTests.Common.Parts
 {
@@ -122,7 +123,7 @@ namespace IntegrationTests.Common.Parts
         private static CategoryIndex<CustomerLookupDataModel> Clone(
             CategoryIndex<CustomerLookupDataModel> input)
         {
-            var lookups = input.Lookups.Select(l =>
+            var lookups = input.LookupsOLD.Select(l =>
                 new CustomerLookupDataModel
                 {
                     CustomerName = l.CustomerName,
@@ -134,7 +135,7 @@ namespace IntegrationTests.Common.Parts
 
             return new CategoryIndex<CustomerLookupDataModel>()
             {
-                Lookups = lookups
+                LookupsOLD = lookups
             };
         }
 
