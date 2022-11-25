@@ -4,6 +4,14 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageId>Jcg.CategorizedRepository</PackageId>
+    <Title>Categorized Repository</Title>
+    <Version>1.0.0-alpha.0</Version>
+    <Authors>Julio Cachay</Authors>
+    <Product>Jcg.CategorizedRepository</Product>
+    <Description>Data access repositories that plug between the database and the client app, seamlessly providing advanced features like: Soft delete and restore, optimistic concurrency check, unit of work, cache, segregated database/client models, and others.</Description>
+    <Copyright>Copyright@2022 by Julio Cachay</Copyright>
   </PropertyGroup>
 
 </Project>
