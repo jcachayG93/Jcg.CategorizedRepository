@@ -4,7 +4,6 @@ using Jcg.CategorizedRepository.DataModelRepo;
 
 namespace Jcg.CategorizedRepository.CategorizedRepo
 {
-    // TODO: R200 Remove TLookupDatabaseModel
     internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup>
     : ICategorizedRepository<TAggregate, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
