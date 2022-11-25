@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
 internal class CommitStrategy<TAggregateDatabaseModel,
     TLookupDatabaseModel> : ICommitStrategy
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     public CommitStrategy(
         IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>

@@ -21,7 +21,6 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             Sut = new(
                 AggregateMapper.Object,
-                LookupMapper.Object,
                 DataModelRepository.Object);
 
           
@@ -39,7 +38,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
         private DataModelRepositoryMock DataModelRepository { get; }
 
-        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup, LookupDatabaseModel> Sut { get; }
+        private CategorizedRepository<Aggregate, AggregateDatabaseModel, LookupDatabaseModel, LookupDatabaseModel> Sut { get; }
 
         public RepositoryIdentity Key { get; }
 
@@ -94,7 +93,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         }
 
         [Fact]
-        public async Task LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_MapsResult_ReturnsMapperResult()
+        public async Task LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
@@ -106,13 +105,12 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             DataModelRepository.VerifyLookupNonDeleted();
 
-            LookupMapper.VerifyMap(DataModelRepository.LookupNonDeletedReturns);
 
-            result.Should().BeSameAs(LookupMapper.MapReturns);
+            result.Should().BeSameAs(DataModelRepository.LookupNonDeletedReturns.Lookups);
         }
 
         [Fact]
-        public async Task LookupDeleted_GetsDeletedLookupsFromDataModelRepository_MapsResult_ReturnsMapperResult()
+        public async Task LookupDeleted_GetsDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
@@ -124,9 +122,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             DataModelRepository.VerifyLookupDeleted();
 
-            LookupMapper.VerifyMap(DataModelRepository.LookupDeletedReturns);
-
-            result.Should().BeSameAs(LookupMapper.MapReturns);
+            result.Should().BeSameAs(DataModelRepository.LookupDeletedReturns.Lookups);
         }
 
         [Fact]

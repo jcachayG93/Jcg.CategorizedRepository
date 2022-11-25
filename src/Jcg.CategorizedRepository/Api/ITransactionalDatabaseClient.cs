@@ -8,7 +8,7 @@
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Gets the aggregate

@@ -7,7 +7,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Initializes the category indexes for the category

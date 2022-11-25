@@ -20,11 +20,10 @@ namespace CategorizedRepository.IntegrationTests
 
         private IInMemoryDatabase Database { get; }
 
-        protected ICategorizedRepository<Customer, Lookup> CreateSut()
+        protected ICategorizedRepository<Customer, CustomerLookupDataModel> CreateSut()
         {
             var aggregateMapper = new AggregateMapper();
             var aggregateToLookupMapper = new AggregateToLookupMapper();
-            var lookupMapper = new LookupMapper();
 
 
             var client = new TransactionalDatabaseClient(Database);
@@ -34,11 +33,10 @@ namespace CategorizedRepository.IntegrationTests
                 .Create(CategoryKey,
                     client,
                     aggregateMapper,
-                    aggregateToLookupMapper,
-                    lookupMapper);
+                    aggregateToLookupMapper);
         }
 
-        protected async Task<ICategorizedRepository<Customer, Lookup>>
+        protected async Task<ICategorizedRepository<Customer, CustomerLookupDataModel>>
             CreateSutAndInitializeIndex()
         {
             var sut = CreateSut();
@@ -48,7 +46,7 @@ namespace CategorizedRepository.IntegrationTests
             return sut;
         }
 
-        protected async Task<ICategorizedRepository<Customer, Lookup>>
+        protected async Task<ICategorizedRepository<Customer, CustomerLookupDataModel>>
             CreateSutWithCustomer(Customer customer)
         {
             var sut = CreateSut();

@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
     internal interface IDeleteAndRestoreStrategy
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Moves the lookup from the Non-Deleted to the Deleted category index

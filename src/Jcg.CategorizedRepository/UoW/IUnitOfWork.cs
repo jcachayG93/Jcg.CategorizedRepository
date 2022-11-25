@@ -7,7 +7,7 @@ namespace Jcg.CategorizedRepository.UoW;
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     /// <summary>
     ///     Gets the non deleted items category index

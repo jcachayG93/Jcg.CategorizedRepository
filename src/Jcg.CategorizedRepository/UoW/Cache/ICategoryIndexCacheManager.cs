@@ -5,7 +5,7 @@ namespace Jcg.CategorizedRepository.UoW.Cache;
 
 // TODO: Rename to TLookup
 internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     /// <summary>
     ///     If the category index was upserted, this will contain the latest version. Null if it was not upserted.

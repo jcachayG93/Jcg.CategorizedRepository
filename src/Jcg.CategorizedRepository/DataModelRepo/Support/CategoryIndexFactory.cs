@@ -3,7 +3,7 @@
 namespace Jcg.CategorizedRepository.DataModelRepo.Support
 {
     internal class CategoryIndexFactory<TLookupDatabaseModel>
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         public virtual CategoryIndex<TLookupDatabaseModel> Create()
         {

@@ -72,8 +72,8 @@ namespace CategorizedRepository.IntegrationTests
             // ************ ASSERT *************
 
             lookups.ShouldBeEquivalent(aggregates, (x, y) =>
-                x.Name == y.Name &&
-                x.CustomerId == y.Id &&
+                x.CustomerName == y.Name &&
+                x.Key == y.Id.ToString() &&
                 x.NumberOfOrders == y.Orders.Count() &&
                 x.IsDeleted == false);
         }
@@ -100,8 +100,8 @@ namespace CategorizedRepository.IntegrationTests
 
             var result = deleted.First();
 
-            result.CustomerId.Should().Be(customer.Id);
-            result.Name.Should().Be(customer.Name);
+            result.Key.Should().Be(customer.Id.ToString());
+            result.CustomerName.Should().Be(customer.Name);
             result.NumberOfOrders.Should().Be(customer.Orders.Count());
             result.IsDeleted.Should().BeTrue();
 
@@ -136,8 +136,8 @@ namespace CategorizedRepository.IntegrationTests
 
             var result = nonDeleted.First();
 
-            result.CustomerId.Should().Be(customer.Id);
-            result.Name.Should().Be(customer.Name);
+            result.Key.Should().Be(customer.Id.ToString());
+            result.CustomerName.Should().Be(customer.Name);
             result.NumberOfOrders.Should().Be(customer.Orders.Count());
             result.IsDeleted.Should().BeFalse();
 
