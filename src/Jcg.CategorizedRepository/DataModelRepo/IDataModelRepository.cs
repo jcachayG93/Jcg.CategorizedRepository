@@ -3,11 +3,9 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.DataModelRepo
 {
-  
     internal interface IDataModelRepository
         <TAggregateDatabaseModel, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookup : IRepositoryLookup
     {
         /// <summary>
         ///     Initializes the category indexes for the category

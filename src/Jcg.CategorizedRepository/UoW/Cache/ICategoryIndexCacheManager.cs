@@ -3,9 +3,7 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW.Cache;
 
-
 internal interface ICategoryIndexCacheManager<TLookup>
-    where TLookup : IRepositoryLookup
 {
     /// <summary>
     ///     If the category index was upserted, this will contain the latest version. Null if it was not upserted.

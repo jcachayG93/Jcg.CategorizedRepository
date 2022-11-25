@@ -66,7 +66,8 @@ namespace IntegrationTests.Common.Parts
 
             aggregate.Name = "juan";
 
-            await sut.UpsertAggregateAsync("", aggregate,
+
+            await sut.UpsertAggregateAsync(key, "", aggregate,
                 CancellationToken.None);
 
             await sut.CommitTransactionAsync(CancellationToken.None);
@@ -122,13 +123,15 @@ namespace IntegrationTests.Common.Parts
             var sut1 = CreateSut();
             var sut2 = CreateSut();
 
-            await sut1.UpsertAggregateAsync("", item, CancellationToken.None);
+            await sut1.UpsertAggregateAsync(key, "", item,
+                CancellationToken.None);
             await sut1.CommitTransactionAsync(CancellationToken.None);
 
             var aggregate =
                 await sut1.GetAggregateAsync(key, CancellationToken.None);
 
-            await sut2.UpsertAggregateAsync(aggregate.Etag, aggregate.Payload,
+            await sut2.UpsertAggregateAsync(key, aggregate.Etag,
+                aggregate.Payload,
                 CancellationToken.None);
 
             await sut2.CommitTransactionAsync(CancellationToken.None);
@@ -137,9 +140,8 @@ namespace IntegrationTests.Common.Parts
 
             var fun = async () =>
             {
-                await sut1.UpsertAggregateAsync(aggregate.Etag,
-                    aggregate.Payload,
-                    CancellationToken.None);
+                await sut1.UpsertAggregateAsync(key, aggregate.Etag,
+                    aggregate.Payload, CancellationToken.None);
 
                 await sut1.CommitTransactionAsync(CancellationToken.None);
             };

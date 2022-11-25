@@ -9,7 +9,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp
             TLookupDatabaseModel>
         : IInitializeCategoryIndexStrategy
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         public InitializeCategoryIndexStrategy(
             CategoryIndexFactory<TLookupDatabaseModel> indexFactory,

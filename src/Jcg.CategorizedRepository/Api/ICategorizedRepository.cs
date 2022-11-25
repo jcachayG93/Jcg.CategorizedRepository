@@ -15,7 +15,6 @@ namespace Jcg.CategorizedRepository.Api
     /// </typeparam>
     public interface ICategorizedRepository
         <TAggregate, TLookup>
-        where TLookup : IRepositoryLookup
     {
         /// <summary>
         ///     Adds an operation that initializes a category so aggregates can be added to it.

@@ -13,7 +13,6 @@ namespace Jcg.CategorizedRepository.UoW
                 string deletedCategoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
             where TAggregateDatabaseModel : class, IAggregateDataModel
 
         {
@@ -43,7 +42,6 @@ namespace Jcg.CategorizedRepository.UoW
                 string categoryIndexKey,
                 ITransactionalDatabaseClient<TAggregateDatabaseModel,
                     TLookupDatabaseModel> dbClient)
-            where TLookupDatabaseModel : IRepositoryLookup
             where TAggregateDatabaseModel : class, IAggregateDataModel
         {
             return new CategoryIndexCacheManager<TAggregateDatabaseModel,

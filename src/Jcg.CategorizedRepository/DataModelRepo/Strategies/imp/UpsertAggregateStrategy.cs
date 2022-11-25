@@ -9,7 +9,6 @@ internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
     : IUpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : IRepositoryLookup
 {
     public UpsertAggregateStrategy(
         ICategoryIndexManipulator<TAggregateDatabaseModel, TLookupDatabaseModel>

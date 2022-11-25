@@ -1,8 +1,6 @@
-﻿using Jcg.CategorizedRepository.Api;
+﻿namespace Testing.CommonV2.Types;
 
-namespace Testing.CommonV2.Types;
-
-public class Lookup : IRepositoryLookup
+public class Lookup
 {
     public string SomeValue { get; set; }
 }

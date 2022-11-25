@@ -6,20 +6,8 @@
     /// </summary>
     /// <typeparam name="TLookupDatabaseModel">A light-weight and database friendly model of the lookup</typeparam>
     public class CategoryIndex<TLookupDatabaseModel>
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         public LookupDto<TLookupDatabaseModel>[] Lookups { get; set; }
             = Array.Empty<LookupDto<TLookupDatabaseModel>>();
-    }
-
-    public class LookupDto<TLookupDatabaseModel>
-    {
-        public string Key { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public string DeletedTimeStamp { get; set; }
-
-        public TLookupDatabaseModel PayLoad { get; set; }
     }
 }

@@ -61,11 +61,11 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
         }
 
 
-        public void VerifyUpsertAggregate(string eTag,
+        public void VerifyUpsertAggregate(string key, string eTag,
             AggregateDatabaseModel aggregate)
         {
             _moq.Verify(s =>
-                s.UpsertAggregateAsync(eTag, aggregate, AnyCt()));
+                s.UpsertAggregateAsync(key, eTag, aggregate, AnyCt()));
         }
 
         public void VerifyGetCategoryIndex(string categoryKey)

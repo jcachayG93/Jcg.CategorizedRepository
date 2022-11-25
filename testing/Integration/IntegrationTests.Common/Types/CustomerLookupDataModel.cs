@@ -1,8 +1,6 @@
-﻿using Jcg.CategorizedRepository.Api;
+﻿namespace IntegrationTests.Common.Types;
 
-namespace IntegrationTests.Common.Types;
-
-public class CustomerLookupDataModel : IRepositoryLookup
+public class CustomerLookupDataModel
 {
     public string CustomerName { get; set; } = "";
 

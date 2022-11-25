@@ -9,7 +9,6 @@ namespace Jcg.CategorizedRepository.UoW
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
@@ -179,7 +178,7 @@ namespace Jcg.CategorizedRepository.UoW
 
             var taskList = _aggregatesCache
                 .UpsertedItems.Select(i =>
-                    _dbClient.UpsertAggregateAsync(i.ETag, i.PayLoad!,
+                    _dbClient.UpsertAggregateAsync(i.Key, i.ETag, i.PayLoad!,
                         CancellationToken.None))
                 .ToList();
 

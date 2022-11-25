@@ -6,7 +6,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
     internal interface IQueryStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Gets the aggregate

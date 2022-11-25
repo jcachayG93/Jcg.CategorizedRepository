@@ -40,14 +40,15 @@ namespace IntegrationTests.Common.Parts
             }
         }
 
+
         /// <inheritdoc />
-        public Task UpsertAggregateAsync(string eTag,
+        public Task UpsertAggregateAsync(string key, string eTag,
             CustomerDataModel aggregate,
             CancellationToken cancellationToken)
         {
             lock (LockObject)
             {
-                var op = new UpsertOperation(aggregate.Key, eTag,
+                var op = new UpsertOperation(key, eTag,
                     Clone(aggregate));
 
                 _operations.Add(op);

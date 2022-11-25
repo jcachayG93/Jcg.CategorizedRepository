@@ -7,7 +7,6 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         public AggregatesCacheManager(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

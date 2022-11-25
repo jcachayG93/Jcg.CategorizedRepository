@@ -8,7 +8,6 @@
     public interface ITransactionalDatabaseClient
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Gets the aggregate
@@ -22,6 +21,9 @@
         /// <summary>
         ///     Adds an Upsert operation to the list of transactions to be commited.
         /// </summary>
+        /// <param name="key">
+        ///     The primary key
+        /// </param>
         /// <param name="eTag">
         ///     The ETag value for the payload. Blank if this is an insert operation. Value returned by GetAggregate
         ///     if this is a replace operation.
@@ -31,7 +33,7 @@
         ///     This method is responsible for checking that the eTag matches the expected value for the key, but that
         ///     exception will be thrown after commit
         /// </remarks>
-        Task UpsertAggregateAsync(string eTag,
+        Task UpsertAggregateAsync(string key, string eTag,
             TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken);
 

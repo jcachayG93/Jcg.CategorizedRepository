@@ -49,10 +49,7 @@ namespace IntegrationTests.Common
         {
             key = RandomString();
 
-            return new()
-            {
-                Key = key
-            };
+            return new();
         }
 
         public static CategoryIndex<CustomerLookupDataModel>

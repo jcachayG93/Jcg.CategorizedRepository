@@ -7,7 +7,6 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
             TLookup>
         : ICategorizedRepository<TAggregate, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookup : IRepositoryLookup
     {
         public CategorizedRepository(
             IAggregateMapper<TAggregate, TAggregateDatabaseModel>

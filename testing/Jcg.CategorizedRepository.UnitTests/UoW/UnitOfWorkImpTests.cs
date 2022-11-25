@@ -40,10 +40,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
             get;
         }
 
-        private UnitOfWork<AggregateDatabaseModel, Lookup> Sut
-        {
-            get;
-        }
+        private UnitOfWork<AggregateDatabaseModel, Lookup> Sut { get; }
 
 
         [Fact]
@@ -187,7 +184,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
 
             foreach (var aggregate in AggregatesCache.UpsertedItemsReturns)
             {
-                DbClient.VerifyUpsertAggregate(aggregate.ETag,
+                DbClient.VerifyUpsertAggregate(aggregate.Key, aggregate.ETag,
                     aggregate.PayLoad);
             }
 

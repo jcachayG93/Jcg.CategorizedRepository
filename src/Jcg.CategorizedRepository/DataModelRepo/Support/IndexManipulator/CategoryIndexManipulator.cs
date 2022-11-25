@@ -8,7 +8,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
         : ICategoryIndexManipulator<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : IRepositoryLookup
     {
         public CategoryIndexManipulator(
             IAggregateToLookupMapper<TAggregateDatabaseModel,
