@@ -56,15 +56,24 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
         CancellationToken cancellationToken);
 
 
+    [Obsolete]
+// TODO: R200 Remove
+    Task UpsertAggregateOLD(
+        TAggregateDatabaseModel aggregate,
+        CancellationToken cancellationToken);
+
     /// <summary>
     ///     Upserts the aggregate
     /// </summary>
+    /// <param name="key"></param>
     /// <param name="aggregate"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task UpsertAggregateAsync(
+        string key,
         TAggregateDatabaseModel aggregate,
         CancellationToken cancellationToken);
+
 
     /// <summary>
     ///     Commits all the changes. This operation can be called only once for the lifetime of this UnitOfWork

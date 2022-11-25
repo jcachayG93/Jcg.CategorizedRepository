@@ -44,7 +44,7 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
 
             if (dataModel != null)
             {
-                await _dataModelRepository.UpsertAsync(dataModel,
+                await _dataModelRepository.UpsertOLD(dataModel,
                     CancellationToken.None);
             }
         }

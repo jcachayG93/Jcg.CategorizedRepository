@@ -58,10 +58,17 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         }
 
         /// <inheritdoc />
-        public Task UpsertAsync(TAggregateDatabaseModel aggregate,
+        public Task UpsertOLD(TAggregateDatabaseModel aggregate,
             CancellationToken cancellationToken)
         {
-            return _upsertAggregateStrategy.UpsertAsync(aggregate,
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,
+            CancellationToken cancellationToken)
+        {
+            return _upsertAggregateStrategy.UpsertAsync(key, aggregate,
                 cancellationToken);
         }
 

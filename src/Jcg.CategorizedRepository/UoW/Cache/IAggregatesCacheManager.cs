@@ -31,6 +31,6 @@ namespace Jcg.CategorizedRepository.UoW.Cache
         /// </summary>
         /// <param name="key">The aggregate key</param>
         /// <param name="aggregate">The aggregate</param>
-        Task UpsertAsync(TAggregateDatabaseModel aggregate);
+        Task UpsertAsync(string key, TAggregateDatabaseModel aggregate);
     }
 }

@@ -148,14 +148,16 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
 
             var aggregate = RandomAggregateDatabaseModel();
 
+            var key = RandomString();
+
             // ************ ACT ****************
 
-            await Sut.UpsertAggregateAsync(aggregate,
+            await Sut.UpsertAggregateAsync(key, aggregate,
                 CancellationToken.None);
 
             // ************ ASSERT *************
 
-            AggregatesCache.VerifyUpsert(aggregate);
+            AggregatesCache.VerifyUpsert(key, aggregate);
         }
 
         [Fact]
@@ -196,7 +198,8 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
         {
             // ************ ARRANGE ************
 
-            await Sut.UpsertAggregateAsync(RandomAggregateDatabaseModel(),
+            await Sut.UpsertAggregateAsync(RandomString(),
+                RandomAggregateDatabaseModel(),
                 CancellationToken.None);
 
             // ************ ACT ****************
@@ -269,7 +272,8 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(aggregate,
+
+            await Sut.UpsertAggregateAsync(RandomString(), aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
@@ -279,7 +283,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
 
             var fun = new Func<Task>(async () =>
             {
-                await Sut.UpsertAggregateAsync(aggregate,
+                await Sut.UpsertAggregateAsync(RandomString(), aggregate,
                     CancellationToken.None);
             });
 
@@ -340,7 +344,9 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            await Sut.UpsertAggregateAsync(aggregate,
+            var key = RandomString();
+
+            await Sut.UpsertAggregateAsync(key, aggregate,
                 CancellationToken.None);
 
             await Sut.CommitChangesAsync(CancellationToken.None);
@@ -348,7 +354,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
             // ************ ACT ****************
 
             var result =
-                await Sut.GetAggregateAsync(RandomString(),
+                await Sut.GetAggregateAsync(key,
                     CancellationToken.None);
 
             // ************ ASSERT *************

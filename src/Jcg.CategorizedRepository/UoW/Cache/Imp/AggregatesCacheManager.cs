@@ -26,11 +26,12 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 
 
         /// <inheritdoc />
-        public async Task UpsertAsync(TAggregateDatabaseModel aggregate)
+        public async Task UpsertAsync(string key,
+            TAggregateDatabaseModel aggregate)
         {
-            await ReadAndAddToCacheIfNeededAsync(aggregate.Key);
+            await ReadAndAddToCacheIfNeededAsync(key);
 
-            _aggregatesCache.Upsert(aggregate.Key, aggregate);
+            _aggregatesCache.Upsert(key, aggregate);
         }
 
         public IEnumerable<UpsertedItem<TAggregateDatabaseModel>>

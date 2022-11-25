@@ -14,6 +14,8 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
             Sut = new(IndexManipulator.Object, UnitOfWork.Object);
 
             Aggregate = RandomAggregateDatabaseModel();
+
+            Key = RandomString();
         }
 
         private CategoryIndexManipulatorMock IndexManipulator { get; }
@@ -26,6 +28,8 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
         public AggregateDatabaseModel Aggregate { get; }
 
+        public string Key { get; }
+
 
         [Fact]
         public async Task Upsert_GetsDeletedItemsCategoryIndex()
@@ -34,7 +38,8 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(Aggregate, CancellationToken.None);
+            await Sut.UpsertAsync(RandomString(), Aggregate,
+                CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -47,14 +52,16 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
         {
             // ************ ARRANGE ************
 
+
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(Aggregate, CancellationToken.None);
+            await Sut.UpsertAsync(Key, Aggregate, CancellationToken.None);
 
             // ************ ASSERT *************
 
             IndexManipulator.VerifyUpsert(
-                UnitOfWork.GetNonDeletedItemsCategoryIndexReturns, Aggregate);
+                UnitOfWork.GetNonDeletedItemsCategoryIndexReturns, Key,
+                Aggregate);
         }
 
 
@@ -65,11 +72,11 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(Aggregate, CancellationToken.None);
+            await Sut.UpsertAsync(Key, Aggregate, CancellationToken.None);
 
             // ************ ASSERT *************
 
-            UnitOfWork.VerifyUpsertAggregate(Aggregate);
+            UnitOfWork.VerifyUpsertAggregate(Key, Aggregate);
         }
 
         [Fact]
@@ -79,7 +86,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(Aggregate, CancellationToken.None);
+            await Sut.UpsertAsync(Key, Aggregate, CancellationToken.None);
 
             // ************ ASSERT *************
 

@@ -88,15 +88,17 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 
             var data = RandomAggregateDatabaseModel();
 
+            var key = RandomString();
+
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(data);
+            await Sut.UpsertAsync(key, data);
 
             // ************ ASSERT *************
 
-            DbClient.VerifyGetAggregate(data.Key);
+            DbClient.VerifyGetAggregate(key);
 
-            Cache.VerifyAdd(data.Key, DbClient.GetAggregateReturns);
+            Cache.VerifyAdd(key, DbClient.GetAggregateReturns);
         }
 
 
@@ -109,7 +111,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(
+            await Sut.UpsertAsync(RandomString(),
                 RandomAggregateDatabaseModel());
 
             // ************ ASSERT *************
@@ -128,14 +130,15 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 
             var data = RandomPayload();
 
+            var key = RandomString();
 
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(data);
+            await Sut.UpsertAsync(key, data);
 
             // ************ ASSERT *************
 
-            Cache.VerifyUpsert(data.Key, data);
+            Cache.VerifyUpsert(key, data);
         }
 
         [Fact]

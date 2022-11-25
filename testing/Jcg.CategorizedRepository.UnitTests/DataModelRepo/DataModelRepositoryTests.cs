@@ -120,14 +120,16 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo
 
             var aggregate = RandomAggregateDatabaseModel();
 
+            var key = RandomString();
+
             // ************ ACT ****************
 
-            await Sut.UpsertAsync(aggregate, CancellationToken.None);
+            await Sut.UpsertAsync(key, aggregate, CancellationToken.None);
 
             // ************ ASSERT *************
 
             UpsertAggregateStrategy
-                .VerifyUpsert(aggregate);
+                .VerifyUpsert(key, aggregate);
         }
 
 

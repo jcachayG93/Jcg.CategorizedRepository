@@ -20,16 +20,23 @@ internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
     }
 
     /// <inheritdoc />
-    public async Task UpsertAsync(TAggregateDatabaseModel aggregate,
+    public async Task UpsertOLD(TAggregateDatabaseModel aggregate,
+        CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public async Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,
         CancellationToken cancellationToken)
     {
         var index =
             await _unitOfWork.GetNonDeletedItemsCategoryIndex(CancellationToken
                 .None);
 
-        _indexManipulator.UpsertOLD(index, aggregate);
+        _indexManipulator.Upsert(index, key, aggregate);
 
-        await _unitOfWork.UpsertAggregateAsync(aggregate,
+        await _unitOfWork.UpsertAggregateAsync(key, aggregate,
             CancellationToken.None);
 
         await _unitOfWork.UpsertNonDeletedItemsCategoryIndex(index,

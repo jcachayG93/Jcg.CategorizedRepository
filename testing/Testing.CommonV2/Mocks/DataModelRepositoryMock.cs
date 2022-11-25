@@ -5,12 +5,13 @@ using Testing.CommonV2.Types;
 
 namespace Testing.CommonV2.Mocks
 {
-
     internal class DataModelRepositoryMock
     {
         public DataModelRepositoryMock()
         {
-            _moq = new Mock<IDataModelRepository<AggregateDatabaseModel, Lookup>>();
+            _moq =
+                new Mock<IDataModelRepository<AggregateDatabaseModel,
+                    Lookup>>();
 
             GetAggregateReturns = RandomAggregateDatabaseModel();
 
@@ -22,8 +23,8 @@ namespace Testing.CommonV2.Mocks
                     s.GetAggregateAsync(AnyId(), AnyCt()).Result)
                 .Returns(GetAggregateReturns);
 
-            _moq.Setup(s=>
-                s.LookupDeletedAsync(AnyCt()).Result)
+            _moq.Setup(s =>
+                    s.LookupDeletedAsync(AnyCt()).Result)
                 .Returns(LookupDeletedReturns);
 
             _moq.Setup(s =>
@@ -31,9 +32,8 @@ namespace Testing.CommonV2.Mocks
                 .Returns(LookupNonDeletedReturns);
         }
 
-        private readonly Mock<IDataModelRepository<AggregateDatabaseModel, Lookup>> _moq;
-
-        public IDataModelRepository<AggregateDatabaseModel, Lookup> Object => _moq.Object;
+        public IDataModelRepository<AggregateDatabaseModel, Lookup> Object =>
+            _moq.Object;
 
         public AggregateDatabaseModel GetAggregateReturns { get; }
 
@@ -43,33 +43,33 @@ namespace Testing.CommonV2.Mocks
 
         public void VerifyInitializeCategory()
         {
-            _moq.Verify(s=>s.InitializeCategoryIndexes(AnyCt()));
+            _moq.Verify(s => s.InitializeCategoryIndexes(AnyCt()));
         }
 
         public void VerifyGetAggregate(Guid key)
         {
-            _moq.Verify(s=>s.GetAggregateAsync(key, AnyCt()));
+            _moq.Verify(s => s.GetAggregateAsync(key, AnyCt()));
         }
 
         public void VerifyLookupNonDeleted()
         {
-            _moq.Verify(s=>s.LookupNonDeletedAsync(AnyCt()));
+            _moq.Verify(s => s.LookupNonDeletedAsync(AnyCt()));
         }
 
         public void VerifyLookupDeleted()
         {
-            _moq.Verify(s=>s.LookupDeletedAsync(
+            _moq.Verify(s => s.LookupDeletedAsync(
                 AnyCt()));
         }
 
         public void VerifyUpsert(AggregateDatabaseModel aggregate)
         {
-            _moq.Verify(s=>s.UpsertAsync(aggregate, AnyCt()));
+            _moq.Verify(s => s.UpsertOLD(aggregate, AnyCt()));
         }
 
         public void VerifyDelete(Guid key)
         {
-            _moq.Verify(s=>s.DeleteAsync(key, AnyCt()));
+            _moq.Verify(s => s.DeleteAsync(key, AnyCt()));
         }
 
         public void VerifyRestore(Guid key)
@@ -79,7 +79,10 @@ namespace Testing.CommonV2.Mocks
 
         public void VerifyCommit()
         {
-            _moq.Verify(s=>s.CommitChangesAsync(AnyCt()));
+            _moq.Verify(s => s.CommitChangesAsync(AnyCt()));
         }
+
+        private readonly
+            Mock<IDataModelRepository<AggregateDatabaseModel, Lookup>> _moq;
     }
 }
