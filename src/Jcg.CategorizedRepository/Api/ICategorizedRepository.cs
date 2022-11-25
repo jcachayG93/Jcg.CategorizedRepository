@@ -57,10 +57,6 @@ namespace Jcg.CategorizedRepository.Api
         Task UpsertAsync(RepositoryIdentity key, TAggregate aggregate,
             CancellationToken cancellationToken);
 
-        [Obsolete]
-// TODO: R200 Remove
-        Task<IEnumerable<TLookup>> LookupNonDeletedOLD(
-            CancellationToken cancellationToken);
 
         // TODO: Review this documentation
         /// <summary>
@@ -74,10 +70,6 @@ namespace Jcg.CategorizedRepository.Api
         Task<IEnumerable<LookupDto<TLookup>>> LookupNonDeletedAsync(
             CancellationToken cancellationToken);
 
-        [Obsolete]
-// TODO: R200 Remove
-        Task<IEnumerable<TLookup>> LookupDeletedOLD(
-            CancellationToken cancellationToken);
 
         // TODO: Review this documentation
         /// <summary>

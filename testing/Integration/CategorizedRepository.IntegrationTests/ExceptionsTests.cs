@@ -46,11 +46,11 @@ namespace CategorizedRepository.IntegrationTests
             {
                 if (lookupNonDeleted)
                 {
-                    await sut.LookupNonDeletedOLD(CancellationToken.None);
+                    await sut.LookupNonDeletedAsync(CancellationToken.None);
                 }
                 else
                 {
-                    await sut.LookupDeletedOLD(CancellationToken.None);
+                    await sut.LookupDeletedAsync(CancellationToken.None);
                 }
             };
 
@@ -103,11 +103,11 @@ namespace CategorizedRepository.IntegrationTests
             {
                 if (lookupNonDeleted)
                 {
-                    await sut.LookupNonDeletedOLD(CancellationToken.None);
+                    await sut.LookupNonDeletedAsync(CancellationToken.None);
                 }
                 else
                 {
-                    await sut.LookupDeletedOLD(CancellationToken.None);
+                    await sut.LookupDeletedAsync(CancellationToken.None);
                 }
             };
 

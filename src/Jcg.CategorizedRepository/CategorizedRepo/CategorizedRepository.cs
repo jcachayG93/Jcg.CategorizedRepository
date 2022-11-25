@@ -50,11 +50,6 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
             }
         }
 
-        public async Task<IEnumerable<TLookup>> LookupNonDeletedOLD(
-            CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public async Task<IEnumerable<LookupDto<TLookup>>>
@@ -68,11 +63,6 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
             return data.Lookups;
         }
 
-        public async Task<IEnumerable<TLookup>> LookupDeletedOLD(
-            CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public async Task<IEnumerable<LookupDto<TLookup>>> LookupDeletedAsync(
