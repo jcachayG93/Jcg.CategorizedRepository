@@ -1,11 +1,10 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.Api.Exceptions;
+﻿using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
 {
     internal interface IDeleteAndRestoreStrategy
         <TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Moves the lookup from the Non-Deleted to the Deleted category index

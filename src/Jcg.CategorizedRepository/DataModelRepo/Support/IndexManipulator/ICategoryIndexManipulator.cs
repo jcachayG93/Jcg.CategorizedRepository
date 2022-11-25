@@ -7,7 +7,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
     /// </summary>
     internal interface ICategoryIndexManipulator
         <TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Upserts: If data for the key exists, it replaces it. IF it doesnt, it inserts it.

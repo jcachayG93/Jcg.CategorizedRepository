@@ -1,11 +1,10 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.Api.Exceptions;
+﻿using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
 {
     internal interface IUpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Upsers the aggregate.

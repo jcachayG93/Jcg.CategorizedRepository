@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
     internal class DataModelRepository<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         public DataModelRepository(
             IInitializeCategoryIndexStrategy initializeCategoryStrategy,

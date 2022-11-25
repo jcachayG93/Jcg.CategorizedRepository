@@ -14,7 +14,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
             (IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> unitOfWork,
                 IAggregateToLookupMapper<TAggregateDatabaseModel,
                     TLookupDatabaseModel> aggregateToLookupMapper)
-            where TAggregateDatabaseModel : class, IAggregateDataModel
+            where TAggregateDatabaseModel : class
         {
             var indexFactory = new CategoryIndexFactory<TLookupDatabaseModel>();
 

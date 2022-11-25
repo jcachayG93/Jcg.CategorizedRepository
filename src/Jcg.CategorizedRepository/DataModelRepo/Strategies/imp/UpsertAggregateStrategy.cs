@@ -1,5 +1,4 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
+﻿using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
 using Jcg.CategorizedRepository.UoW;
 
 namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
@@ -8,7 +7,7 @@ internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
     : IUpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
-    where TAggregateDatabaseModel : class, IAggregateDataModel
+    where TAggregateDatabaseModel : class
 {
     public UpsertAggregateStrategy(
         ICategoryIndexManipulator<TAggregateDatabaseModel, TLookupDatabaseModel>

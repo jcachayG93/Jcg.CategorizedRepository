@@ -1,5 +1,4 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.Api.Exceptions;
+﻿using Jcg.CategorizedRepository.Api.Exceptions;
 using Jcg.CategorizedRepository.DataModelRepo.Support;
 using Jcg.CategorizedRepository.UoW;
 
@@ -8,7 +7,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp
     internal class InitializeCategoryIndexStrategy<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IInitializeCategoryIndexStrategy
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         public InitializeCategoryIndexStrategy(
             CategoryIndexFactory<TLookupDatabaseModel> indexFactory,

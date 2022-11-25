@@ -1,12 +1,11 @@
-﻿using Jcg.CategorizedRepository.Api;
-using Jcg.CategorizedRepository.Api.DatabaseClient;
+﻿using Jcg.CategorizedRepository.Api.DatabaseClient;
 
 namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {
     internal class AggregatesCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : IAggregatesCacheManager<TAggregateDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         public AggregatesCacheManager(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

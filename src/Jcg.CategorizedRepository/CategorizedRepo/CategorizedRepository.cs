@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
     internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel,
             TLookup>
         : ICategorizedRepository<TAggregate, TLookup>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         public CategorizedRepository(
             IAggregateMapper<TAggregate, TAggregateDatabaseModel>

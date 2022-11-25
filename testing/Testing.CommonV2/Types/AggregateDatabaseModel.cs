@@ -1,8 +1,6 @@
-﻿using Jcg.CategorizedRepository.Api;
-
-namespace Testing.CommonV2.Types
+﻿namespace Testing.CommonV2.Types
 {
-    public class AggregateDatabaseModel : IAggregateDataModel
+    public class AggregateDatabaseModel
     {
         public string SomeValue { get; set; }
 

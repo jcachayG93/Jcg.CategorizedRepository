@@ -16,7 +16,7 @@ namespace Jcg.CategorizedRepository.Api
                 aggregateMapper,
             IAggregateToLookupMapper<TAggregateDatabaseModel,
                 TLookup> aggregateToLookupMapper)
-            where TAggregateDatabaseModel : class, IAggregateDataModel
+            where TAggregateDatabaseModel : class
 
         {
             var unitOfWork = UnitOfWorkFactory.Create(

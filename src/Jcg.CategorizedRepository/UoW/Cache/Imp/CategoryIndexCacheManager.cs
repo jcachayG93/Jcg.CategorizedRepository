@@ -7,7 +7,7 @@ namespace Jcg.CategorizedRepository.UoW.Cache.Imp
     internal class CategoryIndexCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>
         : ICategoryIndexCacheManager<TLookupDatabaseModel>
-        where TAggregateDatabaseModel : class, IAggregateDataModel
+        where TAggregateDatabaseModel : class
     {
         /// <summary>
         ///     Constructor
