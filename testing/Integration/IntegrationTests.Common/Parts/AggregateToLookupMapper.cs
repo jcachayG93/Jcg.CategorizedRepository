@@ -3,7 +3,6 @@ using Jcg.CategorizedRepository.Api;
 
 namespace IntegrationTests.Common.Parts;
 
-
 public class AggregateToLookupMapper : IAggregateToLookupMapper<
     CustomerDataModel, CustomerLookupDataModel>
 {
@@ -13,10 +12,7 @@ public class AggregateToLookupMapper : IAggregateToLookupMapper<
         return new()
         {
             CustomerName = aggregate.Name,
-            NumberOfOrders = aggregate.Orders.Count(),
-            Key = aggregate.Key,
-            IsDeleted = false,
-            DeletedTimeStamp = ""
+            NumberOfOrders = aggregate.Orders.Count()
         };
     }
 }

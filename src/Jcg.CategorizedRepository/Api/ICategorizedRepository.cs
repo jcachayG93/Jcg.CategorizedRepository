@@ -58,9 +58,9 @@ namespace Jcg.CategorizedRepository.Api
             CancellationToken cancellationToken);
 
 
-        // TODO: Review this documentation
         /// <summary>
-        ///     Returns all the lookups for non-deleted aggregates that belong to the category
+        ///     Returns all the lookups for non-deleted aggregates that belong to the category.
+        ///     Each result item has the payload as a property.
         /// </summary>
         /// <remarks>
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
@@ -71,9 +71,9 @@ namespace Jcg.CategorizedRepository.Api
             CancellationToken cancellationToken);
 
 
-        // TODO: Review this documentation
         /// <summary>
         ///     Returns all the lookups for deleted aggregates that belong to the category
+        ///     Each result item has the payload as a property.
         /// </summary>
         /// <remarks>
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
