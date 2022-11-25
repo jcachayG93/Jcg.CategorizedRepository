@@ -7,11 +7,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
         TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
     {
-        [Obsolete]
-// TODO: R200 Remove
-        Task UpsertOLD(TAggregateDatabaseModel aggregate,
-            CancellationToken cancellationToken);
-
         /// <summary>
         ///     Upsers the aggregate.
         /// </summary>

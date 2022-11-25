@@ -19,12 +19,6 @@ internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
         _unitOfWork = unitOfWork;
     }
 
-    /// <inheritdoc />
-    public async Task UpsertOLD(TAggregateDatabaseModel aggregate,
-        CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
 
     /// <inheritdoc />
     public async Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,

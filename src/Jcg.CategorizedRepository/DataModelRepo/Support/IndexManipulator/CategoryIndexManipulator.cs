@@ -16,14 +16,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
             _mapper = mapper;
         }
 
-        [Obsolete]
-// TODO: R200 Remove
-        public void UpsertOLD(
-            CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
-            TAggregateDatabaseModel aggregate)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public void Upsert(

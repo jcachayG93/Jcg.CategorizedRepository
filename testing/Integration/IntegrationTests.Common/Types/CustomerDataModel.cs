@@ -15,8 +15,7 @@ namespace IntegrationTests.Common.Types
         public IEnumerable<OrderDataModel> Orders { get; set; }
             = Array.Empty<OrderDataModel>();
 
-        //The key is just the Id as string
-        public string Key { get; set; } = "";
+        public Guid Id { get; set; }
 
 
         public class OrderDataModel

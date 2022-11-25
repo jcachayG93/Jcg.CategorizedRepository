@@ -6,7 +6,4 @@
 /// </summary>
 public interface IAggregateDataModel
 {
-    [Obsolete]
-// TODO: R200 Remove
-    string Key { get; set; }
 }

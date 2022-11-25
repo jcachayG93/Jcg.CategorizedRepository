@@ -95,14 +95,6 @@ namespace Jcg.CategorizedRepository.UoW
         }
 
 
-        [Obsolete]
-// TODO: R200 Remove
-        public Task UpsertAggregateOLD(TAggregateDatabaseModel aggregate,
-            CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <inheritdoc />
         public Task UpsertAggregateAsync(string key,
             TAggregateDatabaseModel aggregate,

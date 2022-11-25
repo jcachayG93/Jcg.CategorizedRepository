@@ -8,7 +8,7 @@ namespace IntegrationTests.Common.Parts
         /// <inheritdoc />
         public Customer ToAggregate(CustomerDataModel databaseModel)
         {
-            var result = new Customer(Guid.Parse(databaseModel.Key)!,
+            var result = new Customer(databaseModel.Id,
                 databaseModel.Name);
 
             foreach (var order in databaseModel.Orders)
@@ -32,7 +32,7 @@ namespace IntegrationTests.Common.Parts
             {
                 Name = aggregate.Name,
                 Orders = orders,
-                Key = aggregate.Id.ToString()
+                Id = aggregate.Id
             };
         }
     }

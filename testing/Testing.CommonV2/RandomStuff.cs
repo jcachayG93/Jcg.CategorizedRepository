@@ -26,8 +26,7 @@ namespace Testing.CommonV2
         {
             return new()
             {
-                SomeValue = RandomString(),
-                Key = RandomString()
+                SomeValue = RandomString()
             };
         }
 
@@ -83,7 +82,6 @@ namespace Testing.CommonV2
         {
             return new()
             {
-                Key = key,
                 SomeValue = RandomString()
             };
         }

@@ -56,12 +56,6 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
         CancellationToken cancellationToken);
 
 
-    [Obsolete]
-// TODO: R200 Remove
-    Task UpsertAggregateOLD(
-        TAggregateDatabaseModel aggregate,
-        CancellationToken cancellationToken);
-
     /// <summary>
     ///     Upserts the aggregate
     /// </summary>

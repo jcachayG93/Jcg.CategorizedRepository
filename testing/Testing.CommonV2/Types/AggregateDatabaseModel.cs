@@ -7,8 +7,5 @@ namespace Testing.CommonV2.Types
         public string SomeValue { get; set; }
 
         /// <inheritdoc />
-
-        /// <inheritdoc />
-        public string Key { get; set; }
     }
 }

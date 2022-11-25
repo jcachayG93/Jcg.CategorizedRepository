@@ -155,8 +155,7 @@ namespace IntegrationTests.Common.Parts
             return new CustomerDataModel
             {
                 Name = input.Name,
-                Orders = orders,
-                Key = input.Key
+                Orders = orders
             };
         }
 

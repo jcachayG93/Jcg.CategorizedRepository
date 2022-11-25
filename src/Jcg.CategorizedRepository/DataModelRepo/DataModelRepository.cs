@@ -57,12 +57,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo
             return _queryStrategy.LookupDeletedAsync(cancellationToken);
         }
 
-        /// <inheritdoc />
-        public Task UpsertOLD(TAggregateDatabaseModel aggregate,
-            CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public Task UpsertAsync(string key, TAggregateDatabaseModel aggregate,

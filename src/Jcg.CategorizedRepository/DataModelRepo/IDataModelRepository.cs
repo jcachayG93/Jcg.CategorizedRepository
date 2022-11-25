@@ -40,10 +40,6 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         Task<CategoryIndex<TLookup>> LookupDeletedAsync(
             CancellationToken cancellationToken);
 
-        [Obsolete]
-// TODO: R200 Remove
-        Task UpsertOLD(TAggregateDatabaseModel aggregate,
-            CancellationToken cancellationToken);
 
         /// <summary>
         ///     Upsers the aggregate.
