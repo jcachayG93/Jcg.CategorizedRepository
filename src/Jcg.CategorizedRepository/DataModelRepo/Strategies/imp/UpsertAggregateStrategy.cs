@@ -27,7 +27,7 @@ internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
             await _unitOfWork.GetNonDeletedItemsCategoryIndex(CancellationToken
                 .None);
 
-        _indexManipulator.Upsert(index, aggregate);
+        _indexManipulator.UpsertOLD(index, aggregate);
 
         await _unitOfWork.UpsertAggregateAsync(aggregate,
             CancellationToken.None);

@@ -21,76 +21,42 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
             Lookup> Sut { get; }
 
 
-        [Fact]
-        public void Upsert_MapsAggregateToLookupModel()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void
+            Upsert_MapsAggregateToPayload_UpsertsLookupWherePayLoadIsMapperResultAndKeIsPassedValue(
+                bool isInsert)
         {
             // ************ ARRANGE ************
 
             var aggregate = RandomAggregateDatabaseModel();
 
-            // ************ ACT ****************
+            var key = RandomString();
 
-            Sut.Upsert(RandomCategoryIndex(), aggregate);
-
-            // ************ ASSERT *************
-
-            Mapper.VerifyToLookup(aggregate);
-        }
-
-
-        [Fact]
-        public void
-            Upsert_LookupDtoForKeyExists_ReplacesPayloadForMapperResult_SetsKeyToAggregateKey()
-        {
-            // ************ ARRANGE ************
-
-            var index = CreateCategoryIndex("k1");
-
-            var aggregate = CreateAggregateDatabaseModel("k1");
+            var index = CreateCategoryIndex(isInsert ? RandomString() : key);
 
             // ************ ACT ****************
 
-            Sut.Upsert(index, aggregate);
+            Sut.Upsert(index, key, aggregate);
 
             // ************ ASSERT *************
 
-            index.Lookups.Count().Should().Be(1);
+            var result = index.Lookups.First(l =>
+                l.Key == key);
 
-            var lookup = index.Lookups.First();
+            result.PayLoad.Should().Be(Mapper.Returns);
+            result.IsDeleted.Should().BeFalse();
+            result.Key.Should().Be(key);
 
-            lookup.PayLoad.Should().BeSameAs(Mapper.Returns);
-
-            lookup.Key.Should().Be("k1");
-
-            lookup.IsDeleted.Should().BeFalse();
-        }
-
-
-        [Fact]
-        public void
-            Upsert_LookupForKeyDoesNotExist_AddsPayload_KeysetToAggregateKey()
-        {
-            // ************ ARRANGE ************
-
-            var index = CreateCategoryIndex(); // Index is empty, no elements
-
-            var aggregate = CreateAggregateDatabaseModel("k1");
-
-            // ************ ACT ****************
-
-            Sut.Upsert(index, aggregate);
-
-            // ************ ASSERT *************
-
-            index.Lookups.Count().Should().Be(1);
-
-            var lookup = index.Lookups.First();
-
-            lookup.PayLoad.Should().BeSameAs(Mapper.Returns);
-
-            lookup.Key.Should().Be("k1");
-
-            lookup.IsDeleted.Should().BeFalse();
+            if (isInsert)
+            {
+                index.Lookups.Length.Should().Be(2);
+            }
+            else
+            {
+                index.Lookups.Length.Should().Be(1);
+            }
         }
 
 

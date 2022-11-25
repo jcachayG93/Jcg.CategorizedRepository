@@ -16,16 +16,26 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
             _mapper = mapper;
         }
 
+        [Obsolete]
+// TODO: R200 Remove
+        public void UpsertOLD(
+            CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
+            TAggregateDatabaseModel aggregate)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc />
         public void Upsert(
             CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
+            string key,
             TAggregateDatabaseModel aggregate)
         {
             var payload = _mapper.ToLookup(aggregate);
 
             var dto = new LookupDto<TLookupDatabaseModel>
             {
-                Key = aggregate.Key,
+                Key = key,
                 IsDeleted = false,
                 DeletedTimeStamp = "",
                 PayLoad = payload
@@ -34,7 +44,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
 
             nonDeletedCategoryIndex.Lookups =
                 nonDeletedCategoryIndex.Lookups
-                    .Where(l => l.Key != aggregate.Key)
+                    .Where(l => l.Key != key)
                     .Append(dto)
                     .ToArray();
         }

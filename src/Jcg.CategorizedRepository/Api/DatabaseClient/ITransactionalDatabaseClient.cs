@@ -19,7 +19,7 @@
 
 
         /// <summary>
-        ///     Adds an Upsert operation to the list of transactions to be commited.
+        ///     Adds an UpsertOLD operation to the list of transactions to be commited.
         /// </summary>
         /// <param name="key">
         ///     The primary key
@@ -47,7 +47,7 @@
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Adds an Upsert operation to the list of transactions to be commited.
+        ///     Adds an UpsertOLD operation to the list of transactions to be commited.
         /// </summary>
         /// <param name="categoryKey">The key</param>
         /// <param name="eTag">
@@ -65,7 +65,7 @@
             CancellationToken cancellationToken);
 
         /// <summary>
-        ///     Commits all Upsert operations added in previous steps in a single transaction. If any ETag do not match the
+        ///     Commits all UpsertOLD operations added in previous steps in a single transaction. If any ETag do not match the
         ///     expected vaue for the key,
         ///     discard this operation and throw an exception.
         /// </summary>

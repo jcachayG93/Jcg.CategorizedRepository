@@ -9,10 +9,17 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
         <TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
     {
+        [Obsolete]
+// TODO: R200 Remove
+        void UpsertOLD(
+            CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
+            TAggregateDatabaseModel aggregate);
+
         /// <summary>
         ///     Upserts: If data for the key exists, it replaces it. IF it doesnt, it inserts it.
         /// </summary>
         void Upsert(CategoryIndex<TLookupDatabaseModel> nonDeletedCategoryIndex,
+            string key,
             TAggregateDatabaseModel aggregate);
 
         /// <summary>

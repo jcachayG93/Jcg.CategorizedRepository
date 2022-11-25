@@ -15,11 +15,23 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         public ICategoryIndexManipulator<AggregateDatabaseModel,
             Lookup> Object => _moq.Object;
 
+        [Obsolete]
+// TODO: R200 Remove
         public void VerifyUpsert(
             CategoryIndex<Lookup> nonDeletedCategoryIndex,
             AggregateDatabaseModel aggregate)
         {
-            _moq.Verify(s => s.Upsert(nonDeletedCategoryIndex,
+            throw new NotImplementedException();
+        }
+
+        public void VerifyUpsert(
+            CategoryIndex<Lookup> nonDeletedCategoryIndex,
+            string key,
+            AggregateDatabaseModel aggregate)
+        {
+            _moq.Verify(s => s.Upsert(
+                nonDeletedCategoryIndex,
+                key,
                 aggregate));
         }
 

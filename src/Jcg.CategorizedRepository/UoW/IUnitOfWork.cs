@@ -34,14 +34,14 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
         CancellationToken cancellationToken);
 
     /// <summary>
-    ///     Upsert the deleted items category index
+    ///     UpsertOLD the deleted items category index
     /// </summary>
     Task UpsertDeletedItemsCategoryIndex(
         CategoryIndex<TLookup> deletedItemsCategoryIndex,
         CancellationToken cancellationToken);
 
     /// <summary>
-    ///     Upsert the non-deleted items category index
+    ///     UpsertOLD the non-deleted items category index
     /// </summary>
     Task UpsertNonDeletedItemsCategoryIndex(
         CategoryIndex<TLookup> nonDeletedItemsCategoryIndex,
