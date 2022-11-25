@@ -3,6 +3,7 @@ using Jcg.CategorizedRepository.Api;
 
 namespace IntegrationTests.Common.Parts;
 
+
 public class AggregateToLookupMapper : IAggregateToLookupMapper<
     CustomerDataModel, CustomerLookupDataModel>
 {

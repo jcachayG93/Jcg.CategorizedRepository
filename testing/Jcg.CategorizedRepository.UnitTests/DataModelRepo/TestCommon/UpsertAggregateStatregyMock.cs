@@ -12,7 +12,7 @@ internal class UpsertAggregateStatregyMock
     }
 
     public IUpsertAggregateStrategy<AggregateDatabaseModel,
-        LookupDatabaseModel> Object => _moq.Object;
+        Lookup> Object => _moq.Object;
 
     public void VerifyUpsert(AggregateDatabaseModel aggregate)
     {
@@ -21,5 +21,5 @@ internal class UpsertAggregateStatregyMock
     }
 
     private readonly Mock<IUpsertAggregateStrategy<AggregateDatabaseModel,
-        LookupDatabaseModel>> _moq;
+        Lookup>> _moq;
 }

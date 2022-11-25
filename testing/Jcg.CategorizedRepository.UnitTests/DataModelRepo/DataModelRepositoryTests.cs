@@ -40,7 +40,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo
 
         private CommitStategyMock CommitStrategy { get; }
 
-        private DataModelRepository<AggregateDatabaseModel, LookupDatabaseModel>
+        private DataModelRepository<AggregateDatabaseModel, Lookup>
             Sut { get; }
 
 

@@ -3,13 +3,14 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW.Cache;
 
-internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
-    where TLookupDatabaseModel : ILookupDataModel
+
+internal interface ICategoryIndexCacheManager<TLookup>
+    where TLookup : IRepositoryLookup
 {
     /// <summary>
     ///     If the category index was upserted, this will contain the latest version. Null if it was not upserted.
     /// </summary>
-    UpsertedItem<CategoryIndex<TLookupDatabaseModel>>? UpsertedItem { get; }
+    UpsertedItem<CategoryIndex<TLookup>>? UpsertedItem { get; }
 
     /// <summary>
     ///     Gets the data from the cache, if the data has not been read, it will read it from the database.
@@ -17,7 +18,7 @@ internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
     /// </summary>
     /// <returns>The category index</returns>
     /// <exception cref="CategoryIndexIsUninitializedException"></exception>
-    Task<CategoryIndex<TLookupDatabaseModel>> GetAsync();
+    Task<CategoryIndex<TLookup>> GetAsync();
 
     /// <summary>
     ///     True if the index exists in the database
@@ -29,5 +30,5 @@ internal interface ICategoryIndexCacheManager<TLookupDatabaseModel>
     ///     Replaces the category index in the cache.
     /// </summary>
     /// <param name="categoryIndex">The updated category index</param>
-    Task UpsertAsync(CategoryIndex<TLookupDatabaseModel> categoryIndex);
+    Task UpsertAsync(CategoryIndex<TLookup> categoryIndex);
 }

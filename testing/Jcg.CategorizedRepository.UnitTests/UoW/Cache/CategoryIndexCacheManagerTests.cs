@@ -23,10 +23,10 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 
         private TransactionalDatabaseClientMock DbClient { get; }
 
-        private CacheMock<CategoryIndex<LookupDatabaseModel>> Cache { get; }
+        private CacheMock<CategoryIndex<Lookup>> Cache { get; }
 
         private CategoryIndexCacheManager<AggregateDatabaseModel,
-                LookupDatabaseModel>
+                Lookup>
             Sut { get; }
 
         private string CategoryKey { get; }

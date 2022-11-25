@@ -4,22 +4,22 @@ using Jcg.CategorizedRepository.DataModelRepo;
 
 namespace Jcg.CategorizedRepository.CategorizedRepo
 {
-    internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup, TLookupDatabaseModel>
+    internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup>
     : ICategorizedRepository<TAggregate, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookup : IRepositoryLookup
     {
         private readonly IAggregateMapper<TAggregate, TAggregateDatabaseModel> _aggregateMapper;
-        private readonly ILookupMapperAdapter<TLookupDatabaseModel, TLookup> _lookupMapper;
-        private readonly IDataModelRepository<TAggregateDatabaseModel, TLookupDatabaseModel> _dataModelRepository;
+
+        private readonly IDataModelRepository<TAggregateDatabaseModel, TLookup> _dataModelRepository;
+
+
 
         public CategorizedRepository(
             IAggregateMapper<TAggregate, TAggregateDatabaseModel> aggregateMapper,
-            ILookupMapperAdapter<TLookupDatabaseModel, TLookup> lookupMapper,
-            IDataModelRepository<TAggregateDatabaseModel,TLookupDatabaseModel> dataModelRepository)
+            IDataModelRepository<TAggregateDatabaseModel, TLookup> dataModelRepository)
         {
             _aggregateMapper = aggregateMapper;
-            _lookupMapper = lookupMapper;
             _dataModelRepository = dataModelRepository;
         }
         public Task InitializeCategoryIndexAsync(CancellationToken cancellationToken)
@@ -49,14 +49,14 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
         {
             var data = await _dataModelRepository.LookupNonDeletedAsync(cancellationToken);
 
-            return _lookupMapper.Map(data);
+            return data.Lookups;
         }
 
         public async Task<IEnumerable<TLookup>> LookupDeletedAsync(CancellationToken cancellationToken)
         {
             var data = await _dataModelRepository.LookupDeletedAsync(cancellationToken);
 
-            return _lookupMapper.Map(data);
+            return data.Lookups;
         }
 
         public Task DeleteAsync(RepositoryIdentity key, CancellationToken cancellationToken)

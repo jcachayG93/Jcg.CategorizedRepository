@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
 internal class QueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>
     : IQueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     public QueryStrategy(
         IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>

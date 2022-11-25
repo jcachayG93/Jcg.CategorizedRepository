@@ -1,7 +1,17 @@
-﻿namespace Testing.CommonV2.Types
-{
-    public class Lookup
-    {
+﻿using Jcg.CategorizedRepository.Api;
 
-    }
+namespace Testing.CommonV2.Types;
+
+public class Lookup : IRepositoryLookup
+{
+    public string SomeValue { get; set; }
+
+    /// <inheritdoc />
+    public string Key { get; set; }
+
+    /// <inheritdoc />
+    public bool IsDeleted { get; set; }
+
+    /// <inheritdoc />
+    public string DeletedTimeStamp { get; set; }
 }

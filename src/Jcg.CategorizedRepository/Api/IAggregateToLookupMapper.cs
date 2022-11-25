@@ -13,7 +13,7 @@
 public interface IAggregateToLookupMapper<TAggregateDatabaseModel,
     TLookupDatabaseModel>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookupDatabaseModel : IRepositoryLookup
 {
     /// <summary>
     /// Maps the aggregate to the lookup

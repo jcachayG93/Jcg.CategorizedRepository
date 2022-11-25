@@ -3,10 +3,11 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.UoW;
 
+
 internal interface IUnitOfWork<TAggregateDatabaseModel,
-    TLookupDatabaseModel>
+    TLookup>
     where TAggregateDatabaseModel : class, IAggregateDataModel
-    where TLookupDatabaseModel : ILookupDataModel
+    where TLookup : IRepositoryLookup
 {
     /// <summary>
     ///     Gets the non deleted items category index
@@ -14,7 +15,7 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
     /// <param name="categoryKey">The category key</param>
     /// <returns>The category index</returns>
     /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
-    Task<CategoryIndex<TLookupDatabaseModel>>
+    Task<CategoryIndex<TLookup>>
         GetNonDeletedItemsCategoryIndex(
             CancellationToken cancellationToken);
 
@@ -24,7 +25,7 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
     /// <param name="categoryKey">The category key</param>
     /// <returns>The category index</returns>
     /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
-    Task<CategoryIndex<TLookupDatabaseModel>>
+    Task<CategoryIndex<TLookup>>
         GetDeletedItemsCategoryIndex(
             CancellationToken cancellationToken);
 
@@ -38,14 +39,14 @@ internal interface IUnitOfWork<TAggregateDatabaseModel,
     ///     Upsert the deleted items category index
     /// </summary>
     Task UpsertDeletedItemsCategoryIndex(
-        CategoryIndex<TLookupDatabaseModel> deletedItemsCategoryIndex,
+        CategoryIndex<TLookup> deletedItemsCategoryIndex,
         CancellationToken cancellationToken);
 
     /// <summary>
     ///     Upsert the non-deleted items category index
     /// </summary>
     Task UpsertNonDeletedItemsCategoryIndex(
-        CategoryIndex<TLookupDatabaseModel> nonDeletedItemsCategoryIndex,
+        CategoryIndex<TLookup> nonDeletedItemsCategoryIndex,
         CancellationToken cancellationToken);
 
     /// <summary>

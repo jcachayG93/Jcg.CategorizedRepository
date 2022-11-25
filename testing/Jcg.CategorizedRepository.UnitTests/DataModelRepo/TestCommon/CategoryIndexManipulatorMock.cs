@@ -13,10 +13,10 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         public ICategoryIndexManipulator<AggregateDatabaseModel,
-            LookupDatabaseModel> Object => _moq.Object;
+            Lookup> Object => _moq.Object;
 
         public void VerifyUpsert(
-            CategoryIndex<LookupDatabaseModel> nonDeletedCategoryIndex,
+            CategoryIndex<Lookup> nonDeletedCategoryIndex,
             AggregateDatabaseModel aggregate)
         {
             _moq.Verify(s => s.Upsert(nonDeletedCategoryIndex,
@@ -24,8 +24,8 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         public void VerifyDelete(
-            CategoryIndex<LookupDatabaseModel> nonDeletedCategoryIndex,
-            CategoryIndex<LookupDatabaseModel> deletedCategoryIndex,
+            CategoryIndex<Lookup> nonDeletedCategoryIndex,
+            CategoryIndex<Lookup> deletedCategoryIndex,
             string key)
         {
             _moq.Verify(s =>
@@ -34,8 +34,8 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         public void VerifyRestore(
-            CategoryIndex<LookupDatabaseModel> nonDeletedCategoryIndex,
-            CategoryIndex<LookupDatabaseModel> deletedCategoryIndex,
+            CategoryIndex<Lookup> nonDeletedCategoryIndex,
+            CategoryIndex<Lookup> deletedCategoryIndex,
             string key)
         {
             _moq.Verify(s =>
@@ -43,6 +43,6 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
         }
 
         private readonly Mock<ICategoryIndexManipulator<AggregateDatabaseModel,
-            LookupDatabaseModel>> _moq;
+            Lookup>> _moq;
     }
 }

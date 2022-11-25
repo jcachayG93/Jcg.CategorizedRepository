@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Jcg.CategorizedRepository.Api;
 using Jcg.CategorizedRepository.CategorizedRepo;
-using Jcg.CategorizedRepository.UnitTests.CategorizedRepo.TestCommon;
 using Testing.CommonV2.Mocks;
 using Testing.CommonV2.Types;
 
@@ -15,13 +14,10 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
           
 
-            LookupMapper = new();
-
             DataModelRepository = new();
 
             Sut = new(
                 AggregateMapper.Object,
-                LookupMapper.Object,
                 DataModelRepository.Object);
 
           
@@ -33,13 +29,11 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         }
         private AggregateMapperMock AggregateMapper { get; }
 
-       
-
-        private LookupMapperAdapterMock LookupMapper { get; }
+        
 
         private DataModelRepositoryMock DataModelRepository { get; }
 
-        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup, LookupDatabaseModel> Sut { get; }
+        private CategorizedRepository<Aggregate, AggregateDatabaseModel, Lookup> Sut { get; }
 
         public RepositoryIdentity Key { get; }
 
@@ -94,7 +88,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
         }
 
         [Fact]
-        public async Task LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_MapsResult_ReturnsMapperResult()
+        public async Task LookupNonDeleted_GetsNonDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
@@ -106,13 +100,12 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             DataModelRepository.VerifyLookupNonDeleted();
 
-            LookupMapper.VerifyMap(DataModelRepository.LookupNonDeletedReturns);
 
-            result.Should().BeSameAs(LookupMapper.MapReturns);
+            result.Should().BeSameAs(DataModelRepository.LookupNonDeletedReturns.Lookups);
         }
 
         [Fact]
-        public async Task LookupDeleted_GetsDeletedLookupsFromDataModelRepository_MapsResult_ReturnsMapperResult()
+        public async Task LookupDeleted_GetsDeletedLookupsFromDataModelRepository_ReturnsLookupsFromResult()
         {
             // ************ ARRANGE ************
 
@@ -124,9 +117,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
             DataModelRepository.VerifyLookupDeleted();
 
-            LookupMapper.VerifyMap(DataModelRepository.LookupDeletedReturns);
-
-            result.Should().BeSameAs(LookupMapper.MapReturns);
+            result.Should().BeSameAs(DataModelRepository.LookupDeletedReturns.Lookups);
         }
 
         [Fact]

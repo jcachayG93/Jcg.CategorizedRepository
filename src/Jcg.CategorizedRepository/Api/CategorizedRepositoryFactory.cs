@@ -8,17 +8,17 @@ namespace Jcg.CategorizedRepository.Api
     public static class CategorizedRepositoryFactory
     {
         public static ICategorizedRepository<TAggregate, TLookup> Create<
-            TAggregate, TAggregateDatabaseModel, TLookup, TLookupDatabaseModel>(
+            TAggregate, TAggregateDatabaseModel, TLookup>(
             RepositoryIdentity categoryKey,
             ITransactionalDatabaseClient<TAggregateDatabaseModel,
-                TLookupDatabaseModel> databaseClient,
+                TLookup> databaseClient,
             IAggregateMapper<TAggregate, TAggregateDatabaseModel>
                 aggregateMapper,
             IAggregateToLookupMapper<TAggregateDatabaseModel,
-                TLookupDatabaseModel> aggregateToLookupMapper,
-            ILookupMapper<TLookupDatabaseModel, TLookup> lookupMapper)
+                TLookup> aggregateToLookupMapper)
             where TAggregateDatabaseModel : class, IAggregateDataModel
-            where TLookupDatabaseModel : ILookupDataModel
+
+        where TLookup : IRepositoryLookup
         {
             var unitOfWork = UnitOfWorkFactory.Create(
                 categoryKey.Value.ToString(),
@@ -28,15 +28,10 @@ namespace Jcg.CategorizedRepository.Api
             var dataModelRepo = DataModelRepositoryFactory
                 .Create(unitOfWork, aggregateToLookupMapper);
 
-            var lookupMapperAdapter =
-                new LookupMapperAdapter<TLookupDatabaseModel, TLookup>(
-                    lookupMapper);
-
             return
                 new CategorizedRepository<TAggregate, TAggregateDatabaseModel,
-                    TLookup, TLookupDatabaseModel>(
+                    TLookup>(
                     aggregateMapper,
-                    lookupMapperAdapter,
                     dataModelRepo
                 );
         }

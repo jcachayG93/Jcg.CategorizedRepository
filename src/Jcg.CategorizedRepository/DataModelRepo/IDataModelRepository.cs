@@ -3,10 +3,11 @@ using Jcg.CategorizedRepository.Api.Exceptions;
 
 namespace Jcg.CategorizedRepository.DataModelRepo
 {
+  
     internal interface IDataModelRepository
-        <TAggregateDatabaseModel, TLookupDatabaseModel>
+        <TAggregateDatabaseModel, TLookup>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookup : IRepositoryLookup
     {
         /// <summary>
         ///     Initializes the category indexes for the category
@@ -27,7 +28,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         /// </summary>
         /// <returns>The category index, which contains all the lookup for those aggregates that are not deleted</returns>
         /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
-        Task<CategoryIndex<TLookupDatabaseModel>> LookupNonDeletedAsync(
+        Task<CategoryIndex<TLookup>> LookupNonDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         ///     that are deleted
         /// </returns>
         /// <exception cref="CategoryIndexIsUninitializedException">When the CategoryIndex is not found</exception>
-        Task<CategoryIndex<TLookupDatabaseModel>> LookupDeletedAsync(
+        Task<CategoryIndex<TLookup>> LookupDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>

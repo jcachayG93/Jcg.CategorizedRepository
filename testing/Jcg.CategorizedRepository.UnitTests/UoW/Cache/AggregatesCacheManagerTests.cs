@@ -21,7 +21,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
         private CacheMock<AggregateDatabaseModel> Cache { get; }
 
         private AggregatesCacheManager<AggregateDatabaseModel,
-            LookupDatabaseModel> Sut { get; }
+            Lookup> Sut { get; }
 
         private AggregateDatabaseModel RandomPayload()
         {

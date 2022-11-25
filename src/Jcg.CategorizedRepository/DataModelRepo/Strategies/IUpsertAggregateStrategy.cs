@@ -6,7 +6,7 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
     internal interface IUpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         /// <summary>
         ///     Upsers the aggregate.

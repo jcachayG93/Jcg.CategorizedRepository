@@ -17,7 +17,7 @@ namespace Testing.CommonV2
             return new AggregateETag(RandomString(), new());
         }
 
-        public static IETagDto<CategoryIndex<LookupDatabaseModel>>
+        public static IETagDto<CategoryIndex<Lookup>>
             RandomCategoryIndexETagDto()
         {
             return new CategoryIndexETag(RandomString(), new());
@@ -32,44 +32,44 @@ namespace Testing.CommonV2
             };
         }
 
-        public static CategoryIndex<LookupDatabaseModel> RandomCategoryIndex()
+        public static CategoryIndex<Lookup> RandomCategoryIndex()
         {
             return new();
         }
 
-        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(
+        public static CategoryIndex<Lookup> CreateCategoryIndex(
             int numberOfLookups)
         {
             var lookups = Enumerable.Range(0, numberOfLookups)
-                .Select(i => new LookupDatabaseModel()
+                .Select(i => new Lookup()
                 {
                     SomeValue = RandomString()
                 }).ToList();
 
-            return new CategoryIndex<LookupDatabaseModel>()
+            return new CategoryIndex<Lookup>()
             {
                 Lookups = lookups
             };
         }
 
-        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(out LookupDatabaseModel item1,
-            out LookupDatabaseModel item2)
+        public static CategoryIndex<Lookup> CreateCategoryIndex(out Lookup item1,
+            out Lookup item2)
         {
             item1 = new();
             item2 = new();
 
             var lookups = item1.ToCollection(item2);
 
-            return new CategoryIndex<LookupDatabaseModel>()
+            return new CategoryIndex<Lookup>()
             {
                 Lookups = lookups
             };
         }
 
-        public static CategoryIndex<LookupDatabaseModel> CreateCategoryIndex(
+        public static CategoryIndex<Lookup> CreateCategoryIndex(
             params string[] keys)
         {
-            var lookups = keys.Select(k => new LookupDatabaseModel()
+            var lookups = keys.Select(k => new Lookup()
             {
                 Key = k
             }).ToList();

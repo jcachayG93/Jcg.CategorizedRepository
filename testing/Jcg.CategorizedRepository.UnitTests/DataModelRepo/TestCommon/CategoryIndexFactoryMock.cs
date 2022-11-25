@@ -17,10 +17,10 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
                 .Returns(Returns);
         }
 
-        public CategoryIndexFactory<LookupDatabaseModel> Object => _moq.Object;
+        public CategoryIndexFactory<Lookup> Object => _moq.Object;
 
-        public CategoryIndex<LookupDatabaseModel> Returns { get; }
+        public CategoryIndex<Lookup> Returns { get; }
 
-        private readonly Mock<CategoryIndexFactory<LookupDatabaseModel>> _moq;
+        private readonly Mock<CategoryIndexFactory<Lookup>> _moq;
     }
 }

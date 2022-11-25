@@ -25,16 +25,16 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
             SetupIndexExist(false);
         }
 
-        public ICategoryIndexCacheManager<LookupDatabaseModel> Object =>
+        public ICategoryIndexCacheManager<Lookup> Object =>
             _moq.Object;
 
-        public UpsertedItem<CategoryIndex<LookupDatabaseModel>>
+        public UpsertedItem<CategoryIndex<Lookup>>
             UpsertedItemReturns { get; }
 
-        public CategoryIndex<LookupDatabaseModel> GetReturns { get; }
+        public CategoryIndex<Lookup> GetReturns { get; }
 
         public void VerifyUpsert(
-            CategoryIndex<LookupDatabaseModel> categoryIndex)
+            CategoryIndex<Lookup> categoryIndex)
         {
             _moq.Verify(s =>
                 s.UpsertAsync(categoryIndex));
@@ -46,7 +46,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
                 .Returns(returns);
         }
 
-        private readonly Mock<ICategoryIndexCacheManager<LookupDatabaseModel>>
+        private readonly Mock<ICategoryIndexCacheManager<Lookup>>
             _moq;
     }
 }

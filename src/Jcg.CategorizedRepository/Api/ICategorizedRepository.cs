@@ -10,7 +10,7 @@ namespace Jcg.CategorizedRepository.Api
     /// <typeparam name="TLookup">A short, lightweight representation of the aggregate. When querying items in the category, a collection of lookups will be returned</typeparam>
     public interface ICategorizedRepository
         <TAggregate, TLookup>
-
+        where TLookup : IRepositoryLookup
     {
         /// <summary>
         ///     Adds an operation that initializes a category so aggregates can be added to it.

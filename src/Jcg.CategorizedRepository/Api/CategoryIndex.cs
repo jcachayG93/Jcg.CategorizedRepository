@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="TLookupDatabaseModel">A light-weight and database friendly model of the lookup</typeparam>
     public class CategoryIndex<TLookupDatabaseModel>
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         public IEnumerable<TLookupDatabaseModel> Lookups { get; set; }
             = Array.Empty<TLookupDatabaseModel>();

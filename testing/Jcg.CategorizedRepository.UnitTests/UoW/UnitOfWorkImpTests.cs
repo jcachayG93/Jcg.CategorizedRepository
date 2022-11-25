@@ -40,7 +40,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW
             get;
         }
 
-        private UnitOfWork<AggregateDatabaseModel, LookupDatabaseModel> Sut
+        private UnitOfWork<AggregateDatabaseModel, Lookup> Sut
         {
             get;
         }

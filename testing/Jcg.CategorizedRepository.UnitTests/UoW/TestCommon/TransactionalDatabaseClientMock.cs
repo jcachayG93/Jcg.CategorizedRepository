@@ -21,11 +21,11 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
 
         public IETagDto<AggregateDatabaseModel> GetAggregateReturns { get; }
 
-        public IETagDto<CategoryIndex<LookupDatabaseModel>>
+        public IETagDto<CategoryIndex<Lookup>>
             GetCategoryIndexReturns { get; }
 
         public ITransactionalDatabaseClient<AggregateDatabaseModel,
-            LookupDatabaseModel> Object => _moq.Object;
+            Lookup> Object => _moq.Object;
 
         private void SetupGetAggregate(
             IETagDto<AggregateDatabaseModel> returns)
@@ -36,7 +36,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
         }
 
         private void SetupGetCategoryIndex(
-            IETagDto<CategoryIndex<LookupDatabaseModel>> returns)
+            IETagDto<CategoryIndex<Lookup>> returns)
         {
             _moq.Setup(s =>
                     s.GetCategoryIndex(AnyString(), AnyCt()).Result)
@@ -73,7 +73,7 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
         }
 
         public void VerifyUpsertCategoryIndex(string key, string eTag,
-            CategoryIndex<LookupDatabaseModel> categoryIndex)
+            CategoryIndex<Lookup> categoryIndex)
         {
             _moq.Verify(s =>
                 s.UpsertCategoryIndex(key, eTag, categoryIndex, AnyCt()));
@@ -85,6 +85,6 @@ namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
         }
 
         private readonly Mock<ITransactionalDatabaseClient<
-            AggregateDatabaseModel, LookupDatabaseModel>> _moq;
+            AggregateDatabaseModel, Lookup>> _moq;
     }
 }

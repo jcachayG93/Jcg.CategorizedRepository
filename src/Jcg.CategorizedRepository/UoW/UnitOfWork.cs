@@ -8,7 +8,7 @@ namespace Jcg.CategorizedRepository.UoW
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :
             IUnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel>
         where TAggregateDatabaseModel : class, IAggregateDataModel
-        where TLookupDatabaseModel : ILookupDataModel
+        where TLookupDatabaseModel : IRepositoryLookup
     {
         public UnitOfWork(
             ITransactionalDatabaseClient<TAggregateDatabaseModel,

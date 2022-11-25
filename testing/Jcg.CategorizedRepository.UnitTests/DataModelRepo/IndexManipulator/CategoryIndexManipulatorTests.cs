@@ -18,7 +18,7 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
         private AggregateToLookupMapperMock Mapper { get; }
 
         private CategoryIndexManipulator<AggregateDatabaseModel,
-            LookupDatabaseModel> Sut { get; }
+            Lookup> Sut { get; }
 
 
         [Fact]
