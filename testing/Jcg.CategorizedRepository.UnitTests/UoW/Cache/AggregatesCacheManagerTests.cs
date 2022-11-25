@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using Support.UnitOfWork.Cache.Imp;
-using Support.UnitOfWork.UnitTests.TestCommon;
-using Testing.Common.Types;
+using Jcg.CategorizedRepository.UnitTests.UoW.TestCommon;
+using Jcg.CategorizedRepository.UoW.Cache.Imp;
+using Testing.CommonV2.Types;
 
-namespace Support.UnitOfWork.UnitTests.Cache
+namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 {
     public class AggregatesCacheManagerTests
     {

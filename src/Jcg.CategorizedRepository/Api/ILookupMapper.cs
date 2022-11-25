@@ -1,4 +1,4 @@
-﻿namespace Jcg.DataAccessRepositories;
+﻿namespace Jcg.CategorizedRepository.Api;
 
 /// <summary>
 ///     Maps the lookup model that is stored in the database to the model the client will receive when querying the

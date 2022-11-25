@@ -1,9 +1,8 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Support.UnitOfWork.Cache;
-using Support.UnitOfWork.Cache.Imp;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW.Cache;
+using Jcg.CategorizedRepository.UoW.Cache.Imp;
 
-namespace Support.UnitOfWork
+namespace Jcg.CategorizedRepository.UoW
 {
     internal static class UnitOfWorkFactory
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Testing.Common.Types
+﻿namespace Testing.CommonV2.Types
 {
     public class Lookup
     {

@@ -1,4 +1,4 @@
-﻿namespace Testing.Common.Types;
+﻿namespace Testing.CommonV2.Types;
 
 public class Aggregate
 {

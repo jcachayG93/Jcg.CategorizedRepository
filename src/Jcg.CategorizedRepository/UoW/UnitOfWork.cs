@@ -1,9 +1,8 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Jcg.DataAccessRepositories.Exceptions;
-using Support.UnitOfWork.Cache;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.Exceptions;
+using Jcg.CategorizedRepository.UoW.Cache;
 
-namespace Support.UnitOfWork
+namespace Jcg.CategorizedRepository.UoW
 {
     internal class
         UnitOfWork<TAggregateDatabaseModel, TLookupDatabaseModel> :

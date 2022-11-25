@@ -1,7 +1,7 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW;
 
-namespace Support.DataModelRepository.Strategies.imp;
+namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
 
 internal class QueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>
     : IQueryStrategy<TAggregateDatabaseModel, TLookupDatabaseModel>

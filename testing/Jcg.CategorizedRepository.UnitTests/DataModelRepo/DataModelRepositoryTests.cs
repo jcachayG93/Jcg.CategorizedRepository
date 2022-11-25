@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
-using Support.DataModelRepository.UnitTests.TestCommon;
-using Testing.Common.Types;
+using Jcg.CategorizedRepository.DataModelRepo;
+using Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo
 {
     public class DataModelRepositoryTests
     {

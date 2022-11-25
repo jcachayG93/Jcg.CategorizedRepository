@@ -1,10 +1,9 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW;
 using Moq;
-using Support.UnitOfWork;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Testing.Common.Mocks
+namespace Testing.CommonV2.Mocks
 {
     internal class UnitOfWorkMock
     {

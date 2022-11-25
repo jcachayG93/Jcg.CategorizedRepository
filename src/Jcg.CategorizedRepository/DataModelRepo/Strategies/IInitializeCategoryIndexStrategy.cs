@@ -1,4 +1,4 @@
-﻿namespace Support.DataModelRepository.Strategies;
+﻿namespace Jcg.CategorizedRepository.DataModelRepo.Strategies;
 
 internal interface IInitializeCategoryIndexStrategy
 {

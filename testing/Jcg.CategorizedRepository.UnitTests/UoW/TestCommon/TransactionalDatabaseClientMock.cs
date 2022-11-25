@@ -1,8 +1,8 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 using Moq;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Support.UnitOfWork.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
 {
     internal class TransactionalDatabaseClientMock
     {

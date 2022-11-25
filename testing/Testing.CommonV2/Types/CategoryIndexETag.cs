@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Testing.Common.Types;
+namespace Testing.CommonV2.Types;
 
 public class CategoryIndexETag : IETagDto<CategoryIndex<LookupDatabaseModel>>
 {

@@ -1,2 +1,2 @@
 global using Xunit;
-global using static Testing.Common.RandomStuff;
+global using static Testing.CommonV2.RandomStuff;

@@ -1,10 +1,9 @@
-﻿using Support.DataModelRepository.Strategies;
-using Support.DataModelRepository.Strategies.imp;
-using Support.DataModelRepository.UnitTests.TestCommon;
-using Testing.Common.Mocks;
-using Testing.Common.Types;
+﻿using Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
+using Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon;
+using Testing.CommonV2.Mocks;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests.Strategies
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 {
     public class UpsertAggregateStrategyTests
     {

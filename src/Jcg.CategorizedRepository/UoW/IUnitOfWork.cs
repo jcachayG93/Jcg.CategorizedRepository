@@ -1,7 +1,7 @@
-﻿using Jcg.DataAccessRepositories;
-using Jcg.DataAccessRepositories.Exceptions;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.Exceptions;
 
-namespace Common.InternalContracts;
+namespace Jcg.CategorizedRepository.UoW;
 
 internal interface IUnitOfWork<TAggregateDatabaseModel,
     TLookupDatabaseModel>

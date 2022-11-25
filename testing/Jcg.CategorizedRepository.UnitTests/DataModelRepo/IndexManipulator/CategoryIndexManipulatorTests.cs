@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
-using Jcg.DataAccessRepositories.Exceptions;
-using Support.DataModelRepository.Support.IndexManipulator;
-using Testing.Common.Mocks;
-using Testing.Common.Types;
+using Jcg.CategorizedRepository.Api.Exceptions;
+using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
+using Testing.CommonV2.Mocks;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests.IndexManipulator
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.IndexManipulator
 {
     public class CategoryIndexManipulatorTests
     {

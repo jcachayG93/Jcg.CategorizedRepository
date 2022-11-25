@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Support.DataModelRepository.Support.IndexManipulator
+namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
 {
     /// <summary>
     ///     Perform operations in category indexes

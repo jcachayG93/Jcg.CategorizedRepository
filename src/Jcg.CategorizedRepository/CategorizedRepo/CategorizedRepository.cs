@@ -1,9 +1,8 @@
-﻿using Common.InternalContracts;
-using Support.CategorizedRepository.Support;
-using System.Linq;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.CategorizedRepo.Support;
+using Jcg.CategorizedRepository.DataModelRepo;
 
-namespace Support.CategorizedRepository
+namespace Jcg.CategorizedRepository.CategorizedRepo
 {
     internal class CategorizedRepository<TAggregate, TAggregateDatabaseModel, TLookup, TLookupDatabaseModel>
     : ICategorizedRepository<TAggregate, TLookup>

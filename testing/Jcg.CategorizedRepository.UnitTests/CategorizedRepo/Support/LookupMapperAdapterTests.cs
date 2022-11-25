@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
-using Support.CategorizedRepository.Support;
-using Testing.Common.Mocks;
+﻿using Jcg.CategorizedRepository.CategorizedRepo.Support;
 using Testing.Common.Support.Assertions;
 using Testing.Common.Support.Extensions;
-using Testing.Common.Types;
+using Testing.CommonV2.Mocks;
+using Testing.CommonV2.Types;
 
-namespace Support.CategorizedRepository.UnitTests.Support
+namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo.Support
 {
     public class LookupMapperAdapterTests
     {

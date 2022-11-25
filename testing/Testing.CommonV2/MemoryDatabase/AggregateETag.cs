@@ -1,7 +1,7 @@
-﻿using Jcg.DataAccessRepositories;
-using Testing.Common.Types;
+﻿using Jcg.CategorizedRepository.Api;
+using Testing.CommonV2.Types;
 
-namespace Testing.Common.MemoryDatabase;
+namespace Testing.CommonV2.MemoryDatabase;
 
 public class AggregateETag : IETagDto<AggregateDatabaseModel>
 {

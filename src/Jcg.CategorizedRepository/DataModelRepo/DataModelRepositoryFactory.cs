@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Support.DataModelRepository.Strategies;
-using Support.DataModelRepository.Strategies.imp;
-using Support.DataModelRepository.Support;
-using Support.DataModelRepository.Support.IndexManipulator;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
+using Jcg.CategorizedRepository.DataModelRepo.Support;
+using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
+using Jcg.CategorizedRepository.UoW;
 
-namespace Support.DataModelRepository
+namespace Jcg.CategorizedRepository.DataModelRepo
 {
     internal static class DataModelRepositoryFactory
     {

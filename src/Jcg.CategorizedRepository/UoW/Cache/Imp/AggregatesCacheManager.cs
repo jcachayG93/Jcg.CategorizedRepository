@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Support.UnitOfWork.Cache.Imp
+namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {
     internal class AggregatesCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>

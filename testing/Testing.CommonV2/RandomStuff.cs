@@ -1,9 +1,9 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 using Moq;
 using Testing.Common.Support.Extensions;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Testing.Common
+namespace Testing.CommonV2
 {
     public static class RandomStuff
     {

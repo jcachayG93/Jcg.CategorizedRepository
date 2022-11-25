@@ -1,7 +1,7 @@
-﻿using Jcg.DataAccessRepositories;
-using Support.UnitOfWork.InternalExceptions;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW.InternalExceptions;
 
-namespace Support.UnitOfWork.Cache.Imp
+namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {
     internal class Cache<TData>
         where TData : class

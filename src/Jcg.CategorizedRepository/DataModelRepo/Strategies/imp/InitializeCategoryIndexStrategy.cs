@@ -1,9 +1,9 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Jcg.DataAccessRepositories.Exceptions;
-using Support.DataModelRepository.Support;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.Exceptions;
+using Jcg.CategorizedRepository.DataModelRepo.Support;
+using Jcg.CategorizedRepository.UoW;
 
-namespace Support.DataModelRepository.Strategies.imp
+namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp
 {
     internal class InitializeCategoryIndexStrategy<TAggregateDatabaseModel,
             TLookupDatabaseModel>

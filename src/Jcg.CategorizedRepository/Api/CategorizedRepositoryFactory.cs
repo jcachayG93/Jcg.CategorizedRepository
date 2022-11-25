@@ -1,9 +1,9 @@
-﻿using Support.CategorizedRepository;
-using Support.CategorizedRepository.Support;
-using Support.DataModelRepository;
-using Support.UnitOfWork;
+﻿using Jcg.CategorizedRepository.CategorizedRepo;
+using Jcg.CategorizedRepository.CategorizedRepo.Support;
+using Jcg.CategorizedRepository.DataModelRepo;
+using Jcg.CategorizedRepository.UoW;
 
-namespace Jcg.DataAccessRepositories
+namespace Jcg.CategorizedRepository.Api
 {
     public static class CategorizedRepositoryFactory
     {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Jcg.DataAccessRepositories;
-using Support.CategorizedRepository.UnitTests.TestCommon;
-using Testing.Common.Mocks;
-using Testing.Common.Types;
+﻿using FluentAssertions;
+using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.CategorizedRepo;
+using Jcg.CategorizedRepository.UnitTests.CategorizedRepo.TestCommon;
+using Testing.CommonV2.Mocks;
+using Testing.CommonV2.Types;
 
-namespace Support.CategorizedRepository.UnitTests
+namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 {
     public class CategorizedRepositoryTests
     {

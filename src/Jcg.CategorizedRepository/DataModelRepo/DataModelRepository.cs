@@ -1,8 +1,7 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Support.DataModelRepository.Strategies;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo.Strategies;
 
-namespace Support.DataModelRepository
+namespace Jcg.CategorizedRepository.DataModelRepo
 {
     internal class DataModelRepository<TAggregateDatabaseModel,
             TLookupDatabaseModel>

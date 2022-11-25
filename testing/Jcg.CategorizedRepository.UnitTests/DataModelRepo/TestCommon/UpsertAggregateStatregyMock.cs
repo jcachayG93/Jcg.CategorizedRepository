@@ -1,8 +1,8 @@
-﻿using Moq;
-using Support.DataModelRepository.Strategies;
-using Testing.Common.Types;
+﻿using Jcg.CategorizedRepository.DataModelRepo.Strategies;
+using Moq;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests.TestCommon;
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon;
 
 internal class UpsertAggregateStatregyMock
 {

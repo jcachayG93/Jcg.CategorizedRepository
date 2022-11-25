@@ -1,9 +1,10 @@
 ﻿using FluentAssertions;
-using Jcg.DataAccessRepositories.Exceptions;
-using Support.UnitOfWork.UnitTests.TestCommon;
-using Testing.Common.Types;
+using Jcg.CategorizedRepository.Api.Exceptions;
+using Jcg.CategorizedRepository.UnitTests.UoW.TestCommon;
+using Jcg.CategorizedRepository.UoW;
+using Testing.CommonV2.Types;
 
-namespace Support.UnitOfWork.UnitTests
+namespace Jcg.CategorizedRepository.UnitTests.UoW
 {
     public class UnitOfWorkImpTests
     {

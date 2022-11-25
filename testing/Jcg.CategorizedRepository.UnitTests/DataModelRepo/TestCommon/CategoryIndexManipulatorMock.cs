@@ -1,9 +1,9 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
 using Moq;
-using Support.DataModelRepository.Support.IndexManipulator;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
 {
     internal class CategoryIndexManipulatorMock
     {

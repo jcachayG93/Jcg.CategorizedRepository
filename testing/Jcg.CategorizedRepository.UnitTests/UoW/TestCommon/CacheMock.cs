@@ -1,9 +1,9 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW.Cache;
+using Jcg.CategorizedRepository.UoW.Cache.Imp;
 using Moq;
-using Support.UnitOfWork.Cache;
-using Support.UnitOfWork.Cache.Imp;
 
-namespace Support.UnitOfWork.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
 {
     internal class CacheMock<TData>
         where TData : class, new()

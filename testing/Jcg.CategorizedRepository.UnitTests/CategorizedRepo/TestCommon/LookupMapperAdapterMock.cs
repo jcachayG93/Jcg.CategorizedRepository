@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.CategorizedRepo.Support;
 using Moq;
-using Support.CategorizedRepository.Support;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Support.CategorizedRepository.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo.TestCommon
 {
 
     internal class LookupMapperAdapterMock

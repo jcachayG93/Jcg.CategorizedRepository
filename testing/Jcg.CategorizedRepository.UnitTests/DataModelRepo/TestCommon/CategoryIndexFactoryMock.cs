@@ -1,9 +1,9 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo.Support;
 using Moq;
-using Support.DataModelRepository.Support;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Support.DataModelRepository.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
 {
     internal class CategoryIndexFactoryMock
     {

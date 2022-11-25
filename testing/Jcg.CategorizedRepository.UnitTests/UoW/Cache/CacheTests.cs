@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
-using Jcg.DataAccessRepositories;
+using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.UoW.Cache.Imp;
+using Jcg.CategorizedRepository.UoW.InternalExceptions;
 using Moq;
-using Support.UnitOfWork.Cache.Imp;
-using Support.UnitOfWork.InternalExceptions;
 using Testing.Common.Support.Assertions;
 
-namespace Support.UnitOfWork.UnitTests.Cache
+namespace Jcg.CategorizedRepository.UnitTests.UoW.Cache
 {
     public class CacheTests
     {

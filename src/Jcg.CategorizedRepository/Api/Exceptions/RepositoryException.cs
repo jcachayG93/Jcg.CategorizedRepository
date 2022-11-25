@@ -1,4 +1,4 @@
-﻿namespace Jcg.DataAccessRepositories.Exceptions;
+﻿namespace Jcg.CategorizedRepository.Api.Exceptions;
 
 public abstract class RepositoryException : Exception
 {

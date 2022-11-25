@@ -1,7 +1,7 @@
-﻿using Jcg.DataAccessRepositories;
-using Jcg.DataAccessRepositories.Exceptions;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.Exceptions;
 
-namespace Support.DataModelRepository.Support.IndexManipulator
+namespace Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator
 {
     internal class CategoryIndexManipulator<TAggregateDatabaseModel,
             TLookupDatabaseModel>

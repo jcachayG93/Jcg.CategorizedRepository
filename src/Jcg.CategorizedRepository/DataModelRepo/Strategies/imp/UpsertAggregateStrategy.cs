@@ -1,8 +1,8 @@
-﻿using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
-using Support.DataModelRepository.Support.IndexManipulator;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo.Support.IndexManipulator;
+using Jcg.CategorizedRepository.UoW;
 
-namespace Support.DataModelRepository.Strategies.imp;
+namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp;
 
 internal class UpsertAggregateStrategy<TAggregateDatabaseModel,
         TLookupDatabaseModel>

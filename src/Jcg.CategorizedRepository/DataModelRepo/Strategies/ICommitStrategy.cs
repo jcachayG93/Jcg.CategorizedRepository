@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories.Exceptions;
+﻿using Jcg.CategorizedRepository.Api.Exceptions;
 
-namespace Support.DataModelRepository.Strategies
+namespace Jcg.CategorizedRepository.DataModelRepo.Strategies
 {
     internal interface ICommitStrategy
     {

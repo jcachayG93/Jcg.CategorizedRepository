@@ -1,7 +1,7 @@
-﻿using Moq;
-using Support.DataModelRepository.Strategies;
+﻿using Jcg.CategorizedRepository.DataModelRepo.Strategies;
+using Moq;
 
-namespace Support.DataModelRepository.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
 {
     internal class CommitStategyMock
     {

@@ -1,4 +1,4 @@
-﻿namespace Support.UnitOfWork.Cache;
+﻿namespace Jcg.CategorizedRepository.UoW.Cache;
 
 /// <summary>
 ///     Represents an item that was upserted in the local cache. This can be an Aggregate o a CategoryIndex

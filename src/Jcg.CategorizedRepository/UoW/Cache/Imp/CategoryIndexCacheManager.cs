@@ -1,7 +1,7 @@
-﻿using Jcg.DataAccessRepositories;
-using Jcg.DataAccessRepositories.Exceptions;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.Api.Exceptions;
 
-namespace Support.UnitOfWork.Cache.Imp
+namespace Jcg.CategorizedRepository.UoW.Cache.Imp
 {
     internal class CategoryIndexCacheManager<TAggregateDatabaseModel,
             TLookupDatabaseModel>

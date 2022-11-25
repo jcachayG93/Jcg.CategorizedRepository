@@ -1,8 +1,8 @@
-﻿using Moq;
-using Support.UnitOfWork.Cache;
-using Testing.Common.Types;
+﻿using Jcg.CategorizedRepository.UoW.Cache;
+using Moq;
+using Testing.CommonV2.Types;
 
-namespace Support.UnitOfWork.UnitTests.TestCommon
+namespace Jcg.CategorizedRepository.UnitTests.UoW.TestCommon
 {
     internal class AggregatesCacheManagerMock
     {

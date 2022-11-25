@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Support.CategorizedRepository.Support;
+namespace Jcg.CategorizedRepository.CategorizedRepo.Support;
 
 internal interface ILookupMapperAdapter<TLookupDatabaseModel, TLookup>
     where TLookupDatabaseModel : ILookupDataModel

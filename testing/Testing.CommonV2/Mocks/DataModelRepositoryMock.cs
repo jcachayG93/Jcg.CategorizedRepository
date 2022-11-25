@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.InternalContracts;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
+using Jcg.CategorizedRepository.DataModelRepo;
 using Moq;
-using Testing.Common.Types;
+using Testing.CommonV2.Types;
 
-namespace Testing.Common.Mocks
+namespace Testing.CommonV2.Mocks
 {
 
     internal class DataModelRepositoryMock

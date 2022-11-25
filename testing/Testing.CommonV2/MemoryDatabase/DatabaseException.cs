@@ -1,4 +1,4 @@
-﻿namespace Testing.Common.MemoryDatabase;
+﻿namespace Testing.CommonV2.MemoryDatabase;
 
 public class DatabaseException : Exception
 {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Support.CategorizedRepository.Support
+namespace Jcg.CategorizedRepository.CategorizedRepo.Support
 {
     internal class LookupMapperAdapter<TLookupDatabaseModel, TLookup>
     : ILookupMapperAdapter<TLookupDatabaseModel, TLookup>

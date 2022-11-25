@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories.Exceptions;
+﻿using Jcg.CategorizedRepository.Api.Exceptions;
 
-namespace Jcg.DataAccessRepositories;
+namespace Jcg.CategorizedRepository.Api;
 
 /// <summary>
 ///     Represents a Key

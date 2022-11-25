@@ -1,6 +1,6 @@
-﻿using Jcg.DataAccessRepositories;
+﻿using Jcg.CategorizedRepository.Api;
 
-namespace Support.DataModelRepository.Support
+namespace Jcg.CategorizedRepository.DataModelRepo.Support
 {
     internal class CategoryIndexFactory<TLookupDatabaseModel>
         where TLookupDatabaseModel : ILookupDataModel

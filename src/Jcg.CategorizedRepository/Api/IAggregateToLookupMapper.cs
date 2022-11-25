@@ -1,4 +1,4 @@
-﻿namespace Jcg.DataAccessRepositories;
+﻿namespace Jcg.CategorizedRepository.Api;
 
 /// <summary>
 ///     Maps the aggregate to a light weight dto (lookup database model) so this library can store a category index containing all the lookups in the category.
