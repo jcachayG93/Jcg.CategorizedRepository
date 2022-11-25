@@ -16,7 +16,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.UpsertAsync(key, aggregate,
                     CancellationToken.None);
@@ -42,15 +42,15 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 if (lookupNonDeleted)
                 {
-                    await sut.LookupNonDeletedAsync(CancellationToken.None);
+                    await sut.LookupNonDeletedOLD(CancellationToken.None);
                 }
                 else
                 {
-                    await sut.LookupDeletedAsync(CancellationToken.None);
+                    await sut.LookupDeletedOLD(CancellationToken.None);
                 }
             };
 
@@ -74,7 +74,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.UpsertAsync(key, aggregate,
                     CancellationToken.None);
@@ -99,15 +99,15 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 if (lookupNonDeleted)
                 {
-                    await sut.LookupNonDeletedAsync(CancellationToken.None);
+                    await sut.LookupNonDeletedOLD(CancellationToken.None);
                 }
                 else
                 {
-                    await sut.LookupDeletedAsync(CancellationToken.None);
+                    await sut.LookupDeletedOLD(CancellationToken.None);
                 }
             };
 
@@ -129,7 +129,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ACT ****************
 
-            Func<Task> fun = async () =>
+            var fun = async () =>
             {
                 await sut.CommitChangesAsync(CancellationToken.None);
             };

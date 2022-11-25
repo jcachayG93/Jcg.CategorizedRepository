@@ -8,11 +8,6 @@
     public class CategoryIndex<TLookupDatabaseModel>
         where TLookupDatabaseModel : IRepositoryLookup
     {
-        [Obsolete]
-// TODO: R200 Remove
-        public IEnumerable<TLookupDatabaseModel> LookupsOLD { get; set; }
-            = Array.Empty<TLookupDatabaseModel>();
-
         public LookupDto<TLookupDatabaseModel>[] Lookups { get; set; }
             = Array.Empty<LookupDto<TLookupDatabaseModel>>();
     }

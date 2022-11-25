@@ -67,7 +67,7 @@ namespace CategorizedRepository.IntegrationTests
             // ************ ACT ****************
 
             var lookups =
-                await sut.LookupNonDeletedAsync(CancellationToken.None);
+                await sut.LookupNonDeletedOLD(CancellationToken.None);
 
             // ************ ASSERT *************
 
@@ -96,7 +96,7 @@ namespace CategorizedRepository.IntegrationTests
 
             // ************ ASSERT *************
 
-            var deleted = await sut.LookupDeletedAsync(CancellationToken.None);
+            var deleted = await sut.LookupDeletedOLD(CancellationToken.None);
 
             var result = deleted.First();
 
@@ -106,7 +106,7 @@ namespace CategorizedRepository.IntegrationTests
             result.IsDeleted.Should().BeTrue();
 
             var nonDeleted =
-                await sut.LookupNonDeletedAsync(CancellationToken.None);
+                await sut.LookupNonDeletedOLD(CancellationToken.None);
 
             nonDeleted.Should().BeEmpty();
         }
@@ -132,7 +132,7 @@ namespace CategorizedRepository.IntegrationTests
             // ************ ASSERT *************
 
             var nonDeleted =
-                await sut.LookupNonDeletedAsync(CancellationToken.None);
+                await sut.LookupNonDeletedOLD(CancellationToken.None);
 
             var result = nonDeleted.First();
 
@@ -141,7 +141,7 @@ namespace CategorizedRepository.IntegrationTests
             result.NumberOfOrders.Should().Be(customer.Orders.Count());
             result.IsDeleted.Should().BeFalse();
 
-            var deleted = await sut.LookupDeletedAsync(CancellationToken.None);
+            var deleted = await sut.LookupDeletedOLD(CancellationToken.None);
 
             deleted.Should().BeEmpty();
         }

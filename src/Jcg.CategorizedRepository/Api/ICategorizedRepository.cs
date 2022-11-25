@@ -3,11 +3,16 @@
 namespace Jcg.CategorizedRepository.Api
 {
     /// <summary>
-    /// A repository that sits between the database client and your application to automate several features. Works like a Unit of work, where changes are kept isolated in this instance until they are committed.
-    /// It also acts as a cache. Data is read from the database up to one time per key, further queries will return data from the cache which reflect all local uncommited changes.
+    ///     A repository that sits between the database client and your application to automate several features. Works like a
+    ///     Unit of work, where changes are kept isolated in this instance until they are committed.
+    ///     It also acts as a cache. Data is read from the database up to one time per key, further queries will return data
+    ///     from the cache which reflect all local uncommited changes.
     /// </summary>
     /// <typeparam name="TAggregate">The detailed model of the aggregate, it can be a composition of more than one class</typeparam>
-    /// <typeparam name="TLookup">A short, lightweight representation of the aggregate. When querying items in the category, a collection of lookups will be returned</typeparam>
+    /// <typeparam name="TLookup">
+    ///     A short, lightweight representation of the aggregate. When querying items in the category, a
+    ///     collection of lookups will be returned
+    /// </typeparam>
     public interface ICategorizedRepository
         <TAggregate, TLookup>
         where TLookup : IRepositoryLookup
@@ -29,8 +34,10 @@ namespace Jcg.CategorizedRepository.Api
         ///     This unit of work caches data so it is read from the database only once per key. The local cache reflects any
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
-        /// <remarks>If the aggregate is DELETED, this method will RETURN IT ANYWAYS. This is a design choice. 
-        /// To see which ones are deleted, use the Lookup methods below.</remarks>
+        /// <remarks>
+        ///     If the aggregate is DELETED, this method will RETURN IT ANYWAYS. This is a design choice.
+        ///     To see which ones are deleted, use the Lookup methods below.
+        /// </remarks>
         /// <param name="key">The key</param>
         /// <returns>The aggregate</returns>
         Task<TAggregate?> GetAggregateAsync(RepositoryIdentity key,
@@ -50,6 +57,12 @@ namespace Jcg.CategorizedRepository.Api
         Task UpsertAsync(RepositoryIdentity key, TAggregate aggregate,
             CancellationToken cancellationToken);
 
+        [Obsolete]
+// TODO: R200 Remove
+        Task<IEnumerable<TLookup>> LookupNonDeletedOLD(
+            CancellationToken cancellationToken);
+
+        // TODO: Review this documentation
         /// <summary>
         ///     Returns all the lookups for non-deleted aggregates that belong to the category
         /// </summary>
@@ -58,9 +71,15 @@ namespace Jcg.CategorizedRepository.Api
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
         /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
-        Task<IEnumerable<TLookup>> LookupNonDeletedAsync(
+        Task<IEnumerable<LookupDto<TLookup>>> LookupNonDeletedAsync(
             CancellationToken cancellationToken);
 
+        [Obsolete]
+// TODO: R200 Remove
+        Task<IEnumerable<TLookup>> LookupDeletedOLD(
+            CancellationToken cancellationToken);
+
+        // TODO: Review this documentation
         /// <summary>
         ///     Returns all the lookups for deleted aggregates that belong to the category
         /// </summary>
@@ -69,7 +88,7 @@ namespace Jcg.CategorizedRepository.Api
         ///     operations performed, but those changes are not applied to the database until commit is called.
         /// </remarks>
         /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
-        Task<IEnumerable<TLookup>> LookupDeletedAsync(
+        Task<IEnumerable<LookupDto<TLookup>>> LookupDeletedAsync(
             CancellationToken cancellationToken);
 
         /// <summary>
@@ -79,7 +98,10 @@ namespace Jcg.CategorizedRepository.Api
         /// <param name="key">The key</param>
         /// <param name="cancellationToken"></param>
         /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
-        /// <exception cref="LookupNotFoundInCategoryIndexException">Thrown if a lookup that match the key was not found between the NON-DELETED ones</exception>
+        /// <exception cref="LookupNotFoundInCategoryIndexException">
+        ///     Thrown if a lookup that match the key was not found between
+        ///     the NON-DELETED ones
+        /// </exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed
@@ -92,7 +114,10 @@ namespace Jcg.CategorizedRepository.Api
         /// </summary>
         /// <param name="key">The aggregate key</param>
         /// <exception cref="CategoryIndexIsUninitializedException">Thrown when the category index is uninitialized</exception>
-        /// <exception cref="LookupNotFoundInCategoryIndexException">Thrown if a lookup that match the key was not found between the DELETED ones</exception>
+        /// <exception cref="LookupNotFoundInCategoryIndexException">
+        ///     Thrown if a lookup that match the key was not found between
+        ///     the DELETED ones
+        /// </exception>
         /// <exception cref="UnitOfWorkWasAlreadyCommittedException">
         ///     Thrown when this method is called after the unit of work was
         ///     already committed

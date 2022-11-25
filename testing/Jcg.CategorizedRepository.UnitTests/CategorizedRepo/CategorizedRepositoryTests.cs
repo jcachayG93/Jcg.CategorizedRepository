@@ -109,7 +109,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
 
             result.Should().BeSameAs(DataModelRepository.LookupNonDeletedReturns
-                .LookupsOLD);
+                .Lookups);
         }
 
         [Fact]
@@ -127,7 +127,7 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
             DataModelRepository.VerifyLookupDeleted();
 
             result.Should()
-                .BeSameAs(DataModelRepository.LookupDeletedReturns.LookupsOLD);
+                .BeSameAs(DataModelRepository.LookupDeletedReturns.Lookups);
         }
 
         [Fact]

@@ -64,9 +64,17 @@ namespace IntegrationTests.Common
                 CustomerName = oneItemName
             };
 
+            var dto = new LookupDto<CustomerLookupDataModel>
+            {
+                Key = RandomString(),
+                IsDeleted = false,
+                DeletedTimeStamp = "",
+                PayLoad = lookup
+            };
+
             return new()
             {
-                LookupsOLD = lookup.ToCollection()
+                Lookups = dto.ToCollection().ToArray()
             };
         }
     }

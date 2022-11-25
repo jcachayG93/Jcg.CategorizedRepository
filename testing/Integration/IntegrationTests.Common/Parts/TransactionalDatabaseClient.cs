@@ -123,19 +123,23 @@ namespace IntegrationTests.Common.Parts
         private static CategoryIndex<CustomerLookupDataModel> Clone(
             CategoryIndex<CustomerLookupDataModel> input)
         {
-            var lookups = input.LookupsOLD.Select(l =>
-                new CustomerLookupDataModel
+            var lookupDtos = input.Lookups.Select(l =>
+                new LookupDto<CustomerLookupDataModel>
                 {
-                    CustomerName = l.CustomerName,
-                    NumberOfOrders = l.NumberOfOrders,
                     Key = l.Key,
                     IsDeleted = l.IsDeleted,
-                    DeletedTimeStamp = l.DeletedTimeStamp
-                }).ToList();
+                    DeletedTimeStamp = l.DeletedTimeStamp,
+                    PayLoad = new CustomerLookupDataModel
+                    {
+                        CustomerName = l.PayLoad.CustomerName,
+                        NumberOfOrders = l.PayLoad.NumberOfOrders
+                    }
+                }).ToArray();
+
 
             return new CategoryIndex<CustomerLookupDataModel>()
             {
-                LookupsOLD = lookups
+                Lookups = lookupDtos
             };
         }
 

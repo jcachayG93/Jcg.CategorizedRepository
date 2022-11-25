@@ -50,24 +50,39 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
             }
         }
 
-        public async Task<IEnumerable<TLookup>> LookupNonDeletedAsync(
+        public async Task<IEnumerable<TLookup>> LookupNonDeletedOLD(
             CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<LookupDto<TLookup>>>
+            LookupNonDeletedAsync(
+                CancellationToken cancellationToken)
         {
             var data =
                 await _dataModelRepository.LookupNonDeletedAsync(
                     cancellationToken);
 
-            return data.LookupsOLD;
+            return data.Lookups;
         }
 
-        public async Task<IEnumerable<TLookup>> LookupDeletedAsync(
+        public async Task<IEnumerable<TLookup>> LookupDeletedOLD(
+            CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<LookupDto<TLookup>>> LookupDeletedAsync(
             CancellationToken cancellationToken)
         {
             var data =
                 await _dataModelRepository
                     .LookupDeletedAsync(cancellationToken);
 
-            return data.LookupsOLD;
+            return data.Lookups;
         }
 
         public Task DeleteAsync(RepositoryIdentity key,

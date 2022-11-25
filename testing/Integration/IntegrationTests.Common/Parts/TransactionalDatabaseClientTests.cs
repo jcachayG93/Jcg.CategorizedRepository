@@ -107,7 +107,8 @@ namespace IntegrationTests.Common.Parts
 
             // ************ ASSERT *************
 
-            resut.Payload.LookupsOLD.First().CustomerName.Should().Be("juan");
+            resut.Payload.Lookups.First().PayLoad.CustomerName.Should()
+                .Be("juan");
         }
 
 
