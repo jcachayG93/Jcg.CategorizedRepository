@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Jcg.Repositories\Jcg.Repositories.csproj" />
+    <ProjectReference Include="..\..\..\src\Jcg.CategorizedRepository\Jcg.CategorizedRepository.csproj" />
     <ProjectReference Include="..\..\Testing.Common.Support\Testing.Common.Support.csproj" />
   </ItemGroup>
 
