@@ -29,6 +29,23 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.Strategies
 
 
         [Fact]
+        public async Task CategoryIsInitialized_DelegatesToUnitOfWork()
+        {
+            // ************ ARRANGE ************
+
+            UnitOfWork.SetupCategoryIndexIsInitialized(true);
+
+            // ************ ACT ****************
+
+            var result =
+                await Sut.CategoryIsInitializedAsync(CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().BeTrue();
+        }
+
+        [Fact]
         public async Task Initialize_CategoryIndexIsAlreadyInitialized_Throws()
         {
             // ************ ARRANGE ************

@@ -27,6 +27,12 @@ namespace Jcg.CategorizedRepository.Api
         Task InitializeCategoryIndexAsync(CancellationToken cancellationToken);
 
         /// <summary>
+        ///     Checks whether or not the category is already initialized
+        /// </summary>
+        Task<bool> CategorIsInitializedAsync(
+            CancellationToken cancellationToken);
+
+        /// <summary>
         ///     Gets the aggregate associated with the key
         /// </summary>
         /// <remarks>

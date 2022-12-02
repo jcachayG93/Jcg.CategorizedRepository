@@ -34,6 +34,14 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         }
 
         /// <inheritdoc />
+        public Task<bool> CategoryIsAlreadyInitializedAsync(
+            CancellationToken cancellationToken)
+        {
+            return _initializeCategoryStrategy.CategoryIsInitializedAsync(
+                cancellationToken);
+        }
+
+        /// <inheritdoc />
         public Task<TAggregateDatabaseModel?> GetAggregateAsync(
             Guid key,
             CancellationToken cancellationToken)

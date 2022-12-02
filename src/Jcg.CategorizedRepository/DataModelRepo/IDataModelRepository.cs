@@ -13,6 +13,12 @@ namespace Jcg.CategorizedRepository.DataModelRepo
         Task InitializeCategoryIndexes(CancellationToken cancellationToken);
 
         /// <summary>
+        ///     Checks whether or not the category is already initialized
+        /// </summary>
+        Task<bool> CategoryIsAlreadyInitializedAsync(
+            CancellationToken cancellationToken);
+
+        /// <summary>
         ///     Gets the aggregate
         /// </summary>
         /// <param name="key">The aggregate key</param>

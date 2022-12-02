@@ -38,6 +38,27 @@ namespace Jcg.CategorizedRepository.UnitTests.CategorizedRepo
 
         public Aggregate Aggregate { get; }
 
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task CategoryIsInitialized_DelegatesToDataModelRepository(
+            bool expected)
+        {
+            // ************ ARRANGE ************
+
+            DataModelRepository.SetupCategoryIndexIsInitialized(expected);
+
+            // ************ ACT ****************
+
+            var result =
+                await Sut.CategorIsInitializedAsync(CancellationToken.None);
+
+            // ************ ASSERT *************
+
+            result.Should().Be(expected);
+        }
+
         [Fact]
         public async Task
             InitializeCategoryIndex_DelegatesToDataModelRepository()

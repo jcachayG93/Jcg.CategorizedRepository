@@ -3,4 +3,6 @@
 internal interface IInitializeCategoryIndexStrategy
 {
     Task InitializeCategoryIndexes(CancellationToken cancellationToken);
+
+    Task<bool> CategoryIsInitializedAsync(CancellationToken cancellationToken);
 }

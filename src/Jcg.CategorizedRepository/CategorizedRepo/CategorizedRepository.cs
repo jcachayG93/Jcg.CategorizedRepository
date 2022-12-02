@@ -25,6 +25,14 @@ namespace Jcg.CategorizedRepository.CategorizedRepo
                 cancellationToken);
         }
 
+        /// <inheritdoc />
+        public Task<bool> CategorIsInitializedAsync(
+            CancellationToken cancellationToken)
+        {
+            return _dataModelRepository
+                .CategoryIsAlreadyInitializedAsync(cancellationToken);
+        }
+
         public async Task<TAggregate?> GetAggregateAsync(RepositoryIdentity key,
             CancellationToken cancellationToken)
         {

@@ -35,6 +35,14 @@ namespace Jcg.CategorizedRepository.DataModelRepo.Strategies.imp
                 _indexFactory.Create(), CancellationToken.None);
         }
 
+        /// <inheritdoc />
+        public Task<bool> CategoryIsInitializedAsync(
+            CancellationToken cancellationToken)
+        {
+            return _unitOfWork.CategoryIndexIsInitializedAsync(
+                cancellationToken);
+        }
+
         private readonly CategoryIndexFactory<TLookupDatabaseModel>
             _indexFactory;
 

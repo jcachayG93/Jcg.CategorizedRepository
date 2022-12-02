@@ -44,6 +44,29 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo
             Sut { get; }
 
 
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task
+            CategoryIsInitialized_DelegatesToInitializeCategoryStrategy(
+                bool expected)
+        {
+            // ************ ARRANGE ************
+
+            InitializeCategoryIndexStrategy
+                .SetupCategoryIsInitialized(expected);
+
+            // ************ ACT ****************
+
+            var result =
+                await Sut.CategoryIsAlreadyInitializedAsync(CancellationToken
+                    .None);
+
+            // ************ ASSERT *************
+
+            result.Should().Be(expected);
+        }
+
         [Fact]
         public async Task InitializeCategory_DelegatesToStrategy()
         {

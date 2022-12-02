@@ -41,6 +41,12 @@ namespace Testing.CommonV2.Mocks
 
         public CategoryIndex<Lookup> LookupDeletedReturns { get; }
 
+        public void SetupCategoryIndexIsInitialized(bool returns)
+        {
+            _moq.Setup(s => s.CategoryIsAlreadyInitializedAsync(AnyCt()).Result)
+                .Returns(returns);
+        }
+
         public void VerifyInitializeCategory()
         {
             _moq.Verify(s => s.InitializeCategoryIndexes(AnyCt()));

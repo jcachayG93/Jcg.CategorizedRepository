@@ -19,6 +19,13 @@ namespace Jcg.CategorizedRepository.UnitTests.DataModelRepo.TestCommon
                 s.InitializeCategoryIndexes(cancellationToken));
         }
 
+        public void SetupCategoryIsInitialized(bool returns)
+        {
+            _moq.Setup(s =>
+                    s.CategoryIsInitializedAsync(AnyCt()).Result)
+                .Returns(returns);
+        }
+
         private readonly Mock<IInitializeCategoryIndexStrategy> _moq;
     }
 }
